@@ -35,9 +35,9 @@ class _MyHomePageState extends State<MyHomePage> {
   int selectedItem = 0;
   final List<Widget> tumSayfalar = [
     Anasayfa(),
-    HesapBilgileri(),
     ParaCekme(),
-    Referanslar()
+    Referanslar(),
+    HesapBilgileri()
   ];
 
   @override
@@ -45,8 +45,18 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: tumSayfalar[selectedItem],
       appBar: AppBar(
+          actions: <Widget>[
+          IconButton(
+          icon: const Icon(Icons.add_alert_rounded),
+          tooltip: 'Show Snackbar',
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Duyurular Yakında...')));
+          }),
+          Image.asset('assets/free.png',  fit: BoxFit.fill, width: 45,)
+      ],
         centerTitle: true,
-        title: Text('MINENGER')//Image.asset('assets/Logo.png', color: Colors.white, fit: BoxFit.cover, width: 100,),
+        title: Image.asset('assets/logo_yazi.png', color: Colors.white, fit: BoxFit.cover, width: 160),
       ),
 
       //drawer: Drawerbar(),
@@ -60,16 +70,16 @@ class _MyHomePageState extends State<MyHomePage> {
               label: 'Anasayfa',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Hesap Bilgileri',
-            ),
-            BottomNavigationBarItem(
               icon: Icon(Icons.attach_money),
               label: 'Para Çekme',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person_add_alt_1_rounded),
               label: 'Referanslar',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Hesap Bilgileri',
             ),
           ],
           onTap: (index){

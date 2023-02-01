@@ -12,19 +12,16 @@ class Animated_splash extends StatelessWidget {
           fontFamily: 'Akrobat-Semibold',
         ),
         home: AnimatedSplashScreen(
-            duration: 1100,
+            duration: 900,
             splash: Stack(
                 children:[
-                Image.asset('assets/coin.jpeg',fit: BoxFit.contain, width: 150, alignment: Alignment.center),
-                  SizedBox(
-                    height: 20,
-                  ),
-                //Image.asset('assets/tozemis.png',fit: BoxFit.contain, color: Colors.white,width: 151, height: 140,alignment: Alignment.center),
+                Image.asset('assets/coin.jpg',fit: BoxFit.contain),
+
                 ],
             ), nextScreen: MyHomePage(),
             splashTransition: SplashTransition.sizeTransition,
             //pageTransitionType: PageTransitionType.scale,
-            backgroundColor: Colors.white
+            //backgroundColor: Colors.white
         ),
     );
   }
