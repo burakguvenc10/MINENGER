@@ -9,6 +9,9 @@ import 'Pages/Referanslar.dart';
 void main() {
   runApp(const MyApp());
 }
+const appbarColor = Color.fromRGBO(250, 179, 53  ,1);
+
+const bottombarColor = Color.fromRGBO(252, 207, 38  ,1);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -45,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: tumSayfalar[selectedItem],
       appBar: AppBar(
+          backgroundColor: appbarColor,
           actions: <Widget>[
           IconButton(
           icon: const Icon(Icons.add_alert_rounded),
@@ -61,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       //drawer: Drawerbar(),
       bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.blueAccent,
+          selectedItemColor: bottombarColor,
           currentIndex: selectedItem,
           type: BottomNavigationBarType.fixed,
           items: const <BottomNavigationBarItem>[

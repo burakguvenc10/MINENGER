@@ -8,14 +8,14 @@ class Animated_splash extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          //primarySwatch: Colors.white,
           fontFamily: 'Akrobat-Semibold',
         ),
         home: AnimatedSplashScreen(
+           backgroundColor: Colors.orange.shade200,
             duration: 900,
             splash: Stack(
                 children:[
-                Image.asset('assets/coin.jpg',fit: BoxFit.contain),
+                Image.asset('assets/splash.png',fit: BoxFit.contain),
 
                 ],
             ), nextScreen: MyHomePage(),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../Component/Pageview.dart';
 
 class Anasayfa extends StatefulWidget {
   @override
@@ -10,6 +11,7 @@ class _Anasayfa extends State<Anasayfa> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Scrollbar(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -25,26 +27,26 @@ class _Anasayfa extends State<Anasayfa> {
               ),
 
               SizedBox(
-                height: 20,
+                height: 30,
               ),
 
-              Card(
-                color: Colors.grey.shade200,
-                shadowColor: Colors.black12,
-                child: Container(
-                height: 250,
+              Container(
+                child: Column(
+                  children: [
+                    Pageview(),
+
+
+                  ],
                 ),
-              )
+              ),
+
 
 
             ],
           ),
-
-
         ),
       ),
     );
-
 
   }
 }
