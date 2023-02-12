@@ -5,6 +5,7 @@ import 'Pages/Anasayfa.dart';
 import 'Pages/HesapBilgileri.dart';
 import 'Pages/ParaCekme.dart';
 import 'Pages/Referanslar.dart';
+import 'Pages/Duyurular.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,15 +50,18 @@ class _MyHomePageState extends State<MyHomePage> {
       body: tumSayfalar[selectedItem],
       appBar: AppBar(
           backgroundColor: appbarColor,
+          leading: Container(
+            child: Image.asset('assets/free.png',  fit: BoxFit.fill, width: 45,),
+          ),
           actions: <Widget>[
           IconButton(
-          icon: const Icon(Icons.add_alert_rounded),
-          tooltip: 'Show Snackbar',
+          icon: const Icon(Icons.notifications),
+          tooltip: 'Duyurular',
           onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Duyurular Yakında...')));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Duyurular()));
+            /*ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Duyurular Yakında...')));*/
           }),
-          Image.asset('assets/free.png',  fit: BoxFit.fill, width: 45,)
       ],
         centerTitle: true,
         title: Image.asset('assets/logo_yazi.png', color: Colors.white, fit: BoxFit.cover, width: 160),

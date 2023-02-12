@@ -1,10 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 
 final coin_controller = TextEditingController();
+late final AnimatedButton animButton;
 
 class Shiba extends StatefulWidget {
   @override
@@ -12,9 +12,14 @@ class Shiba extends StatefulWidget {
 }
 
 class _Shiba extends State<Shiba> {
+
+  static const maxSeconds = 60;
+  Timer? timer;
+  int seconds = 60;
+  bool checkstatu = true;
+
   @override
   Widget build(BuildContext context) {
-    final PageController controller = PageController();
     return Column(
       children: [
 
@@ -62,13 +67,18 @@ class _Shiba extends State<Shiba> {
               alignment: Alignment.center,
               children: [
                 SizedBox(
-                  width: 100,
-                  height: 100,
+                  width: 120,
+                  height: 120,
                   child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation(Colors.blueGrey.shade200),
+                    backgroundColor: Colors.orangeAccent,
                     color: Colors.redAccent,
-                    strokeWidth: 6,
-                    value: 60,
+                    strokeWidth: 8,
+                    value: 1- seconds / maxSeconds,
                   ),
+                ),
+                Center(
+                  child: buildTime()
                 ),
               ],
             ),
@@ -85,7 +95,7 @@ class _Shiba extends State<Shiba> {
 
                 Text(
                   '  Reklam İzle',
-                  style: TextStyle(
+                    style: TextStyle(
                     fontSize: 18,
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
@@ -96,11 +106,15 @@ class _Shiba extends State<Shiba> {
             ),
           ),
           color: Colors.orangeAccent,
-          enabled : true,
+          enabled : checkstatu,
           duration: 25,
           shadowDegree: ShadowDegree.dark,
           width: 190,
           onPressed: () {
+            checkstatu = false;
+            setState(() => checkstatu);
+            seconds = 60;
+            startTimer();
           },
         ),
 
@@ -114,7 +128,44 @@ class _Shiba extends State<Shiba> {
 
     );
   }
+
+  Widget buildTime(){
+    if(seconds  == 0){
+      return Icon(
+        Icons.done, color: Colors.green, size: 100,
+      );
+    }
+    else {
+      return Text(
+        '$seconds' + ' Dakika', textAlign: TextAlign.center,
+        style: TextStyle(
+            color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+        maxLines: 1,
+      );
+    }
+  }
+
+  void startTimer() {
+    timer = Timer.periodic(Duration(milliseconds: 60), (_) {
+      if (seconds > 0) {
+        setState(() => seconds--);
+      } else {
+        setState(() {
+          timer?.cancel();
+        });
+      }
+    });
+  }
+
+  void changeEnabled(){
+    checkstatu = true;
+    setState(() => checkstatu);
+  }
+
+
 }
+
+
 
 
 

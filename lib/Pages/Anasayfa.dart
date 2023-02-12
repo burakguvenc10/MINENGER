@@ -22,18 +22,42 @@ class _Anasayfa extends State<Anasayfa> {
                   SizedBox(
                     height: 20,
                   ),
-                  Text('Duyuru Text Yazı....')
+                  Card(
+                      color: Colors.blueGrey.shade100,
+                      elevation: 5,
+                      shadowColor: Colors.black12,
+                      child: Container(
+                        height: 60,
+                        child: Row(
+                          children: [
+                            Text('  Duyuru Text Yazı....',textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 15,color: Colors.black,height: 3,),
+                              maxLines: 1,
+                            ),
+                          ],
+                        ),
+                      ),
+                  ),
                 ],
               ),
 
               SizedBox(
-                height: 30,
+                height: 20,
               ),
 
               Container(
                 child: Column(
                   children: [
-                    Pageview(),
+                    Card(
+                      color: Colors.grey.shade200,
+                      elevation: 2,
+                      shadowColor: Colors.grey,
+                      child: Column(
+                        children: [
+                          Pageview(),
+                        ],
+                      )
+                    ),
 
 
                   ],

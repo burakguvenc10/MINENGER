@@ -25,10 +25,8 @@ class _PageView extends State<Pageview> {
 
     return Container(
       height: 450,
-      color: Colors.grey.shade200,
       child: Stack(
         children:[
-
           // Coin Ikonlar
           Column(
             children: [
@@ -38,11 +36,14 @@ class _PageView extends State<Pageview> {
               ),
 
               IconButton(
+                tooltip: 'SHIBA',
                 icon:  Image.asset(
                   'assets/shiba.png', height: 35, width: 35,
                 ),
                 iconSize: 50,
                 onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Duyurular Yakında...')));
 
                 },
               ),
@@ -52,6 +53,7 @@ class _PageView extends State<Pageview> {
               ),
 
               IconButton(
+                tooltip: 'TRX',
                 icon:  Image.asset(
                   'assets/trx.png', height: 35, width: 35,
                 ),
@@ -64,6 +66,7 @@ class _PageView extends State<Pageview> {
               ),
 
               IconButton(
+                tooltip: 'BTTC',
                 icon:  Image.asset(
                   'assets/bttc.png', height: 35, width: 35,
                 ),
@@ -76,8 +79,9 @@ class _PageView extends State<Pageview> {
               ),
 
               IconButton(
+                tooltip: 'CATE',
                 icon:  Image.asset(
-                  'assets/cate.png', height: 35, width: 35,
+                  'assets/cate.png', height: 40, width: 40,
                 ),
                 iconSize: 50,
                 onPressed: () {},
@@ -88,6 +92,7 @@ class _PageView extends State<Pageview> {
               ),
 
               IconButton(
+                tooltip: 'SATOSHI',
                 icon:  Image.asset(
                   'assets/satoshi.png', height: 35, width: 35,
                 ),
@@ -101,6 +106,7 @@ class _PageView extends State<Pageview> {
               ),
 
               IconButton(
+                tooltip: 'BABY DOGE',
                 icon:  Image.asset(
                   'assets/babydoge.png', height: 35, width: 35,
                 ),
@@ -146,7 +152,7 @@ class _PageView extends State<Pageview> {
 
     )),
     Center(
-        child: Coin(
+        child: Satoshi(
 
     )),
     Center(

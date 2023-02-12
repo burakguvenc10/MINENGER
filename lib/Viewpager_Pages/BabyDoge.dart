@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 
 final coin_controller = TextEditingController();
+late final AnimatedButton animButton;
 
 class BabyDoge extends StatefulWidget {
   @override
@@ -10,9 +12,14 @@ class BabyDoge extends StatefulWidget {
 }
 
 class _BabyDoge extends State<BabyDoge> {
+
+  static const maxSeconds = 60;
+  Timer? timer;
+  int seconds = 60;
+  bool checkstatu = true;
+
   @override
   Widget build(BuildContext context) {
-    final PageController controller = PageController();
     return Column(
       children: [
 
@@ -27,10 +34,21 @@ class _BabyDoge extends State<BabyDoge> {
         ),
 
         Container(
-          margin: EdgeInsets.fromLTRB(70, 20, 70, 40),
+          margin: EdgeInsets.fromLTRB(70, 20, 70,0),
           child: TextFormField(
+            textAlign: TextAlign.center,
+            showCursor: false,
+            enableInteractiveSelection: false,
+            obscureText: true,
+            keyboardType: TextInputType.none,
+            autofocus: false,
             controller: coin_controller,
             decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.orange,
+                ),
+              ),
               errorStyle: TextStyle(color: Colors.redAccent),
               border: OutlineInputBorder(),
               hintText: 'Coin Sayacı',
@@ -40,11 +58,31 @@ class _BabyDoge extends State<BabyDoge> {
             },
             onChanged: (deger) {
             },
-            keyboardType: TextInputType.none,
-            autofocus: false,
           ),
         ),
 
+
+        Expanded(
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              SizedBox(
+                width: 120,
+                height: 120,
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation(Colors.blueGrey.shade200),
+                  backgroundColor: Colors.orangeAccent,
+                  color: Colors.redAccent,
+                  strokeWidth: 8,
+                  value: 1- seconds / maxSeconds,
+                ),
+              ),
+              Center(
+                  child: buildTime()
+              ),
+            ],
+          ),
+        ),
 
 
         AnimatedButton(
@@ -68,14 +106,21 @@ class _BabyDoge extends State<BabyDoge> {
             ),
           ),
           color: Colors.orangeAccent,
-          enabled : true,
+          enabled : checkstatu,
           duration: 25,
           shadowDegree: ShadowDegree.dark,
           width: 190,
           onPressed: () {
+            checkstatu = false;
+            setState(() => checkstatu);
+            seconds = 60;
+            startTimer();
           },
         ),
 
+        SizedBox(
+          height: 10,
+        )
 
 
       ],
@@ -83,7 +128,44 @@ class _BabyDoge extends State<BabyDoge> {
 
     );
   }
+
+  Widget buildTime(){
+    if(seconds  == 0){
+      return Icon(
+        Icons.done, color: Colors.green, size: 100,
+      );
+    }
+    else {
+      return Text(
+        '$seconds' + ' Dakika', textAlign: TextAlign.center,
+        style: TextStyle(
+            color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+        maxLines: 1,
+      );
+    }
+  }
+
+  void startTimer() {
+    timer = Timer.periodic(Duration(milliseconds: 60), (_) {
+      if (seconds > 0) {
+        setState(() => seconds--);
+      } else {
+        setState(() {
+          timer?.cancel();
+        });
+      }
+    });
+  }
+
+  void changeEnabled(){
+    checkstatu = true;
+    setState(() => checkstatu);
+  }
+
+
 }
+
+
 
 
 
