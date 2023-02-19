@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:minenger/Pages/Duyurular.dart';
 import '../Viewpager_Pages/Shiba.dart';
 import '../Viewpager_Pages/Trx.dart';
 import '../Viewpager_Pages/Bttc.dart';
 import '../Viewpager_Pages/Cate.dart';
 import '../Viewpager_Pages/Satoshi.dart';
 import '../Viewpager_Pages/BabyDoge.dart';
+
+final PageController controller = PageController();
+num _curr = 0;
+final GlobalKey<FormState> _shibaKey = GlobalKey<FormState>();
+bool selected = true;
+
 
 class Pageview extends StatefulWidget {
   @override
@@ -14,8 +21,6 @@ class Pageview extends StatefulWidget {
 class _PageView extends State<Pageview> {
   @override
   Widget build(BuildContext context) {
-    final PageController controller = PageController();
-    num _curr = 0;
 
     @override
     void dispose() {
@@ -36,14 +41,15 @@ class _PageView extends State<Pageview> {
               ),
 
               IconButton(
+                key: _shibaKey,
                 tooltip: 'SHIBA',
+                disabledColor: Colors.blueGrey.shade100,
+                isSelected: selected,
                 icon:  Image.asset(
                   'assets/shiba.png', height: 35, width: 35,
                 ),
                 iconSize: 50,
                 onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Duyurular Yakında...')));
 
                 },
               ),
@@ -58,7 +64,8 @@ class _PageView extends State<Pageview> {
                   'assets/trx.png', height: 35, width: 35,
                 ),
                 iconSize: 50,
-                onPressed: () {},
+                onPressed: () {
+                },
               ),
 
               SizedBox(
@@ -122,6 +129,7 @@ class _PageView extends State<Pageview> {
             onPageChanged: (num) {
               setState(() {
                 _curr = num;
+                selectedButton(_curr);
               });
             },
             children: _list,
@@ -131,34 +139,42 @@ class _PageView extends State<Pageview> {
     );
 
   }
-}
+  void selectedButton(num state) {
+    if(state == 0){
 
+    }
+    else if (state == 1){
+
+    }
+    else if (state == 2){
+
+    }
+    else if (state == 3){
+
+    }
+    else if (state == 4){
+
+    }
+    else{
+
+    }
+
+  }
+}
 
   final List<Widget> _list = <Widget>[
     Center(
-        child: Shiba(
-
-    )),
+        child: Shiba()),
     Center(
-        child: Trx(
-
-    )),
+        child: Trx()),
     Center(
-        child: Bttc(
-
-    )),
+        child: Bttc()),
     Center(
-        child: Cate(
-
-    )),
+        child: Cate()),
     Center(
-        child: Satoshi(
-
-    )),
+        child: Satoshi()),
     Center(
-        child: BabyDoge(
-
-    )),
+        child: BabyDoge()),
 
   ];
 

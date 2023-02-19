@@ -20,14 +20,14 @@ class _Anasayfa extends State<Anasayfa> {
               Column(
                 children: [
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Card(
                       color: Colors.blueGrey.shade100,
                       elevation: 5,
                       shadowColor: Colors.black12,
                       child: Container(
-                        height: 60,
+                        height: 50,
                         child: Row(
                           children: [
                             Text('  Duyuru Text Yazı....',textAlign: TextAlign.center,
