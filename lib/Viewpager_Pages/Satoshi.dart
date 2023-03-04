@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
@@ -92,7 +91,7 @@ class _Satoshi extends State<Satoshi> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image.asset('assets/gif/play.gif',color: Colors.white, height: 30,),
+                Image.asset('assets/play.png',color: Colors.white, height: 30,),
 
                 Text(
                   '  Reklam İzle',

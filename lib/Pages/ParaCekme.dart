@@ -2,8 +2,11 @@ import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 
 final Shiba_controller = TextEditingController();
-final Trx_controller = TextEditingController();
 final Bttc_controller = TextEditingController();
+final Floki_controller = TextEditingController();
+final Cate_controller = TextEditingController();
+final Satoshi_controller = TextEditingController();
+final BabyDoge_controller = TextEditingController();
 
 
 class ParaCekme extends StatefulWidget {
@@ -12,7 +15,6 @@ class ParaCekme extends StatefulWidget {
 }
 
 class _ParaCekme extends State<ParaCekme> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,127 +34,420 @@ class _ParaCekme extends State<ParaCekme> {
                     elevation: 5,
                     shadowColor: Colors.grey,
                     child: Container(
-                      height: 450,
+                      height: 520,
                       padding: const EdgeInsets.all(20.0),
                       child:Column(
                         children: [
-                          TextFormField(
-                            textAlign: TextAlign.center,
-                            showCursor: false,
-                            enableInteractiveSelection: false,
-                            obscureText: true,
-                            keyboardType: TextInputType.none,
-                            autofocus: false,
-                            controller: Shiba_controller,
-                            decoration: InputDecoration(
-                              labelText: 'SHIBA',
-                              labelStyle: TextStyle(color: Colors.black),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.orange,
-                                ),
-                              ),
-                              errorStyle: TextStyle(color: Colors.redAccent),
-                              border: OutlineInputBorder(),
-                            ),
-                            maxLines: 1,
-                            onSaved: (deger) {
-                            },
-                            onChanged: (deger) {
-                            },
-                          ),
-
-                          SizedBox(
-                            height: 20,
-                          ),
-
-                          TextFormField(
-                            textAlign: TextAlign.center,
-                            showCursor: false,
-                            enableInteractiveSelection: false,
-                            obscureText: true,
-                            keyboardType: TextInputType.none,
-                            autofocus: false,
-                            controller: Trx_controller,
-                            decoration: InputDecoration(
-                              labelStyle: TextStyle(color: Colors.black),
-                              labelText: 'TRX',
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.orange,
-                                ),
-                              ),
-                              errorStyle: TextStyle(color: Colors.redAccent),
-                              border: OutlineInputBorder(),
-                            ),
-                            maxLines: 1,
-                            onSaved: (deger) {
-                            },
-                            onChanged: (deger) {
-                            },
-                          ),
-
-                          SizedBox(
-                            height: 20,
-                          ),
-
-
-                          TextFormField(
-                            textAlign: TextAlign.center,
-                            showCursor: false,
-                            enableInteractiveSelection: false,
-                            obscureText: true,
-                            keyboardType: TextInputType.none,
-                            autofocus: false,
-                            controller: Bttc_controller,
-                            decoration: InputDecoration(
-                              labelStyle: TextStyle(color: Colors.black),
-                              labelText: 'BTTC',
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.orange,
-                                ),
-                              ),
-                              errorStyle: TextStyle(color: Colors.redAccent),
-                              border: OutlineInputBorder(),
-                            ),
-                            maxLines: 1,
-                            onSaved: (deger) {
-                            },
-                            onChanged: (deger) {
-                            },
-                          ),
-
-                          SizedBox(
-                            height: 45,
-                          ),
-
-                          AnimatedButton(
-                            child: Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                    '  Para Çek',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: 'Akrobat-Regular',
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 200,
+                                child: TextFormField(
+                                  textAlign: TextAlign.center,
+                                  showCursor: false,
+                                  enableInteractiveSelection: false,
+                                  obscureText: true,
+                                  keyboardType: TextInputType.none,
+                                  autofocus: false,
+                                  controller: Shiba_controller,
+                                  decoration: InputDecoration(
+                                    labelText: 'SHIBA',
+                                    labelStyle: TextStyle(color: Colors.black),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.orange,
+                                      ),
                                     ),
+                                    errorStyle: TextStyle(color: Colors.redAccent),
+                                    border: OutlineInputBorder(),
                                   ),
-                                ],
+                                  maxLines: 1,
+                                  onSaved: (deger) {
+                                  },
+                                  onChanged: (deger) {
+                                  },
+                                ),
                               ),
-                            ),
-                            color: Colors.orangeAccent,
-                            duration: 25,
-                            shadowDegree: ShadowDegree.dark,
-                            width: 200,
-                            onPressed: () {
 
-                            },
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),),
+
+                              AnimatedButton(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(
+                                        'Para Çek',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: 'Akrobat-Regular',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                color: Colors.orangeAccent,
+                                duration: 25,
+                                shadowDegree: ShadowDegree.dark,
+                                width: 90,
+                                height: 50,
+                                onPressed: () {
+
+                                },
+                              ),
+                            ],
                           ),
+
+                          SizedBox(
+                            height: 20,
+                          ),
+
+
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 200,
+                                child: TextFormField(
+                                  textAlign: TextAlign.center,
+                                  showCursor: false,
+                                  enableInteractiveSelection: false,
+                                  obscureText: true,
+                                  keyboardType: TextInputType.none,
+                                  autofocus: false,
+                                  controller: Bttc_controller,
+                                  decoration: InputDecoration(
+                                    labelStyle: TextStyle(color: Colors.black),
+                                    labelText: 'BTTC',
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.orange,
+                                      ),
+                                    ),
+                                    errorStyle: TextStyle(color: Colors.redAccent),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  maxLines: 1,
+                                  onSaved: (deger) {
+                                  },
+                                  onChanged: (deger) {
+                                  },
+                                ),
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),),
+
+                              AnimatedButton(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(
+                                        'Para Çek',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: 'Akrobat-Regular',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                color: Colors.orangeAccent,
+                                duration: 25,
+                                shadowDegree: ShadowDegree.dark,
+                                width: 90,
+                                height: 50,
+                                onPressed: () {
+                                },
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(
+                            height: 20,
+                          ),
+
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 200,
+                                child: TextFormField(
+                                  textAlign: TextAlign.center,
+                                  showCursor: false,
+                                  enableInteractiveSelection: false,
+                                  obscureText: true,
+                                  enabled: false,
+                                  keyboardType: TextInputType.none,
+                                  autofocus: false,
+                                  controller: Floki_controller,
+                                  decoration: InputDecoration(
+                                    labelStyle: TextStyle(color: Colors.black),
+                                    labelText: 'FLOKI',
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.orange,
+                                      ),
+                                    ),
+                                    errorStyle: TextStyle(color: Colors.redAccent),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  maxLines: 1,
+                                  onSaved: (deger) {
+                                  },
+                                  onChanged: (deger) {
+                                  },
+                                ),
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),),
+
+                              AnimatedButton(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(
+                                        'Para Çek',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: 'Akrobat-Regular',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                color: Colors.orangeAccent,
+                                duration: 25,
+                                enabled: false,
+                                shadowDegree: ShadowDegree.dark,
+                                width: 90,
+                                height: 50,
+                                onPressed: () {
+                                },
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(
+                            height: 20,
+                          ),
+
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 200,
+                                child: TextFormField(
+                                  textAlign: TextAlign.center,
+                                  showCursor: false,
+                                  enableInteractiveSelection: false,
+                                  obscureText: true,
+                                  enabled: false,
+                                  keyboardType: TextInputType.none,
+                                  autofocus: false,
+                                  controller: Cate_controller,
+                                  decoration: InputDecoration(
+                                    labelStyle: TextStyle(color: Colors.black),
+                                    labelText: 'CATE',
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.orange,
+                                      ),
+                                    ),
+                                    errorStyle: TextStyle(color: Colors.redAccent),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  maxLines: 1,
+                                  onSaved: (deger) {
+                                  },
+                                  onChanged: (deger) {
+                                  },
+                                ),
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),),
+
+                              AnimatedButton(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(
+                                        'Para Çek',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: 'Akrobat-Regular',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                color: Colors.orangeAccent,
+                                duration: 25,
+                                enabled: false,
+                                shadowDegree: ShadowDegree.dark,
+                                width: 90,
+                                height: 50,
+                                onPressed: () {
+                                },
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(
+                            height: 20,
+                          ),
+
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 200,
+                                child: TextFormField(
+                                  textAlign: TextAlign.center,
+                                  showCursor: false,
+                                  enableInteractiveSelection: false,
+                                  obscureText: true,
+                                  enabled: false,
+                                  keyboardType: TextInputType.none,
+                                  autofocus: false,
+                                  controller: Satoshi_controller,
+                                  decoration: InputDecoration(
+                                    labelStyle: TextStyle(color: Colors.black),
+                                    labelText: 'SATOSHI',
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.orange,
+                                      ),
+                                    ),
+                                    errorStyle: TextStyle(color: Colors.redAccent),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  maxLines: 1,
+                                  onSaved: (deger) {
+                                  },
+                                  onChanged: (deger) {
+                                  },
+                                ),
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),),
+
+                              AnimatedButton(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(
+                                        'Para Çek',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: 'Akrobat-Regular',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                color: Colors.orangeAccent,
+                                duration: 25,
+                                enabled: false,
+                                shadowDegree: ShadowDegree.dark,
+                                width: 90,
+                                height: 50,
+                                onPressed: () {
+                                },
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(
+                            height: 20,
+                          ),
+
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 200,
+                                child: TextFormField(
+                                  textAlign: TextAlign.center,
+                                  showCursor: false,
+                                  enableInteractiveSelection: false,
+                                  obscureText: true,
+                                  enabled: false,
+                                  keyboardType: TextInputType.none,
+                                  autofocus: false,
+                                  controller: BabyDoge_controller,
+                                  decoration: InputDecoration(
+                                    labelStyle: TextStyle(color: Colors.black),
+                                    labelText: 'BABY DOGE',
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.orange,
+                                      ),
+                                    ),
+                                    errorStyle: TextStyle(color: Colors.redAccent),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  maxLines: 1,
+                                  onSaved: (deger) {
+                                  },
+                                  onChanged: (deger) {
+                                  },
+                                ),
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),),
+
+                              AnimatedButton(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(
+                                        'Para Çek',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: 'Akrobat-Regular',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                color: Colors.orangeAccent,
+                                duration: 25,
+                                enabled: false,
+                                shadowDegree: ShadowDegree.dark,
+                                width: 90,
+                                height: 50,
+                                onPressed: () {
+                                },
+                              ),
+                            ],
+                          ),
+
+
                         ],
                       ),
                     ),
@@ -166,3 +461,4 @@ class _ParaCekme extends State<ParaCekme> {
     );
   }
 }
+

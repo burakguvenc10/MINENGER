@@ -11,7 +11,6 @@ class _Anasayfa extends State<Anasayfa> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Scrollbar(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -19,9 +18,11 @@ class _Anasayfa extends State<Anasayfa> {
             children: [
               Column(
                 children: [
+
                   SizedBox(
                     height: 10,
                   ),
+
                   Card(
                       color: Colors.blueGrey.shade100,
                       elevation: 5,
@@ -58,14 +59,9 @@ class _Anasayfa extends State<Anasayfa> {
                         ],
                       )
                     ),
-
-
                   ],
                 ),
               ),
-
-
-
             ],
           ),
         ),

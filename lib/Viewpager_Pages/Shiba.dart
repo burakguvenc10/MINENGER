@@ -91,7 +91,7 @@ class _Shiba extends State<Shiba> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image.asset('assets/gif/play.gif',color: Colors.white, height: 30,),
+                Image.asset('assets/play.png',color: Colors.white, height: 30,),
 
                 Text(
                   '  Reklam İzle',

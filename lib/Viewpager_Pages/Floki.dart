@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
@@ -7,12 +6,12 @@ import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 final coin_controller = TextEditingController();
 late final AnimatedButton animButton;
 
-class Trx extends StatefulWidget {
+class Floki extends StatefulWidget {
   @override
-  _Trx createState() => _Trx();
+  _Floki createState() => _Floki();
 }
 
-class _Trx extends State<Trx> {
+class _Floki extends State<Floki> {
 
   static const maxSeconds = 60;
   Timer? timer;
@@ -28,7 +27,7 @@ class _Trx extends State<Trx> {
           height: 20,
         ),
 
-        Text('TRX', textAlign: TextAlign.center, style: TextStyle(fontSize: 35,)),
+        Text('FLOKI', textAlign: TextAlign.center, style: TextStyle(fontSize: 35,)),
 
         SizedBox(
           height: 20,
@@ -92,7 +91,7 @@ class _Trx extends State<Trx> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image.asset('assets/gif/play.gif',color: Colors.white, height: 30,),
+                Image.asset('assets/play.png',color: Colors.white, height: 30,),
 
                 Text(
                   '  Reklam İzle',

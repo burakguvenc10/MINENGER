@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minenger/Pages/Duyurular.dart';
 import '../Viewpager_Pages/Shiba.dart';
-import '../Viewpager_Pages/Trx.dart';
+import '../Viewpager_Pages/Floki.dart';
 import '../Viewpager_Pages/Bttc.dart';
 import '../Viewpager_Pages/Cate.dart';
 import '../Viewpager_Pages/Satoshi.dart';
@@ -59,20 +59,6 @@ class _PageView extends State<Pageview> {
               ),
 
               IconButton(
-                tooltip: 'TRX',
-                icon:  Image.asset(
-                  'assets/trx.png', height: 35, width: 35,
-                ),
-                iconSize: 50,
-                onPressed: () {
-                },
-              ),
-
-              SizedBox(
-                height: 5,
-              ),
-
-              IconButton(
                 tooltip: 'BTTC',
                 icon:  Image.asset(
                   'assets/bttc.png', height: 35, width: 35,
@@ -86,12 +72,13 @@ class _PageView extends State<Pageview> {
               ),
 
               IconButton(
-                tooltip: 'CATE',
+                tooltip: 'FLOKI',
                 icon:  Image.asset(
-                  'assets/cate.png', height: 40, width: 40,
+                  'assets/floki.png', height: 35, width: 35,
                 ),
                 iconSize: 50,
-                onPressed: () {},
+                onPressed: () {
+                },
               ),
 
               SizedBox(
@@ -104,6 +91,19 @@ class _PageView extends State<Pageview> {
                   'assets/satoshi.png', height: 35, width: 35,
                 ),
                 disabledColor: Colors.grey,
+                iconSize: 50,
+                onPressed: () {},
+              ),
+
+              SizedBox(
+                height: 5,
+              ),
+
+              IconButton(
+                tooltip: 'CATE',
+                icon:  Image.asset(
+                  'assets/cate.png', height: 40, width: 40,
+                ),
                 iconSize: 50,
                 onPressed: () {},
               ),
@@ -166,9 +166,9 @@ class _PageView extends State<Pageview> {
     Center(
         child: Shiba()),
     Center(
-        child: Trx()),
-    Center(
         child: Bttc()),
+    Center(
+        child: Floki()),
     Center(
         child: Cate()),
     Center(

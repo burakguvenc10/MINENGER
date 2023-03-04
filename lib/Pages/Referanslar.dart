@@ -28,7 +28,7 @@ class _Referanslar extends State<Referanslar> {
                     elevation: 5,
                     shadowColor: Colors.grey,
                     child: Container(
-                      height: 250,
+                      height: 200,
                       padding: const EdgeInsets.all(20.0),
                       child:Column(
                         children: [
