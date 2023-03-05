@@ -11,7 +11,8 @@ class _Anasayfa extends State<Anasayfa> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Scrollbar(
+      resizeToAvoidBottomInset: false,
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(

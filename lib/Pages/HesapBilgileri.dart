@@ -11,7 +11,8 @@ class _HesapBilgileri extends State<HesapBilgileri> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      body: Scrollbar(
+      resizeToAvoidBottomInset: false,
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
@@ -27,14 +28,16 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                     elevation: 5,
                     shadowColor: Colors.grey,
                     child: Container(
-                      height: 500,
+                      height: 510,
                       padding: const EdgeInsets.all(20.0),
+                      child:SingleChildScrollView(
                       child:Column(
                         children: [
                           CircleAvatar(
                             backgroundImage: AssetImage('assets/avatar.png'),
                             backgroundColor: Colors.white,
-                            radius: 40,
+                            child: Padding(padding: EdgeInsets.all(5.0)),
+                            radius: 45,
                           ),
 
                           SizedBox(
@@ -42,10 +45,10 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                           ),
 
                           TextFormField(
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.left,
                             showCursor: false,
                             enableInteractiveSelection: false,
-                            obscureText: true,
+                            obscureText: false,
                             enabled: false,
                             keyboardType: TextInputType.none,
                             autofocus: false,
@@ -53,7 +56,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                             decoration: InputDecoration(
                               labelText: 'Kullanıcı Adı',
                               labelStyle: TextStyle(color: Colors.black),
-                              suffixIcon: IconButton(
+                              prefixIcon: IconButton(
                                 onPressed: (){},
                                 icon: Icon(Icons.person),
                                 color: Colors.black54,
@@ -80,10 +83,10 @@ class _HesapBilgileri extends State<HesapBilgileri> {
 
 
                           TextFormField(
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.left,
                             showCursor: false,
                             enableInteractiveSelection: false,
-                            obscureText: true,
+                            obscureText: false,
                             enabled: false,
                             keyboardType: TextInputType.none,
                             autofocus: false,
@@ -91,7 +94,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                             decoration: InputDecoration(
                               labelText: 'Mail',
                               labelStyle: TextStyle(color: Colors.black),
-                              suffixIcon: IconButton(
+                              prefixIcon: IconButton(
                                 onPressed: (){},
                                 icon: Icon(Icons.mail_outline),
                                 color: Colors.black54,
@@ -117,8 +120,9 @@ class _HesapBilgileri extends State<HesapBilgileri> {
 
 
                           TextFormField(
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.left,
                             showCursor: true,
+                            cursorColor: Colors.black26,
                             enableInteractiveSelection: false,
                             obscureText: true,
                             keyboardType: TextInputType.visiblePassword,
@@ -127,7 +131,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                             decoration: InputDecoration(
                               labelText: 'Yeni Şifre',
                               labelStyle: TextStyle(color: Colors.black),
-                              suffixIcon: IconButton(
+                              prefixIcon: IconButton(
                                 onPressed: (){},
                                 icon: Icon(Icons.key),
                                 color: Colors.black54,
@@ -152,8 +156,9 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                           ),
 
                           TextFormField(
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.left,
                             showCursor: true,
+                            cursorColor: Colors.black26,
                             enableInteractiveSelection: false,
                             obscureText: true,
                             keyboardType: TextInputType.visiblePassword,
@@ -162,7 +167,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                             decoration: InputDecoration(
                               labelText: '* Yeni Şifre Tekrar',
                               labelStyle: TextStyle(color: Colors.black),
-                              suffixIcon: IconButton(
+                              prefixIcon: IconButton(
                                 onPressed: (){},
                                 icon: Icon(Icons.key),
                                 color: Colors.black54,
@@ -214,7 +219,9 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                           ),
 
 
-                        ],
+
+                          ],
+                        ),
                       ),
                     ),
                   ),

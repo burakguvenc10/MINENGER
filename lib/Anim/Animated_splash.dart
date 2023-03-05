@@ -1,6 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:minenger/main.dart';
 import 'package:flutter/material.dart';
+import '../Pages/Login.dart';
 
 class Animated_splash extends StatelessWidget {
   @override
@@ -15,10 +16,10 @@ class Animated_splash extends StatelessWidget {
             duration: 900,
             splash: Stack(
                 children:[
-                Image.asset('assets/splash.png',fit: BoxFit.contain),
+                Image.asset('assets/msplash.png',fit: BoxFit.contain,color: Colors.white,),
 
                 ],
-            ), nextScreen: MyHomePage(),
+            ), nextScreen: Login(),
             splashTransition: SplashTransition.sizeTransition,
             //pageTransitionType: PageTransitionType.scale,
             //backgroundColor: Colors.white

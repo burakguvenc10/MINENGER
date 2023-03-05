@@ -12,7 +12,7 @@ class _Referanslar extends State<Referanslar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      resizeToAvoidBottomInset: false,
       body: Scrollbar(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
