@@ -1,5 +1,7 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:minenger/Pages/PasswordRefresh.dart';
+import 'package:minenger/Pages/Signup.dart';
 import 'package:minenger/main.dart';
 
 class Login extends StatefulWidget {
@@ -104,15 +106,13 @@ class _Login extends State<Login> {
                   },
                 ),
 
-                SizedBox(
-                  height: 5,
-                ),
-
                 TextButton(
-                    child: Text('Şifremi Unuttum?'),
-
+                  child: Container(
+                    alignment: Alignment.centerRight,
+                    child: Text('Şifremi Unuttum?',textAlign: TextAlign.right,style: TextStyle(color: Colors.orange)),
+                  ),
                     onPressed: () {
-
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> PasswordRefresh()));
                     },
                 ),
 
@@ -123,7 +123,7 @@ class _Login extends State<Login> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          'Giriş',
+                          'Giriş Yap',
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.white,
@@ -147,22 +147,38 @@ class _Login extends State<Login> {
                   height: 5,
                 ),
 
-                TextButton(
-                  child: Text('hesabınız yok mu? KAYIT OL'),
+                Container(
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        child: Text('hesabınız yok mu?',textAlign: TextAlign.left,style: TextStyle(color: Colors.black26,fontSize: 14)),
+                        onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Signup()));
+                          },
+                      ),
 
-                  onPressed: () {
+                      TextButton(
+                        child: Text('KAYDOL',textAlign: TextAlign.center,style: TextStyle(color: Colors.blue,fontSize: 18)),
+                        onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Signup()));
+                          },
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
 
-                  },
+
+
+
                 ),
-
-
-                 ],
-                ),
-               ),
               ),
             ),
           ),
-      ),
+        ),
     );
   }
 }
