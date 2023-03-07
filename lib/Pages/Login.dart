@@ -1,5 +1,6 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:minenger/Pages/PasswordRefresh.dart';
 import 'package:minenger/Pages/Signup.dart';
 import 'package:minenger/main.dart';
@@ -140,6 +141,10 @@ class _Login extends State<Login> {
                   width: 180,
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context)=> MyHomePage()));
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Hoşgeldin Burak "),
+                      backgroundColor: Colors.orange.shade300,
+                    ));
                   },
                 ),
 
@@ -180,5 +185,16 @@ class _Login extends State<Login> {
           ),
         ),
     );
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    //Ekran dönmesini engelleme
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+
+    ]);
   }
 }

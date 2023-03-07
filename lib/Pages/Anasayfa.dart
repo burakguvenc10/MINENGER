@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../Component/Pageview.dart';
 
 class Anasayfa extends StatefulWidget {
@@ -69,5 +70,16 @@ class _Anasayfa extends State<Anasayfa> {
       ),
     );
 
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    //Ekran dönmesini engelleme
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+
+    ]);
   }
 }

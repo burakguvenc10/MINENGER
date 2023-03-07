@@ -1,5 +1,6 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:minenger/Pages/Login.dart';
 
@@ -234,15 +235,21 @@ class _Signup extends State<Signup> {
 
                   ],
                 ),
-
-
-
-
               ),
             ),
           ),
         ),
       ),
     );
+  }
+  @override
+  void initState(){
+    super.initState();
+    //Ekran dönmesini engelleme
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+
+    ]);
   }
 }
