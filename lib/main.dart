@@ -11,7 +11,6 @@ void main() {
   runApp(const MyApp());
 }
 const appbarColor = Color.fromRGBO(250, 179, 53  ,1);
-
 const bottombarColor = Color.fromRGBO(252, 207, 38  ,1);
 
 class MyApp extends StatelessWidget {
@@ -36,6 +35,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  
   int selectedItem = 0;
   final List<Widget> tumSayfalar = [
     Anasayfa(),

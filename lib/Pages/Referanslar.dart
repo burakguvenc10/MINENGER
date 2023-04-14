@@ -81,10 +81,6 @@ class _Referanslar extends State<Referanslar> {
           ),
         ),
       ),
-
     );
-
-
-
   }
 }
