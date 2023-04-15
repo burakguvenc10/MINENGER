@@ -19,6 +19,7 @@ class Anasayfa extends StatefulWidget {
 class _Anasayfa extends State<Anasayfa> {
   int pageIndex = 0;
   final PageController pageviewController = PageController(initialPage: 0);
+  bool _icon = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class _Anasayfa extends State<Anasayfa> {
                 children: [
 
                   SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
 
                   Card(
@@ -41,11 +42,13 @@ class _Anasayfa extends State<Anasayfa> {
                       elevation: 5,
                       shadowColor: Colors.black12,
                       child: Container(
-                        height: 50,
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text('  Duyuru Text Yazı....',textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 15,color: Colors.black,height: 3,),
+                            Text('  Son Dakika Duyurular....',textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 16,color: Colors.black,height: 3,
+                              ),
                               maxLines: 1,
                             ),
                           ],
@@ -70,16 +73,19 @@ class _Anasayfa extends State<Anasayfa> {
                           Row(
                             children:[
                               // Coin Ikonlar
-                                Stack(
-                                children: [
                                   Container(
-                                    height: 450,
-                                    alignment: Alignment.center,
+                                    height: 470,
+                                    padding: EdgeInsets.all(1),
                                     child:Column(
                                       children:[
                                         SingleChildScrollView(
                                           child:Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
+
+                                              Image.network(
+                                                'https://art.ngfiles.com/images/2173000/2173045_supertrekkie92_spinning-coin.gif?f1636079576',width: 35,height: 35,),
+
                                               IconButton(
                                                 tooltip: 'SHIBA',
                                                 splashColor: Colors.orange.shade200,
@@ -89,7 +95,13 @@ class _Anasayfa extends State<Anasayfa> {
                                                 ),
                                                 iconSize: 50,
                                                 onPressed: () {
-                                                  gotoSelectedPage(1);
+                                                  setState(() {
+                                                    _icon = !_icon;
+                                                    page_controller.animateToPage(
+                                                        0, duration: const Duration(microseconds: 300), curve: Curves.easeIn
+                                                    );
+                                                  });
+
                                                 },
                                               ),
 
@@ -105,7 +117,11 @@ class _Anasayfa extends State<Anasayfa> {
                                                 ),
                                                 iconSize: 50,
                                                 onPressed: () {
-                                                  gotoSelectedPage(2);
+                                                  setState(() {
+                                                    page_controller.animateToPage(
+                                                        1, duration: const Duration(microseconds: 300), curve: Curves.easeIn
+                                                    );
+                                                  });
                                                 },
                                               ),
 
@@ -121,7 +137,31 @@ class _Anasayfa extends State<Anasayfa> {
                                                 ),
                                                 iconSize: 50,
                                                 onPressed: () {
-                                                  gotoSelectedPage(3);
+                                                  setState(() {
+                                                    page_controller.animateToPage(
+                                                        2, duration: const Duration(microseconds: 300), curve: Curves.easeIn
+                                                    );
+                                                  });
+                                                },
+                                              ),
+
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+
+                                              IconButton(
+                                                tooltip: 'CATE',
+                                                splashColor: Colors.orange.shade200,
+                                                icon:  Image.asset(
+                                                  'assets/cate.png', height: 40, width: 40,
+                                                ),
+                                                iconSize: 50,
+                                                onPressed: () {
+                                                  setState(() {
+                                                    page_controller.animateToPage(
+                                                        3, duration: const Duration(microseconds: 300), curve: Curves.easeIn
+                                                    );
+                                                  });
                                                 },
                                               ),
 
@@ -138,23 +178,11 @@ class _Anasayfa extends State<Anasayfa> {
                                                 disabledColor: Colors.grey,
                                                 iconSize: 50,
                                                 onPressed: () {
-                                                  gotoSelectedPage(4);
-                                                },
-                                              ),
-
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-
-                                              IconButton(
-                                                tooltip: 'CATE',
-                                                splashColor: Colors.orange.shade200,
-                                                icon:  Image.asset(
-                                                  'assets/cate.png', height: 40, width: 40,
-                                                ),
-                                                iconSize: 50,
-                                                onPressed: () {
-                                                  gotoSelectedPage(5);
+                                                  setState(() {
+                                                    page_controller.animateToPage(
+                                                        4, duration: const Duration(microseconds: 300), curve: Curves.easeIn
+                                                    );
+                                                  });
                                                 },
                                               ),
 
@@ -170,7 +198,11 @@ class _Anasayfa extends State<Anasayfa> {
                                                 ),
                                                 iconSize: 50,
                                                 onPressed: () {
-                                                  gotoSelectedPage(6);
+                                                  setState(() {
+                                                    page_controller.animateToPage(
+                                                        5, duration: const Duration(microseconds: 300), curve: Curves.easeIn
+                                                    );
+                                                  });
                                                 },
                                               ),
                                             ],
@@ -182,8 +214,8 @@ class _Anasayfa extends State<Anasayfa> {
 
                                   Container(
                                     height: 450,
-                                    margin: EdgeInsets.only(left: 70),
-                                    alignment: Alignment.centerRight,
+                                    width: 280,
+                                    alignment: Alignment.center,
                                     child: Column(
                                       children: [
                                         Pageview(pageIndex),
@@ -191,8 +223,7 @@ class _Anasayfa extends State<Anasayfa> {
                                     ),
                                   ),
 
-                                  ],
-                                ),
+
                             ],
                           ),
                         ],
@@ -206,28 +237,6 @@ class _Anasayfa extends State<Anasayfa> {
       ),
     );
   }
-
-  gotoSelectedPage(int selectedPage) {
-    pageviewController.nextPage(
-        duration: Duration(milliseconds: 200),
-        curve: Curves.easeIn);
-  }
-
-  final List<Widget> _list = <Widget>[
-    Center(
-        child: Shiba()),
-    Center(
-        child: Bttc()),
-    Center(
-        child: Floki()),
-    Center(
-        child: Cate()),
-    Center(
-        child: Satoshi()),
-    Center(
-        child: BabyDoge()),
-
-  ];
 
   @override
   void initState(){

@@ -27,16 +27,24 @@ class _Cate extends State<Cate> {
           height: 20,
         ),
 
-        Text('CATE', textAlign: TextAlign.center, style: TextStyle(fontSize: 35,)),
+        Text('CATE', textAlign: TextAlign.center, style: TextStyle(
+          fontSize: 35,
+          foreground: Paint()
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 3
+            ..color = Colors.orange[400]!,
+          ),
+        ),
 
         SizedBox(
           height: 20,
         ),
 
         Container(
-          margin: EdgeInsets.fromLTRB(70, 20, 70,0),
+          margin: EdgeInsets.fromLTRB(50, 20, 50,0),
           child: TextFormField(
             textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 18),
             showCursor: false,
             enableInteractiveSelection: false,
             obscureText: true,
@@ -52,6 +60,10 @@ class _Cate extends State<Cate> {
               errorStyle: TextStyle(color: Colors.redAccent),
               border: OutlineInputBorder(),
               hintText: 'Coin Sayacı',
+              suffixIcon: IconButton(
+                onPressed: (){},
+                icon: Image.asset('assets/cate.png',width: 25,height: 25,),
+              ),
             ),
             maxLines: 1,
             onSaved: (deger) {
@@ -131,6 +143,7 @@ class _Cate extends State<Cate> {
 
   Widget buildTime(){
     if(seconds  == 0){
+      checkstatu = true;
       return Icon(
         Icons.done, color: Colors.green, size: 100,
       );

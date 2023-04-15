@@ -21,9 +21,12 @@ class _ParaCekme extends State<ParaCekme> {
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(30.0),
+          padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
+                SizedBox(
+                  height: 20,
+                ),
                   Card(
                     color: Colors.grey.shade200,
                     elevation: 5,

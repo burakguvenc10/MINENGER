@@ -6,10 +6,10 @@ import '../Viewpager_Pages/Cate.dart';
 import '../Viewpager_Pages/Satoshi.dart';
 import '../Viewpager_Pages/BabyDoge.dart';
 
-final PageController controller = PageController(initialPage: 0);
+final PageController page_controller = PageController(initialPage: 0);
 num _curr = 0;
 bool selected = true;
-final GlobalKey<FormState> _shibaKey = GlobalKey<FormState>();
+
 
 class Pageview extends StatefulWidget {
 
@@ -22,20 +22,13 @@ class Pageview extends StatefulWidget {
 class _PageView extends State<Pageview> {
   @override
   Widget build(BuildContext context) {
-
-    @override
-    void dispose() {
-      controller.dispose();
-      super.dispose();
-    }
-
     return Container(
       height: 450,
       width: 270,
       child: Material(
         child:
           PageView(
-            controller: controller,
+            controller: page_controller,
             onPageChanged: (num) {
               setState(() {
                 _curr = num;
@@ -63,6 +56,12 @@ class _PageView extends State<Pageview> {
         child: BabyDoge()),
 
   ];
+
+  @override
+  void dispose() {
+    page_controller.dispose();
+    super.dispose();
+  }
 
 }
 
