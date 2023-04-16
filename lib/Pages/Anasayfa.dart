@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../Component/Pageview.dart';
-import '../Viewpager_Pages/Shiba.dart';
-import '../Viewpager_Pages/Floki.dart';
-import '../Viewpager_Pages/Bttc.dart';
-import '../Viewpager_Pages/Cate.dart';
-import '../Viewpager_Pages/Satoshi.dart';
-import '../Viewpager_Pages/BabyDoge.dart';
 
 num _curr = 0;
 bool selected = true;

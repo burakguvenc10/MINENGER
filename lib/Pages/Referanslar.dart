@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 final referanskodu_controller = TextEditingController();
 
@@ -8,6 +9,8 @@ class Referanslar extends StatefulWidget {
 }
 
 class _Referanslar extends State<Referanslar> {
+
+  String copyCode = referanskodu_controller.text;
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +39,20 @@ class _Referanslar extends State<Referanslar> {
                             textAlign: TextAlign.center,
                             showCursor: false,
                             enableInteractiveSelection: false,
-                            obscureText: true,
+                            obscureText: false,
                             keyboardType: TextInputType.none,
                             autofocus: false,
-                            //controller: coin_controller,
+                            controller: referanskodu_controller,
                             decoration: InputDecoration(
                               labelText: 'Referans Kodu',
                               labelStyle: TextStyle(color: Colors.black),
                               suffixIcon: IconButton(
-                                onPressed: (){},
+                                onPressed: (){
+                                  Clipboard.setData(ClipboardData(text: '$copyCode')).then((_) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Kopyalandı')));
+                                  });
+                                },
                                 icon: Icon(Icons.copy),
                                 color: Colors.black54,
                               ),

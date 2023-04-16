@@ -1,5 +1,7 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
+import 'Login.dart';
+
 
 class HesapBilgileri extends StatefulWidget {
   @override
@@ -28,7 +30,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                     elevation: 5,
                     shadowColor: Colors.grey,
                     child: Container(
-                      height: 510,
+                      height: 550,
                       padding: const EdgeInsets.all(20.0),
                       child:SingleChildScrollView(
                       child:Column(
@@ -38,6 +40,24 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                             backgroundColor: Colors.white,
                             child: Padding(padding: EdgeInsets.all(5.0)),
                             radius: 45,
+                          ),
+
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                IconButton(
+                                  onPressed: (){
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Login()));
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                      content: Text("Başarıyla Çıkış Yapıldı"),
+                                      backgroundColor: Colors.white38,
+                                    ));
+                                  },
+                                  icon: Icon(Icons.logout,color: Colors.red,size: 30,)
+                                ),
+
+                                Text("Çıkış",style: TextStyle(fontSize: 13,color: Colors.grey,),)
+                              ],
                           ),
 
                           SizedBox(
@@ -225,6 +245,10 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                       ),
                     ),
                   ),
+
+
+
+
                 ],
               ),
             ],

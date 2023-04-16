@@ -149,11 +149,15 @@ class _Bttc extends State<Bttc> {
       );
     }
     else {
-      return Text(
-        '$seconds' + ' Dakika', textAlign: TextAlign.center,
-        style: TextStyle(
-            color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-        maxLines: 1,
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:[
+          Text('Kalan Zaman',textAlign: TextAlign.center,style: TextStyle(color: Colors.grey.shade400,fontSize: 10),),
+          Text('$seconds' + ' Dakika', textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+            maxLines: 1,)
+        ],
       );
     }
   }
