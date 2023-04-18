@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 final coin_controller = TextEditingController();
 late final AnimatedButton animButton;
@@ -17,6 +19,10 @@ class _Shiba extends State<Shiba> {
   Timer? timer;
   int seconds = 60;
   bool checkstatu = true;
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +67,7 @@ class _Shiba extends State<Shiba> {
                 ),
                 errorStyle: TextStyle(color: Colors.redAccent),
                 border: OutlineInputBorder(),
-                hintText: 'Coin Sayacı',
+                hintText: 'Kazılan Coin',
                 suffixIcon: IconButton(
                   onPressed: (){},
                   icon: Image.asset('assets/shiba.png',width: 25,height: 25,),
@@ -74,7 +80,6 @@ class _Shiba extends State<Shiba> {
               },
           ),
         ),
-
 
         Expanded(
             child: Stack(
@@ -125,6 +130,7 @@ class _Shiba extends State<Shiba> {
           shadowDegree: ShadowDegree.dark,
           width: 190,
           onPressed: () {
+            //Timer
             checkstatu = false;
             setState(() => checkstatu);
             seconds = 60;
@@ -134,7 +140,7 @@ class _Shiba extends State<Shiba> {
 
         SizedBox(
           height: 10,
-        )
+        ),
 
 
       ],
@@ -179,6 +185,11 @@ class _Shiba extends State<Shiba> {
   void changeEnabled(){
     checkstatu = true;
     setState(() => checkstatu);
+  }
+
+
+  @override
+  void dispose() {
   }
 
 

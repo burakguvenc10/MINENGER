@@ -59,7 +59,7 @@ class _Bttc extends State<Bttc> {
               ),
               errorStyle: TextStyle(color: Colors.redAccent),
               border: OutlineInputBorder(),
-              hintText: 'Coin Sayacı',
+              hintText: 'Kazılan Coin',
               suffixIcon: IconButton(
                 onPressed: (){},
                 icon: Image.asset('assets/bttc.png',width: 25,height: 25,),

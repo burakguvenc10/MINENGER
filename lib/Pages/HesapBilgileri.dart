@@ -1,7 +1,8 @@
+import 'dart:io';
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'Login.dart';
-
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class HesapBilgileri extends StatefulWidget {
   @override
@@ -9,6 +10,28 @@ class HesapBilgileri extends StatefulWidget {
 }
 
 class _HesapBilgileri extends State<HesapBilgileri> {
+  bool isLoaded = false;
+  late BannerAd bannerAd;
+
+  loadBannerAd(){
+    bannerAd = BannerAd(
+      size: AdSize.banner,
+      adUnitId: Platform.isIOS ? "ca-app-pub-3940256099942544/6300978111" : "ca-app-pub-3940256099942544/6300978111", //testId
+      listener: BannerAdListener(
+          onAdLoaded: (ad){
+            setState(() {
+              isLoaded = true;
+            });
+          },
+          onAdFailedToLoad: (ad,error){
+            ad.dispose();
+          }
+      ),
+      request: const AdRequest(),
+    );
+    bannerAd.load();
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -251,10 +274,37 @@ class _HesapBilgileri extends State<HesapBilgileri> {
 
                 ],
               ),
+
+              SizedBox(
+                height: 10,
+              ),
+
+              //BANNER-ADMOB
+              isLoaded?SizedBox(
+                height: bannerAd.size.height.toDouble(),
+                width: bannerAd.size.width.toDouble(),
+                child: AdWidget(ad: bannerAd,),
+              )
+                  :const SizedBox(),
+
             ],
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    //Admob-Banner
+    loadBannerAd();
+  }
+
+  @override
+  void dispose() {
+    //Admob-Banner
+    bannerAd.dispose();
+    loadBannerAd();
   }
 }

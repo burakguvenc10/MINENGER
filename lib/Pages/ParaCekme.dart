@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 final Shiba_controller = TextEditingController();
 final Bttc_controller = TextEditingController();
@@ -15,6 +17,61 @@ class ParaCekme extends StatefulWidget {
 }
 
 class _ParaCekme extends State<ParaCekme> {
+  bool isLoaded = false;
+  late BannerAd bannerAd;
+  late RewardedAd rewardedAd;
+
+  loadBannerAd(){
+    bannerAd = BannerAd(
+      size: AdSize.banner,
+      adUnitId: Platform.isIOS ? "ca-app-pub-3940256099942544/6300978111" : "ca-app-pub-3940256099942544/6300978111", //testId
+      listener: BannerAdListener(
+          onAdLoaded: (ad){
+            setState(() {
+              isLoaded = true;
+            });
+          },
+          onAdFailedToLoad: (ad,error){
+            ad.dispose();
+          }
+      ),
+      request: const AdRequest(),
+    );
+    bannerAd.load();
+  }
+
+  loadRewardedAd(){
+    RewardedAd.load(
+        adUnitId: Platform.isIOS ? "ca-app-pub-3940256099942544/5224354917" : "ca-app-pub-3940256099942544/5224354917", //testID
+        request: AdRequest(),
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+            onAdLoaded: (RewardedAd ad){
+              rewardedAd = ad;
+            },
+            onAdFailedToLoad: (LoadAdError error){
+              rewardedAd = error as RewardedAd;
+            })
+    );
+  }
+
+  showRewardedAdd(){
+    if(rewardedAd != null){
+      rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
+          onAdShowedFullScreenContent: (RewardedAd ad){
+            ad.dispose();
+            loadRewardedAd();
+          },
+          onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error){
+            ad.dispose();
+            loadRewardedAd();
+          }
+      );
+      rewardedAd!.setImmersiveMode(true);
+      rewardedAd!.show(onUserEarnedReward: (AdWithoutView ad, RewardItem reward){
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,9 +140,9 @@ class _ParaCekme extends State<ParaCekme> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
-                                          'Para Çek',
+                                          'Hesabıma\nAktar',
                                           style: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: 17,
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500,
                                             fontFamily: 'Akrobat-Regular',
@@ -101,6 +158,7 @@ class _ParaCekme extends State<ParaCekme> {
                                   width: 90,
                                   height: 50,
                                   onPressed: () {
+                                    showRewardedAdd();
                                   },
                                 ),
                               ],
@@ -157,9 +215,9 @@ class _ParaCekme extends State<ParaCekme> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
-                                          'Para Çek',
+                                          'Hesabıma\nAktar',
                                           style: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: 17,
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500,
                                             fontFamily: 'Akrobat-Regular',
@@ -168,12 +226,14 @@ class _ParaCekme extends State<ParaCekme> {
                                       ],
                                     ),
                                   ),
+
                                   color: Colors.orangeAccent,
                                   duration: 25,
                                   shadowDegree: ShadowDegree.dark,
                                   width: 90,
                                   height: 50,
                                   onPressed: () {
+                                    showRewardedAdd();
                                   },
                                 ),
                               ],
@@ -230,9 +290,9 @@ class _ParaCekme extends State<ParaCekme> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
-                                          'Para Çek',
+                                          'Hesabıma\nAktar',
                                           style: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: 17,
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500,
                                             fontFamily: 'Akrobat-Regular',
@@ -304,9 +364,9 @@ class _ParaCekme extends State<ParaCekme> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
-                                          'Para Çek',
+                                          'Hesabıma\nAktar',
                                           style: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: 17,
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500,
                                             fontFamily: 'Akrobat-Regular',
@@ -378,9 +438,9 @@ class _ParaCekme extends State<ParaCekme> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
-                                          'Para Çek',
+                                          'Hesabıma\nAktar',
                                           style: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: 17,
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500,
                                             fontFamily: 'Akrobat-Regular',
@@ -452,9 +512,9 @@ class _ParaCekme extends State<ParaCekme> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
-                                          'Para Çek',
+                                          'Hesabıma\nAktar',
                                           style: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: 17,
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500,
                                             fontFamily: 'Akrobat-Regular',
@@ -481,11 +541,39 @@ class _ParaCekme extends State<ParaCekme> {
                       ),
                     ),
                   ),
-                ],
+
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                    //BANNER-ADMOB
+                    isLoaded?SizedBox(
+                      height: bannerAd.size.height.toDouble(),
+                      width: bannerAd.size.width.toDouble(),
+                      child: AdWidget(ad: bannerAd,),
+                    )
+                      :const SizedBox(),
+                  ],
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    //Admob-Banner
+    loadBannerAd();
+    loadRewardedAd();
+  }
+
+  @override
+  void dispose() {
+    rewardedAd.dispose();
+    bannerAd.dispose();
+    loadBannerAd();
+    loadRewardedAd();
   }
 }
 

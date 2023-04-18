@@ -60,7 +60,7 @@ class _BabyDoge extends State<BabyDoge> {
               ),
               errorStyle: TextStyle(color: Colors.redAccent),
               border: OutlineInputBorder(),
-              hintText: 'Coin Sayacı',
+              hintText: 'Kazılan Coin',
               suffixIcon: IconButton(
                 onPressed: (){},
                 icon: Image.asset('assets/babydoge.png',width: 25,height: 25,),

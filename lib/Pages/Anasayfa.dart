@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../Component/Pageview.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 num _curr = 0;
 bool selected = true;
@@ -10,10 +12,55 @@ class Anasayfa extends StatefulWidget {
   _Anasayfa createState() => _Anasayfa();
 }
 
-class _Anasayfa extends State<Anasayfa> {
-  int pageIndex = 0;
+class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
   final PageController pageviewController = PageController(initialPage: 0);
+  late AnimationController translateAnimationController;
+  late Animation<double> translateAnimation;
+  static final _opacityTween = Tween<double>(begin: 0.1, end: 1);
   bool _icon = false;
+  bool isLoaded = false;
+  int pageIndex = 0;
+  late BannerAd bannerAd;
+
+
+  loadBannerAd(){
+    bannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: Platform.isIOS ? "ca-app-pub-3940256099942544/6300978111" : "ca-app-pub-3940256099942544/6300978111", //testId
+        listener: BannerAdListener(
+          onAdLoaded: (ad){
+            setState(() {
+              isLoaded = true;
+            });
+          },
+          onAdFailedToLoad: (ad,error){
+            ad.dispose();
+          }
+        ),
+        request: const AdRequest(),
+    );
+    bannerAd.load();
+  }
+
+  initTranslateAnimation() {
+    translateAnimationController = AnimationController(
+      vsync: this,
+      duration: Duration(
+          seconds: 13
+      ),
+    );
+      translateAnimation = Tween(
+      begin: -18.0,
+      end: 30.0,
+    ).animate(translateAnimationController)
+      ..addListener(() {
+        setState(() {});
+        debugPrint(translateAnimationController.status.toString());
+      });
+    translateAnimationController.forward();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,35 +71,44 @@ class _Anasayfa extends State<Anasayfa> {
           padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
-              Column(
-                children: [
-
-                  SizedBox(
-                    height: 20,
-                  ),
-
-                  Card(
-                      color: Colors.blueGrey.shade100,
-                      elevation: 5,
-                      shadowColor: Colors.black12,
-                      child: Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('  Son Dakika Duyurular....',textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 16,color: Colors.black,height: 3,
-                              ),
-                              maxLines: 1,
-                            ),
-                          ],
-                        ),
-                      ),
-                  ),
-                ],
+              SizedBox(
+                height: 20,
               ),
 
-              SizedBox(
+              Card(
+                color: Colors.blueGrey.shade100,
+                elevation: 5,
+                shadowColor: Colors.black12,
+                child: Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Transform.translate(
+                          offset: Offset(
+                              translateAnimation.value * -10.0, 0.0
+                          ),
+                            child: SizedBox(
+                              child:Row(
+                                children:[
+                                   Padding(padding: EdgeInsets.only(bottom: 10),
+                                    child: Text(
+                                      'Son Dakika Duyurular....',textAlign: TextAlign.right,
+                                      style: TextStyle(
+                                        fontSize: 17,color: Colors.black,height: 2,
+                                      ),
+                                      maxLines: 1,
+                                    ),
+                                   ),
+                                ],
+                              ),
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+             SizedBox(
                 height: 20,
               ),
 
@@ -217,14 +273,28 @@ class _Anasayfa extends State<Anasayfa> {
                                     ),
                                   ),
 
-
                             ],
                           ),
                         ],
                       ),
                     ),
+
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                   //BANNER-ADMOB
+                   isLoaded?SizedBox(
+                     height: bannerAd.size.height.toDouble(),
+                     width: bannerAd.size.width.toDouble(),
+                     child: AdWidget(ad: bannerAd,),
+                   )
+                    :const SizedBox(),
                   ],
-                ),
+              ),
+
+
+
             ],
           ),
         ),
@@ -235,11 +305,26 @@ class _Anasayfa extends State<Anasayfa> {
   @override
   void initState(){
     super.initState();
+    //Admob-Banner
+    loadBannerAd();
+    //Animasyon-DuyuruText
+    initTranslateAnimation();
+
     //Ekran dönmesini engelleme
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
 
     ]);
+  }
+
+  @override
+  void dispose() {
+    //Admob-Banner
+    bannerAd.dispose();
+    loadBannerAd();
+    //Viewpager
+    pageviewController.dispose();
+    initTranslateAnimation();
   }
 }

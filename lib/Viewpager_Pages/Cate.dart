@@ -59,7 +59,7 @@ class _Cate extends State<Cate> {
               ),
               errorStyle: TextStyle(color: Colors.redAccent),
               border: OutlineInputBorder(),
-              hintText: 'Coin Sayacı',
+              hintText: 'Kazılan Coin',
               suffixIcon: IconButton(
                 onPressed: (){},
                 icon: Image.asset('assets/cate.png',width: 25,height: 25,),
