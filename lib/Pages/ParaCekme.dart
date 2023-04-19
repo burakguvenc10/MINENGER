@@ -9,6 +9,7 @@ final Floki_controller = TextEditingController();
 final Cate_controller = TextEditingController();
 final Satoshi_controller = TextEditingController();
 final BabyDoge_controller = TextEditingController();
+const button_color = Color.fromRGBO(235, 189, 94 ,1);
 
 
 class ParaCekme extends StatefulWidget {
@@ -152,7 +153,7 @@ class _ParaCekme extends State<ParaCekme> {
                                     ),
                                   ),
 
-                                  color: Colors.orangeAccent,
+                                  color: button_color,
                                   duration: 25,
                                   shadowDegree: ShadowDegree.dark,
                                   width: 90,
@@ -227,7 +228,7 @@ class _ParaCekme extends State<ParaCekme> {
                                     ),
                                   ),
 
-                                  color: Colors.orangeAccent,
+                                  color: button_color,
                                   duration: 25,
                                   shadowDegree: ShadowDegree.dark,
                                   width: 90,
@@ -301,7 +302,7 @@ class _ParaCekme extends State<ParaCekme> {
                                       ],
                                     ),
                                   ),
-                                  color: Colors.orangeAccent,
+                                  color: button_color,
                                   duration: 25,
                                   enabled: false,
                                   shadowDegree: ShadowDegree.dark,
@@ -375,7 +376,7 @@ class _ParaCekme extends State<ParaCekme> {
                                       ],
                                     ),
                                   ),
-                                  color: Colors.orangeAccent,
+                                  color: button_color,
                                   duration: 25,
                                   enabled: false,
                                   shadowDegree: ShadowDegree.dark,
@@ -449,7 +450,7 @@ class _ParaCekme extends State<ParaCekme> {
                                       ],
                                     ),
                                   ),
-                                  color: Colors.orangeAccent,
+                                  color: button_color,
                                   duration: 25,
                                   enabled: false,
                                   shadowDegree: ShadowDegree.dark,
@@ -523,7 +524,7 @@ class _ParaCekme extends State<ParaCekme> {
                                       ],
                                     ),
                                   ),
-                                  color: Colors.orangeAccent,
+                                  color: button_color,
                                   duration: 25,
                                   enabled: false,
                                   shadowDegree: ShadowDegree.dark,

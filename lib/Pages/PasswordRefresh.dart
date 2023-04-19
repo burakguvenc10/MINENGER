@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:minenger/Pages/Login.dart';
 
+const button_color = Color.fromRGBO(235, 189, 94 ,1);
+
 class PasswordRefresh extends StatefulWidget {
   @override
   _PasswordRefresh createState() => _PasswordRefresh();
@@ -72,7 +74,7 @@ class _PasswordRefresh extends State<PasswordRefresh> {
 
 
                     SizedBox(
-                      height: 25,
+                      height: 35,
                     ),
 
 
@@ -94,10 +96,9 @@ class _PasswordRefresh extends State<PasswordRefresh> {
                           ],
                         ),
                       ),
-                      color: Colors.orangeAccent,
+                      color: button_color,
                       duration: 25,
                       shadowDegree: ShadowDegree.dark,
-                      width: 180,
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Login()));
                       },

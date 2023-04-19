@@ -7,6 +7,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 final coin_controller = TextEditingController();
 late final AnimatedButton animButton;
+const button_color = Color.fromRGBO(252, 185, 65 ,1);
 
 class Shiba extends StatefulWidget {
   @override
@@ -19,8 +20,6 @@ class _Shiba extends State<Shiba> {
   Timer? timer;
   int seconds = 60;
   bool checkstatu = true;
-
-
 
 
 
@@ -90,7 +89,7 @@ class _Shiba extends State<Shiba> {
                   height: 120,
                   child: CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation(Colors.blueGrey.shade200),
-                    backgroundColor: Colors.orangeAccent,
+                    backgroundColor: button_color,
                     color: Colors.redAccent,
                     strokeWidth: 8,
                     value: 1- seconds / maxSeconds,
@@ -124,7 +123,7 @@ class _Shiba extends State<Shiba> {
               ],
             ),
           ),
-          color: Colors.orangeAccent,
+          color: button_color,
           enabled : checkstatu,
           duration: 25,
           shadowDegree: ShadowDegree.dark,
@@ -150,7 +149,7 @@ class _Shiba extends State<Shiba> {
   }
 
   Widget buildTime(){
-    if(seconds  == 0){
+    if (seconds  == 0){
       checkstatu = true;
       return Icon(
         Icons.done, color: Colors.green, size: 100,

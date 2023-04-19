@@ -16,7 +16,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
   final PageController pageviewController = PageController(initialPage: 0);
   late AnimationController translateAnimationController;
   late Animation<double> translateAnimation;
-  static final _opacityTween = Tween<double>(begin: 0.1, end: 1);
+  //static final _opacityTween = Tween<double>(begin: 0.1, end: 1);
   bool _icon = false;
   bool isLoaded = false;
   int pageIndex = 0;
@@ -50,14 +50,14 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
       ),
     );
       translateAnimation = Tween(
-      begin: -18.0,
-      end: 30.0,
+      begin: -10.0,
+      end: 10.0,
     ).animate(translateAnimationController)
       ..addListener(() {
         setState(() {});
         debugPrint(translateAnimationController.status.toString());
       });
-    translateAnimationController.forward();
+    translateAnimationController.repeat();
   }
 
 
@@ -325,6 +325,8 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
     loadBannerAd();
     //Viewpager
     pageviewController.dispose();
+    //Animasyon
     initTranslateAnimation();
+    translateAnimationController.dispose();
   }
 }

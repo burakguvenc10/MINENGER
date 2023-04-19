@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const appbarColor = Color.fromRGBO(250, 179, 53  ,1);
+const appbarColor = Color.fromRGBO(235, 189, 94 ,1);
 
 const bottombarColor = Color.fromRGBO(252, 207, 38  ,1);
 

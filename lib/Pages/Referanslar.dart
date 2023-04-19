@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 final referanskodu_controller = TextEditingController();
+const button_color = Color.fromRGBO(235, 189, 94 ,1);
 
 class Referanslar extends StatefulWidget {
   @override
@@ -73,7 +74,7 @@ class _Referanslar extends State<Referanslar> {
                                 onPressed: (){
                                   Clipboard.setData(ClipboardData(text: '$copyCode')).then((_) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text('Panoya Kopyalandı')));
+                                    const SnackBar(content: Text('Panoya Kopyalandı'),backgroundColor: button_color,));
                                   });
                                 },
                                 icon: Icon(Icons.copy),

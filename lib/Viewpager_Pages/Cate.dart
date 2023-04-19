@@ -5,6 +5,7 @@ import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 
 final coin_controller = TextEditingController();
 late final AnimatedButton animButton;
+const button_color = Color.fromRGBO(252, 185, 65 ,1);
 
 class Cate extends StatefulWidget {
   @override
@@ -83,7 +84,7 @@ class _Cate extends State<Cate> {
                 height: 120,
                 child: CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation(Colors.blueGrey.shade200),
-                  backgroundColor: Colors.orangeAccent,
+                  backgroundColor: button_color,
                   color: Colors.redAccent,
                   strokeWidth: 8,
                   value: 1- seconds / maxSeconds,
@@ -117,7 +118,7 @@ class _Cate extends State<Cate> {
               ],
             ),
           ),
-          color: Colors.orangeAccent,
+          color: button_color,
           enabled : checkstatu,
           duration: 25,
           shadowDegree: ShadowDegree.dark,

@@ -252,7 +252,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                                 ],
                               ),
                             ),
-                            color: Colors.orangeAccent,
+                            color: button_color,
                             duration: 25,
                             shadowDegree: ShadowDegree.dark,
                             width: 150,

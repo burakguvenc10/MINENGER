@@ -10,7 +10,7 @@ import 'Pages/Duyurular.dart';
 void main() {
   runApp(const MyApp());
 }
-const appbarColor = Color.fromRGBO(250, 179, 53  ,1);
+const appbarColor = Color.fromRGBO(235, 189, 94 ,1);
 const bottombarColor = Color.fromRGBO(252, 207, 38  ,1);
 
 class MyApp extends StatelessWidget {
@@ -78,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
               label: 'Anasayfa',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.attach_money),
+              icon: Icon(Icons.monetization_on_outlined),
               label: 'Para Çekme',
             ),
             BottomNavigationBarItem(

@@ -5,6 +5,8 @@ import 'package:minenger/Pages/PasswordRefresh.dart';
 import 'package:minenger/Pages/Signup.dart';
 import 'package:minenger/main.dart';
 
+const button_color = Color.fromRGBO(235, 189, 94 ,1);
+
 class Login extends StatefulWidget {
   @override
   _Login createState() => _Login();
@@ -110,7 +112,7 @@ class _Login extends State<Login> {
                 TextButton(
                   child: Container(
                     alignment: Alignment.centerRight,
-                    child: Text('Şifremi Unuttum?',textAlign: TextAlign.right,style: TextStyle(color: Colors.orange)),
+                    child: Text('Şifremi Unuttum?',textAlign: TextAlign.right,style: TextStyle(color: button_color)),
                   ),
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(builder: (context)=> PasswordRefresh()));
@@ -135,15 +137,14 @@ class _Login extends State<Login> {
                       ],
                     ),
                   ),
-                  color: Colors.orangeAccent,
+                  color: button_color,
                   duration: 25,
                   shadowDegree: ShadowDegree.dark,
-                  width: 180,
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context)=> MyHomePage()));
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text("Hoşgeldin Burak "),
-                      backgroundColor: Colors.orange.shade300,
+                      backgroundColor: button_color,
                     ));
                   },
                 ),

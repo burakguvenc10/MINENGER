@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:minenger/Pages/Login.dart';
 
+const button_color = Color.fromRGBO(235, 189, 94 ,1);
+
 class Signup extends StatefulWidget {
   @override
   _Signup createState() => _Signup();
@@ -222,10 +224,9 @@ class _Signup extends State<Signup> {
                           ],
                         ),
                       ),
-                      color: Colors.orangeAccent,
+                      color: button_color,
                       duration: 25,
                       shadowDegree: ShadowDegree.dark,
-                      width: 180,
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Login()));
                       },
