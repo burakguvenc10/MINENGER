@@ -70,7 +70,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                               children: [
                                 IconButton(
                                   onPressed: (){
-                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Login()));
+                                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Login()), (_) => false);
                                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                       content: Text("Başarıyla Çıkış Yapıldı"),
                                       backgroundColor: Colors.white38,

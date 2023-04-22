@@ -1,4 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:flutter/services.dart';
 import 'package:minenger/Pages/FirstPage.dart';
 import 'package:flutter/material.dart';
 
@@ -24,5 +25,15 @@ class Animated_splash extends StatelessWidget {
             //backgroundColor: Colors.white
         ),
     );
+  }
+
+  @override
+  void initState(){
+    //Ekran dönmesini engelleme
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+
+    ]);
   }
 }

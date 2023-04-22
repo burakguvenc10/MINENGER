@@ -3,9 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
+import 'package:flutter_launcher_icons/utils.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-final coin_controller = TextEditingController();
+final coin_controller = TextEditingController(text: '0');
 late final AnimatedButton animButton;
 const button_color = Color.fromRGBO(252, 185, 65 ,1);
 
@@ -20,7 +21,55 @@ class _Shiba extends State<Shiba> {
   Timer? timer;
   int seconds = 60;
   bool checkstatu = true;
+  late RewardedAd rewardedAd;
+  double sonuc = 0;
 
+  loadRewardedAd(){
+    RewardedAd.load(
+        adUnitId: Platform.isIOS ? "ca-app-pub-3940256099942544/5224354917" : "ca-app-pub-3940256099942544/5224354917", //testID
+        request: AdRequest(),
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+            onAdLoaded: (RewardedAd ad){
+              rewardedAd = ad;
+            },
+            onAdFailedToLoad: (LoadAdError error){
+              rewardedAd = error as RewardedAd;
+            })
+    );
+  }
+
+  showRewardedAdd(){
+    if(rewardedAd != null){
+      rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
+          onAdShowedFullScreenContent: (RewardedAd ad){
+            loadRewardedAd();
+            ad.dispose();
+          },
+          onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error){
+            ad.dispose();
+            loadRewardedAd();
+          },
+          onAdDismissedFullScreenContent: (ad){
+            ad.dispose();
+            loadRewardedAd();
+          }
+      );
+      rewardedAd.setImmersiveMode(true);
+      rewardedAd.show(
+          onUserEarnedReward: (ad,rewardedAd){
+              setState(() {
+                sonuc = double.parse(coin_controller.value.text) + 10;
+                coin_controller.text = sonuc.toString();
+                //Timer
+                checkstatu = false;
+                setState(() => checkstatu);
+                seconds = 60;
+                startTimer();
+              });
+          }
+      );
+    }
+  }
 
 
   @override
@@ -54,7 +103,7 @@ class _Shiba extends State<Shiba> {
               style: TextStyle(fontSize: 18),
               showCursor: false,
               enableInteractiveSelection: false,
-              obscureText: true,
+              obscureText: false,
               keyboardType: TextInputType.none,
               autofocus: false,
               controller: coin_controller,
@@ -76,6 +125,9 @@ class _Shiba extends State<Shiba> {
               onSaved: (deger) {
               },
               onChanged: (deger) {
+                setState(() {
+                  coin_controller.value.text;
+                });
               },
           ),
         ),
@@ -129,11 +181,9 @@ class _Shiba extends State<Shiba> {
           shadowDegree: ShadowDegree.dark,
           width: 190,
           onPressed: () {
-            //Timer
-            checkstatu = false;
-            setState(() => checkstatu);
-            seconds = 60;
-            startTimer();
+            //RewardedAd
+            loadRewardedAd();
+            showRewardedAdd();
           },
         ),
 
@@ -188,7 +238,14 @@ class _Shiba extends State<Shiba> {
 
 
   @override
+  void initState(){
+    super.initState();
+    loadRewardedAd();
+  }
+
+  @override
   void dispose() {
+    loadRewardedAd();
   }
 
 

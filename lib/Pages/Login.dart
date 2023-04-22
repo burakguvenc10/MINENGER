@@ -6,6 +6,7 @@ import 'package:minenger/Pages/Signup.dart';
 import 'package:minenger/main.dart';
 
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
+bool isChecked = false;
 
 class Login extends StatefulWidget {
   @override
@@ -94,6 +95,14 @@ class _Login extends State<Login> {
                       icon: Icon(Icons.key),
                       color: Colors.black54,
                     ),
+                    suffixIcon: TextButton(
+                      child: Container(
+                        child: Text('Şifremi Unuttum?',textAlign: TextAlign.right,style: TextStyle(color: button_color)),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> PasswordRefresh()));
+                      },
+                    ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.orange,
@@ -109,14 +118,28 @@ class _Login extends State<Login> {
                   },
                 ),
 
-                TextButton(
-                  child: Container(
-                    alignment: Alignment.centerRight,
-                    child: Text('Şifremi Unuttum?',textAlign: TextAlign.right,style: TextStyle(color: button_color)),
-                  ),
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> PasswordRefresh()));
-                    },
+                Row(
+                  children: [
+                    Checkbox(
+                        value: isChecked,
+                        onChanged: (value){
+                          isChecked = !isChecked;
+                          setState(() {
+
+                          });
+                        }
+                    ),
+
+                    Text(
+                      "Beni Hatırla",
+                      style: TextStyle(color: Colors.black26,fontSize: 15,),
+                    ),
+
+                  ],
+                ),
+
+                SizedBox(
+                  height: 5,
                 ),
 
                 AnimatedButton(
@@ -141,7 +164,7 @@ class _Login extends State<Login> {
                   duration: 25,
                   shadowDegree: ShadowDegree.dark,
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> MyHomePage()));
+                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> MyHomePage()), (_) => false);
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text("Hoşgeldin Burak "),
                       backgroundColor: button_color,

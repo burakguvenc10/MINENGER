@@ -228,7 +228,7 @@ class _Signup extends State<Signup> {
                       duration: 25,
                       shadowDegree: ShadowDegree.dark,
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Login()));
+                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Login()), (_) => false);
                       },
                     ),
 

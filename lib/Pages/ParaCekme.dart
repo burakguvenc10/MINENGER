@@ -18,9 +18,10 @@ class ParaCekme extends StatefulWidget {
 }
 
 class _ParaCekme extends State<ParaCekme> {
-  bool isLoaded = false;
+  bool isbannerLoaded = false;
+  bool isinterstitialLoaded = false;
   late BannerAd bannerAd;
-  late RewardedAd rewardedAd;
+  late InterstitialAd interstitialAd;
 
   loadBannerAd(){
     bannerAd = BannerAd(
@@ -29,7 +30,7 @@ class _ParaCekme extends State<ParaCekme> {
       listener: BannerAdListener(
           onAdLoaded: (ad){
             setState(() {
-              isLoaded = true;
+              isbannerLoaded = true;
             });
           },
           onAdFailedToLoad: (ad,error){
@@ -41,37 +42,26 @@ class _ParaCekme extends State<ParaCekme> {
     bannerAd.load();
   }
 
-  loadRewardedAd(){
-    RewardedAd.load(
-        adUnitId: Platform.isIOS ? "ca-app-pub-3940256099942544/5224354917" : "ca-app-pub-3940256099942544/5224354917", //testID
-        request: AdRequest(),
-        rewardedAdLoadCallback: RewardedAdLoadCallback(
-            onAdLoaded: (RewardedAd ad){
-              rewardedAd = ad;
+  loadInterstitialAd(){
+    InterstitialAd.load(
+        adUnitId: Platform.isIOS ? "ca-app-pub-3940256099942544/1033173712" : "ca-app-pub-3940256099942544/1033173712", //testId
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+            onAdLoaded: (ad){
+              setState(() {
+                isinterstitialLoaded = true;
+              });
+              if(interstitialAd != null){
+                interstitialAd.show();
+              }
             },
-            onAdFailedToLoad: (LoadAdError error){
-              rewardedAd = error as RewardedAd;
-            })
+            onAdFailedToLoad: (LoadAdError) {
+              interstitialAd.dispose();
+            },
+        ),
     );
   }
 
-  showRewardedAdd(){
-    if(rewardedAd != null){
-      rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
-          onAdShowedFullScreenContent: (RewardedAd ad){
-            ad.dispose();
-            loadRewardedAd();
-          },
-          onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error){
-            ad.dispose();
-            loadRewardedAd();
-          }
-      );
-      rewardedAd!.setImmersiveMode(true);
-      rewardedAd!.show(onUserEarnedReward: (AdWithoutView ad, RewardItem reward){
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -159,7 +149,7 @@ class _ParaCekme extends State<ParaCekme> {
                                   width: 90,
                                   height: 50,
                                   onPressed: () {
-                                    showRewardedAdd();
+                                    loadInterstitialAd();
                                   },
                                 ),
                               ],
@@ -234,7 +224,7 @@ class _ParaCekme extends State<ParaCekme> {
                                   width: 90,
                                   height: 50,
                                   onPressed: () {
-                                    showRewardedAdd();
+
                                   },
                                 ),
                               ],
@@ -548,7 +538,7 @@ class _ParaCekme extends State<ParaCekme> {
                     ),
 
                     //BANNER-ADMOB
-                    isLoaded?SizedBox(
+                      isbannerLoaded?SizedBox(
                       height: bannerAd.size.height.toDouble(),
                       width: bannerAd.size.width.toDouble(),
                       child: AdWidget(ad: bannerAd,),
@@ -566,15 +556,13 @@ class _ParaCekme extends State<ParaCekme> {
     super.initState();
     //Admob-Banner
     loadBannerAd();
-    loadRewardedAd();
   }
 
   @override
   void dispose() {
-    rewardedAd.dispose();
     bannerAd.dispose();
     loadBannerAd();
-    loadRewardedAd();
+    loadInterstitialAd();
   }
 }
 
