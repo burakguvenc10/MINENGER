@@ -185,6 +185,7 @@ class _Signup extends State<Signup> {
                     ),
 
                     IntlPhoneField(
+                      cursorColor: Colors.black,
                       decoration: InputDecoration(
                         labelText: 'Cep Telefonu',
                         border: OutlineInputBorder(
@@ -193,6 +194,12 @@ class _Signup extends State<Signup> {
                           ),
                         ),
                         errorStyle: TextStyle(color: Colors.red),
+                        labelStyle: TextStyle(color: Colors.black,fontWeight:FontWeight.normal),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.orange,
+                          ),
+                        ),
                       ),
                       initialCountryCode: 'TR',
                       onChanged: (phone) {
@@ -200,9 +207,29 @@ class _Signup extends State<Signup> {
                       },
                     ),
 
+                    Row(
+                      children: [
+                        Checkbox(
+                            value: isChecked,
+                            onChanged: (value){
+                              isChecked = !isChecked;
+                              setState(() {
+
+                              });
+                            }
+                        ),
+
+                        Text(
+                          "Koşulları Kabul Ediyorum.",
+                          style: TextStyle(color: Colors.blueAccent.shade200,fontSize: 15,decoration: TextDecoration.underline),
+                        ),
+
+                      ],
+                    ),
+
 
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
 
 

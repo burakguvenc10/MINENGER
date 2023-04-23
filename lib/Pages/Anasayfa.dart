@@ -7,6 +7,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
 num _curr = 0;
 bool selected = true;
+int pageIndex = 0;
 
 class Anasayfa extends StatefulWidget {
   @override
@@ -24,7 +25,6 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
   bool selected_CateIcon = false;
   bool selected_SatoshiIcon = false;
   bool selected_BabyDogeIcon = false;
-  int pageIndex = 0;
   late BannerAd bannerAd;
   Color ShibaCardColor = Colors.grey.shade300;
   Color BttcCardColor = Colors.grey.shade300;
@@ -159,18 +159,14 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                   iconSize: 50,
                                                   onPressed: () {
                                                     setState(() {
-                                                      if(selected_ShibaIcon == false) {
-                                                        selected_ShibaIcon = true;
-                                                        ShibaCardColor = button_color;
-                                                        BttcCardColor = Colors.transparent;
-                                                        FlokiCardColor = Colors.transparent;
-                                                        CateCardColor = Colors.transparent;
-                                                        SatoshiCardColor = Colors.transparent;
-                                                        BabyDogeCardColor = Colors.transparent;
-                                                      }else{
-                                                        selected_ShibaIcon = false;
-                                                        ShibaCardColor = Colors.transparent;
-                                                      }
+                                                      selected_ShibaIcon = true;
+                                                      ShibaCardColor = button_color;
+                                                      BttcCardColor = Colors.transparent;
+                                                      FlokiCardColor = Colors.transparent;
+                                                      CateCardColor = Colors.transparent;
+                                                      SatoshiCardColor = Colors.transparent;
+                                                      BabyDogeCardColor = Colors.transparent;
+
                                                       page_controller.animateToPage(
                                                           0, duration: const Duration(microseconds: 300), curve: Curves.easeIn
                                                       );
@@ -197,18 +193,14 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                 iconSize: 50,
                                                 onPressed: () {
                                                   setState(() {
-                                                    if(selected_BttcIcon == false) {
-                                                      selected_BttcIcon = true;
-                                                      BttcCardColor = button_color;
-                                                      ShibaCardColor = Colors.transparent;
-                                                      FlokiCardColor = Colors.transparent;
-                                                      CateCardColor = Colors.transparent;
-                                                      SatoshiCardColor = Colors.transparent;
-                                                      BabyDogeCardColor = Colors.transparent;
-                                                    }else{
-                                                      selected_BttcIcon = false;
-                                                      BttcCardColor = Colors.transparent;
-                                                    }
+                                                    selected_BttcIcon = true;
+                                                    BttcCardColor = button_color;
+                                                    ShibaCardColor = Colors.transparent;
+                                                    FlokiCardColor = Colors.transparent;
+                                                    CateCardColor = Colors.transparent;
+                                                    SatoshiCardColor = Colors.transparent;
+                                                    BabyDogeCardColor = Colors.transparent;
+
                                                     page_controller.animateToPage(
                                                         1, duration: const Duration(microseconds: 300), curve: Curves.easeIn
                                                     );
@@ -233,18 +225,14 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                 iconSize: 50,
                                                 onPressed: () {
                                                   setState(() {
-                                                    if(selected_FlokiIcon == false) {
-                                                      selected_FlokiIcon = true;
-                                                      FlokiCardColor = button_color;
-                                                      BttcCardColor = Colors.transparent;
-                                                      ShibaCardColor = Colors.transparent;
-                                                      CateCardColor = Colors.transparent;
-                                                      SatoshiCardColor = Colors.transparent;
-                                                      BabyDogeCardColor = Colors.transparent;
-                                                    }else{
-                                                      selected_FlokiIcon = false;
-                                                      FlokiCardColor = Colors.transparent;
-                                                    }
+                                                    selected_FlokiIcon = true;
+                                                    FlokiCardColor = button_color;
+                                                    BttcCardColor = Colors.transparent;
+                                                    ShibaCardColor = Colors.transparent;
+                                                    CateCardColor = Colors.transparent;
+                                                    SatoshiCardColor = Colors.transparent;
+                                                    BabyDogeCardColor = Colors.transparent;
+
                                                     page_controller.animateToPage(
                                                         2, duration: const Duration(microseconds: 300), curve: Curves.easeIn
                                                     );
@@ -269,18 +257,14 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                 iconSize: 50,
                                                 onPressed: () {
                                                   setState(() {
-                                                    if(selected_CateIcon == false) {
-                                                      selected_CateIcon = true;
-                                                      CateCardColor = button_color;
-                                                      FlokiCardColor = Colors.transparent;
-                                                      BttcCardColor = Colors.transparent;
-                                                      ShibaCardColor = Colors.transparent;
-                                                      SatoshiCardColor = Colors.transparent;
-                                                      BabyDogeCardColor = Colors.transparent;
-                                                    }else{
-                                                      selected_CateIcon = false;
-                                                      CateCardColor = Colors.transparent;
-                                                    }
+                                                    selected_CateIcon = true;
+                                                    CateCardColor = button_color;
+                                                    FlokiCardColor = Colors.transparent;
+                                                    BttcCardColor = Colors.transparent;
+                                                    ShibaCardColor = Colors.transparent;
+                                                    SatoshiCardColor = Colors.transparent;
+                                                    BabyDogeCardColor = Colors.transparent;
+
                                                     page_controller.animateToPage(
                                                         3, duration: const Duration(microseconds: 300), curve: Curves.easeIn
                                                     );
@@ -306,18 +290,13 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                 iconSize: 50,
                                                 onPressed: () {
                                                   setState(() {
-                                                    if(selected_SatoshiIcon == false) {
-                                                      selected_SatoshiIcon = true;
-                                                      SatoshiCardColor = button_color;
-                                                      CateCardColor = Colors.transparent;;
-                                                      FlokiCardColor = Colors.transparent;
-                                                      BttcCardColor = Colors.transparent;
-                                                      ShibaCardColor = Colors.transparent;
-                                                      BabyDogeCardColor = Colors.transparent;
-                                                    }else{
-                                                      selected_SatoshiIcon = false;
-                                                      SatoshiCardColor = Colors.transparent;
-                                                    }
+                                                    selected_SatoshiIcon = true;
+                                                    SatoshiCardColor = button_color;
+                                                    CateCardColor = Colors.transparent;;
+                                                    FlokiCardColor = Colors.transparent;
+                                                    BttcCardColor = Colors.transparent;
+                                                    ShibaCardColor = Colors.transparent;
+                                                    BabyDogeCardColor = Colors.transparent;
                                                     page_controller.animateToPage(
                                                         4, duration: const Duration(microseconds: 300), curve: Curves.easeIn
                                                     );
@@ -342,18 +321,13 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                 iconSize: 50,
                                                 onPressed: () {
                                                   setState(() {
-                                                    if(selected_BabyDogeIcon == false) {
-                                                      selected_BabyDogeIcon = true;
-                                                      BabyDogeCardColor = button_color;
-                                                      SatoshiCardColor = Colors.transparent;
-                                                      CateCardColor = Colors.transparent;;
-                                                      FlokiCardColor = Colors.transparent;
-                                                      BttcCardColor = Colors.transparent;
-                                                      ShibaCardColor = Colors.transparent;
-                                                    }else{
-                                                      selected_BabyDogeIcon = false;
-                                                      BabyDogeCardColor = Colors.transparent;
-                                                    }
+                                                    selected_BabyDogeIcon = true;
+                                                    BabyDogeCardColor = button_color;
+                                                    SatoshiCardColor = Colors.transparent;
+                                                    CateCardColor = Colors.transparent;;
+                                                    FlokiCardColor = Colors.transparent;
+                                                    BttcCardColor = Colors.transparent;
+                                                    ShibaCardColor = Colors.transparent;
                                                     page_controller.animateToPage(
                                                         5, duration: const Duration(microseconds: 300), curve: Curves.easeIn
                                                     );

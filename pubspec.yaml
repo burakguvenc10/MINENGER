@@ -1,9 +1,9 @@
 name: minenger
 description: Minenger App
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'pub.dev' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.6
+version: 1.0.7
 
 environment:
   sdk: '>=2.19.0-444.6.beta <3.0.0'
@@ -23,6 +23,9 @@ dependencies:
   intl_phone_field: ^3.1.0
   google_mobile_ads: ^2.4.0
   shared_preferences: ^2.1.0
+  dio: 5.1.1
+  get_it: ^7.2.0
+  intl: ^0.17.0
 
 
 dev_dependencies:
@@ -35,8 +38,8 @@ flutter_launcher_icons:
   path: ../
 
 flutter_icons:
-  #image_path_android: "assets/icon.png"
-  #image_path_ios: "assets/icon.png"
+  image_path_android: "assets/msplash.png"
+  image_path_ios: "assets/msplash.png"
   android : true
   ios: true
   web: false
@@ -59,7 +62,6 @@ flutter:
     - family: Akrobat-Semibold
       fonts:
         - asset: fonts/akrobat-semibold.otf
-
 
     - family: Oswald-Regular
       fonts:
