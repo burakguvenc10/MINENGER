@@ -1,7 +1,10 @@
 import 'dart:io';
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+import '../Component/Dialog_Detail.dart';
 
 final Shiba_controller = TextEditingController();
 final Bttc_controller = TextEditingController();
@@ -149,7 +152,27 @@ class _ParaCekme extends State<ParaCekme> {
                                   width: 90,
                                   height: 50,
                                   onPressed: () {
-                                    loadInterstitialAd();
+                                    //loadInterstitialAd();
+                                    showAnimatedDialog(
+                                      alignment: Alignment.center,
+                                      context: context,
+                                      barrierDismissible: true,
+                                        builder: (BuildContext context) {
+                                          return ClassicGeneralDialogWidget(
+                                            actions: [
+                                              Dialog_Detail(),
+                                            ],
+                                            onPositiveClick: () {
+                                            },
+                                            onNegativeClick: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          );
+                                        },
+                                        animationType: DialogTransitionType.size,
+                                        curve: Curves.easeInBack,
+                                        duration: Duration(seconds: 1),
+                                    );
                                   },
                                 ),
                               ],

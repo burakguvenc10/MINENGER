@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:minenger/Pages/Login.dart';
 
+import '../Component/Webview_Signup.dart';
+
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
 
 class Signup extends StatefulWidget {
@@ -24,7 +26,7 @@ class _Signup extends State<Signup> {
             elevation: 5,
             shadowColor: Colors.grey,
             child: Container(
-              height: 600,
+              height: 630,
               padding: const EdgeInsets.all(20.0),
               child:SingleChildScrollView(
                 child:Column(
@@ -219,14 +221,20 @@ class _Signup extends State<Signup> {
                             }
                         ),
 
-                        Text(
-                          "Koşulları Kabul Ediyorum.",
-                          style: TextStyle(color: Colors.blueAccent.shade200,fontSize: 15,decoration: TextDecoration.underline),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Webview_item()));
+                          },
+                          child: new Padding(
+                            padding: new EdgeInsets.all(10.0),
+                            child: Text(
+                              "Kullanım Koşullarını Kabul Ediyorum.",
+                              style: TextStyle(color: Colors.blueAccent.shade200,fontSize: 15,decoration: TextDecoration.underline),
+                            ),
+                          ),
                         ),
-
                       ],
                     ),
-
 
                     SizedBox(
                       height: 10,
