@@ -1,10 +1,16 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:minenger/Viewpager_Pages/BabyDoge.dart';
 import '../Component/Pageview.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
+const acik_turuncu = Color.fromRGBO(239, 159, 56 ,1);
+const turuncu = Color.fromRGBO(255, 116, 5 ,1);
+const siyah = Color.fromRGBO(40, 40, 48 ,1);
+const gri = Color.fromRGBO(66, 77, 78 ,1);
+const pembe = Color.fromRGBO(240, 194, 194 ,1);
 num _curr = 0;
 bool selected = true;
 int pageIndex = 0;
@@ -85,35 +91,88 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                 height: 20,
               ),
 
+              Text(
+                  "Kur Oranları",
+                  style: TextStyle(color: Colors.grey.shade400),
+              ),
+
               Card(
                 color: Colors.blueGrey.shade200,
                 elevation: 5,
                 shadowColor: Colors.black12,
                 child: Container(
+                  height: 65,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+
                       Transform.translate(
                           offset: Offset(
-                              translateAnimation.value * -10.0, 0.0
+                              translateAnimation.value * -28.0, 0.0
                           ),
                             child: SizedBox(
-                              child:Row(
-                                children:[
-                                   Padding(padding: EdgeInsets.only(bottom: 10),
-                                    child: Text(
-                                      'Son Dakika Duyurular....',textAlign: TextAlign.right,
-                                      style: TextStyle(
-                                        fontSize: 17,color: Colors.black,height: 2,
+                                child:Padding(
+                                  padding: EdgeInsets.all(5),
+                                  child: Row(
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Image.asset('assets/shiba.png',width: 30,height: 30,),
+                                          Text("10.0",style: TextStyle(fontSize: 16)),
+                                        ],
                                       ),
-                                      maxLines: 1,
-                                    ),
-                                   ),
-                                ],
+
+                                      SizedBox(width: 30,),
+
+                                      Column(
+                                        children: [
+                                          Image.asset('assets/bttc.png',width: 30,height: 30,),
+                                          Text("10.0",style: TextStyle(fontSize: 16)),
+                                        ],
+                                      ),
+
+                                      SizedBox(width: 30,),
+
+                                      Column(
+                                        children: [
+                                          Image.asset('assets/floki.png',width: 30,height: 30,),
+                                          Text("10.0",style: TextStyle(fontSize: 16)),
+                                        ],
+                                      ),
+
+                                      SizedBox(width: 30,),
+
+                                      Column(
+                                        children: [
+                                          Image.asset('assets/cate.png',width: 30,height: 30,),
+                                          Text("10.0",style: TextStyle(fontSize: 16)),
+                                        ],
+                                      ),
+
+                                      SizedBox(width: 30,),
+
+                                      Column(
+                                        children: [
+                                          Image.asset('assets/satoshi.png',width: 30,height: 30,),
+                                          Text("10.0",style: TextStyle(fontSize: 16)),
+                                        ],
+                                      ),
+
+                                      SizedBox(width: 30,),
+
+                                      Column(
+                                        children: [
+                                          Image.asset('assets/babydoge.png',width: 30,height: 30,),
+                                          Text("10.0",style: TextStyle(fontSize: 16)),
+                                        ],
+                                      ),
+
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
-                      ),
-                    ],
+                     ],
                   ),
                 ),
               ),
@@ -151,7 +210,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                 radius: 35,
                                                 child: IconButton(
                                                   tooltip: 'SHIBA',
-                                                  splashColor: Colors.orange.shade200,
+                                                  splashColor:turuncu,
                                                   isSelected: selected,
                                                   icon:  Image.asset(
                                                     'assets/shiba.png', height: 35, width: 35,
@@ -160,7 +219,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                   onPressed: () {
                                                     setState(() {
                                                       selected_ShibaIcon = true;
-                                                      ShibaCardColor = button_color;
+                                                      ShibaCardColor = turuncu;
                                                       BttcCardColor = Colors.transparent;
                                                       FlokiCardColor = Colors.transparent;
                                                       CateCardColor = Colors.transparent;
@@ -171,7 +230,6 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                           0, duration: const Duration(microseconds: 300), curve: Curves.easeIn
                                                       );
                                                     });
-
                                                   },
                                                 ),
                                               ),
@@ -194,7 +252,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                 onPressed: () {
                                                   setState(() {
                                                     selected_BttcIcon = true;
-                                                    BttcCardColor = button_color;
+                                                    BttcCardColor = siyah;
                                                     ShibaCardColor = Colors.transparent;
                                                     FlokiCardColor = Colors.transparent;
                                                     CateCardColor = Colors.transparent;
@@ -226,7 +284,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                 onPressed: () {
                                                   setState(() {
                                                     selected_FlokiIcon = true;
-                                                    FlokiCardColor = button_color;
+                                                    FlokiCardColor = gri;
                                                     BttcCardColor = Colors.transparent;
                                                     ShibaCardColor = Colors.transparent;
                                                     CateCardColor = Colors.transparent;
@@ -258,7 +316,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                 onPressed: () {
                                                   setState(() {
                                                     selected_CateIcon = true;
-                                                    CateCardColor = button_color;
+                                                    CateCardColor = pembe;
                                                     FlokiCardColor = Colors.transparent;
                                                     BttcCardColor = Colors.transparent;
                                                     ShibaCardColor = Colors.transparent;
@@ -291,8 +349,8 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                 onPressed: () {
                                                   setState(() {
                                                     selected_SatoshiIcon = true;
-                                                    SatoshiCardColor = button_color;
-                                                    CateCardColor = Colors.transparent;;
+                                                    SatoshiCardColor = acik_turuncu;
+                                                    CateCardColor = Colors.transparent;
                                                     FlokiCardColor = Colors.transparent;
                                                     BttcCardColor = Colors.transparent;
                                                     ShibaCardColor = Colors.transparent;

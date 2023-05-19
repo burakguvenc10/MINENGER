@@ -186,6 +186,42 @@ class _Signup extends State<Signup> {
                       height: 15,
                     ),
 
+                    TextFormField(
+                      textAlign: TextAlign.left,
+                      showCursor: true,
+                      cursorColor: Colors.black26,
+                      enableInteractiveSelection: false,
+                      obscureText: false,
+                      keyboardType: TextInputType.text,
+                      autofocus: false,
+                      //controller: coin_controller,
+                      decoration: InputDecoration(
+                        labelText: 'Referans Kodu',
+                        labelStyle: TextStyle(color: Colors.black),
+                        prefixIcon: IconButton(
+                          onPressed: (){},
+                          icon: Icon(Icons.account_box_outlined),
+                          color: Colors.black54,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.orange,
+                          ),
+                        ),
+                        errorStyle: TextStyle(color: Colors.redAccent),
+                        border: OutlineInputBorder(),
+                      ),
+                      maxLines: 1,
+                      onSaved: (deger) {
+                      },
+                      onChanged: (deger) {
+                      },
+                    ),
+
+                    SizedBox(
+                      height: 15,
+                    ),
+
                     IntlPhoneField(
                       cursorColor: Colors.black,
                       decoration: InputDecoration(

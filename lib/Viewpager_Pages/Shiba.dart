@@ -2,13 +2,15 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:animated_button/animated_button.dart';
-import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
-import 'package:flutter_launcher_icons/utils.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+import '../Component/NotificationService.dart';
 
 final coin_controller = TextEditingController(text: '0');
 late final AnimatedButton animButton;
 const button_color = Color.fromRGBO(252, 185, 65 ,1);
+const turuncu = Color.fromRGBO(255, 116, 5 ,1);
+
 
 class Shiba extends StatefulWidget {
   @override
@@ -74,9 +76,16 @@ class _Shiba extends State<Shiba> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [turuncu,button_color,Colors.white,Colors.white,Colors.white],
+        ),
+      ),
+      child: Column(
       children: [
-
         SizedBox(
           height: 20,
         ),
@@ -87,7 +96,7 @@ class _Shiba extends State<Shiba> {
           foreground: Paint()
             ..style = PaintingStyle.stroke
             ..strokeWidth = 3
-            ..color = Colors.orange[400]!,
+            ..color = Colors.white!,
           ),
         ),
 
@@ -110,7 +119,7 @@ class _Shiba extends State<Shiba> {
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: Colors.orange,
+                      color: Colors.black,
                   ),
                 ),
                 errorStyle: TextStyle(color: Colors.redAccent),
@@ -194,7 +203,7 @@ class _Shiba extends State<Shiba> {
 
       ],
 
-
+      ),
     );
   }
 
@@ -209,7 +218,7 @@ class _Shiba extends State<Shiba> {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
-          Text('Kalan Zaman',textAlign: TextAlign.center,style: TextStyle(color: Colors.grey.shade400,fontSize: 10),),
+          Text('Kalan Zaman',textAlign: TextAlign.center,style: TextStyle(color: Colors.grey.shade400, fontSize: 10),),
           Text('$seconds' + ' Dakika', textAlign: TextAlign.center,
             style: TextStyle(
                 color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
@@ -235,7 +244,6 @@ class _Shiba extends State<Shiba> {
     checkstatu = true;
     setState(() => checkstatu);
   }
-
 
   @override
   void initState(){

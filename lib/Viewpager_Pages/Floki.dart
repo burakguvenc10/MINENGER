@@ -6,6 +6,9 @@ import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 final coin_controller = TextEditingController();
 late final AnimatedButton animButton;
 const button_color = Color.fromRGBO(252, 185, 65 ,1);
+const gri = Color.fromRGBO(66, 77, 78 ,1);
+const acik = Color.fromRGBO(122, 159, 191 ,1);
+
 
 class Floki extends StatefulWidget {
   @override
@@ -21,7 +24,15 @@ class _Floki extends State<Floki> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Container(
+        decoration: BoxDecoration(
+        gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [gri,acik,Colors.white,Colors.white,Colors.white],
+      ),
+    ),
+    child: Column(
       children: [
 
         SizedBox(
@@ -33,7 +44,7 @@ class _Floki extends State<Floki> {
           foreground: Paint()
             ..style = PaintingStyle.stroke
             ..strokeWidth = 3
-            ..color = Colors.orange[400]!,
+            ..color = Colors.white!,
          ),
         ),
 
@@ -55,7 +66,7 @@ class _Floki extends State<Floki> {
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Colors.orange,
+                  color: Colors.black,
                 ),
               ),
               errorStyle: TextStyle(color: Colors.redAccent),
@@ -138,7 +149,7 @@ class _Floki extends State<Floki> {
 
       ],
 
-
+     ),
     );
   }
 

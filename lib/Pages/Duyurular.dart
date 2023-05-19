@@ -100,18 +100,13 @@ class _Duyurular extends State<Duyurular> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                            children: [
-                             CircleAvatar(
-                               backgroundColor: Colors.transparent,
-                               child: Image.network(jsonList[index]['url'],height: 50,width: 50,fit: BoxFit.cover,),
-                             ),
-
-                             Padding(padding: EdgeInsets.all(5)),
 
                              Text(
                                  jsonList[index]['name'], //'Duyuru Başlık'
                                  textAlign: TextAlign.center,
                                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold)
                              ),
+
                            ],
                           ),
 
@@ -121,11 +116,17 @@ class _Duyurular extends State<Duyurular> {
 
                           ListTile(
                             title: Text(
-                              jsonList[index]['power'],
+                              jsonList[index]['power'], //'Duyuru İçerik'
                               //'Son Dakika Duyurular, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like.',
                               style: TextStyle(fontSize: 15)),
                             tileColor: Colors.grey.shade200,
                             textColor: Colors.black54,
+                          ),
+
+                          Text(
+                              "2023-05-16 10:04:00", //'Duyuru Tarih'
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal,color: Colors.grey.shade600)
                           ),
 
                         ],

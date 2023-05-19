@@ -1,6 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/services.dart';
-import 'package:minenger/Pages/FirstPage.dart';
+import 'package:minenger/Pages/Splash.dart';
 import 'package:flutter/material.dart';
 
 class Animated_splash extends StatelessWidget {

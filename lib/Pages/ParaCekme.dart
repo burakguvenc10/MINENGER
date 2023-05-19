@@ -134,7 +134,7 @@ class _ParaCekme extends State<ParaCekme> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
-                                          'Hesabıma\nAktar',
+                                          'Para Çek',
                                           style: TextStyle(
                                             fontSize: 17,
                                             color: Colors.white,
@@ -229,7 +229,7 @@ class _ParaCekme extends State<ParaCekme> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
-                                          'Hesabıma\nAktar',
+                                          '30 GünSonra',
                                           style: TextStyle(
                                             fontSize: 17,
                                             color: Colors.white,
@@ -304,7 +304,7 @@ class _ParaCekme extends State<ParaCekme> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
-                                          'Hesabıma\nAktar',
+                                          'Yakında',
                                           style: TextStyle(
                                             fontSize: 17,
                                             color: Colors.white,
@@ -378,7 +378,7 @@ class _ParaCekme extends State<ParaCekme> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
-                                          'Hesabıma\nAktar',
+                                          'Yakında',
                                           style: TextStyle(
                                             fontSize: 17,
                                             color: Colors.white,
@@ -452,7 +452,7 @@ class _ParaCekme extends State<ParaCekme> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
-                                          'Hesabıma\nAktar',
+                                          'Yakında',
                                           style: TextStyle(
                                             fontSize: 17,
                                             color: Colors.white,
@@ -526,7 +526,7 @@ class _ParaCekme extends State<ParaCekme> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
-                                          'Hesabıma\nAktar',
+                                          'Yakında',
                                           style: TextStyle(
                                             fontSize: 17,
                                             color: Colors.white,

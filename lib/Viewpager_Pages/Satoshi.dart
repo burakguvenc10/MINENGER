@@ -6,6 +6,7 @@ import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 final coin_controller = TextEditingController();
 late final AnimatedButton animButton;
 const button_color = Color.fromRGBO(252, 185, 65 ,1);
+const turuncu = Color.fromRGBO(255, 167, 94 ,1);
 
 class Satoshi extends StatefulWidget {
   @override
@@ -21,7 +22,15 @@ class _Satoshi extends State<Satoshi> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Container(
+        decoration: BoxDecoration(
+        gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [Colors.orange,turuncu,Colors.white,Colors.white,Colors.white],
+     ),
+    ),
+    child: Column(
       children: [
 
         SizedBox(
@@ -33,7 +42,7 @@ class _Satoshi extends State<Satoshi> {
           foreground: Paint()
             ..style = PaintingStyle.stroke
             ..strokeWidth = 3
-            ..color = Colors.orange[400]!,
+            ..color = Colors.white!,
           ),
         ),
 
@@ -55,7 +64,7 @@ class _Satoshi extends State<Satoshi> {
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Colors.orange,
+                  color: Colors.black,
                 ),
               ),
               errorStyle: TextStyle(color: Colors.redAccent),
@@ -138,7 +147,7 @@ class _Satoshi extends State<Satoshi> {
 
       ],
 
-
+     ),
     );
   }
 

@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:animated_button/animated_button.dart';
-import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
+import 'package:minenger/Component/NotificationService.dart';
 
 final coin_controller = TextEditingController();
 late final AnimatedButton animButton;
 const button_color = Color.fromRGBO(252, 185, 65 ,1);
+const siyah = Color.fromRGBO(40, 40, 48 ,1);
+//late FlutterLocalNotificationsPlugin localNotification;
 
 class Bttc extends StatefulWidget {
   @override
@@ -18,10 +20,19 @@ class _Bttc extends State<Bttc> {
   Timer? timer;
   int seconds = 60;
   bool checkstatu = true;
+  NotificationService notificationService = NotificationService();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Container(
+        decoration: BoxDecoration(
+        gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [siyah,Colors.grey,Colors.white,Colors.white,Colors.white],
+      ),
+    ),
+    child: Column(
       children: [
 
         SizedBox(
@@ -33,7 +44,7 @@ class _Bttc extends State<Bttc> {
           foreground: Paint()
             ..style = PaintingStyle.stroke
             ..strokeWidth = 3
-            ..color = Colors.orange[400]!,
+            ..color = Colors.white!,
           ),
         ),
 
@@ -55,7 +66,7 @@ class _Bttc extends State<Bttc> {
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Colors.orange,
+                  color: Colors.black,
                 ),
               ),
               errorStyle: TextStyle(color: Colors.redAccent),
@@ -138,13 +149,15 @@ class _Bttc extends State<Bttc> {
 
       ],
 
-
+     ),
     );
   }
 
   Widget buildTime(){
     if(seconds  == 0){
+      showNotification();
       checkstatu = true;
+      showNotification();
       return Icon(
         Icons.done, color: Colors.green, size: 100,
       );
@@ -178,6 +191,20 @@ class _Bttc extends State<Bttc> {
   void changeEnabled(){
     checkstatu = true;
     setState(() => checkstatu);
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    notificationService.initializeNotification();
+  }
+
+  void showNotification() async{
+    notificationService.sendNotification(
+        'Deneme',
+        'Mesajj'
+    );
+
   }
 
 

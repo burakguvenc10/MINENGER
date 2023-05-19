@@ -6,6 +6,8 @@ import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 final coin_controller = TextEditingController();
 late final AnimatedButton animButton;
 const button_color = Color.fromRGBO(252, 185, 65 ,1);
+const pembe = Color.fromRGBO(240, 194, 194 ,1);
+const koyu_pembe = Color.fromRGBO(194, 83, 150 ,1);
 
 class Cate extends StatefulWidget {
   @override
@@ -21,7 +23,15 @@ class _Cate extends State<Cate> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Container(
+        decoration: BoxDecoration(
+        gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [koyu_pembe,pembe,Colors.white,Colors.white,Colors.white],
+      ),
+    ),
+    child: Column(
       children: [
 
         SizedBox(
@@ -33,7 +43,7 @@ class _Cate extends State<Cate> {
           foreground: Paint()
             ..style = PaintingStyle.stroke
             ..strokeWidth = 3
-            ..color = Colors.orange[400]!,
+            ..color = Colors.white!,
           ),
         ),
 
@@ -55,7 +65,7 @@ class _Cate extends State<Cate> {
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Colors.orange,
+                  color: Colors.black,
                 ),
               ),
               errorStyle: TextStyle(color: Colors.redAccent),
@@ -138,7 +148,7 @@ class _Cate extends State<Cate> {
 
       ],
 
-
+     ),
     );
   }
 
