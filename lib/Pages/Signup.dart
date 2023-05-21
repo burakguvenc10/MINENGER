@@ -7,6 +7,12 @@ import 'package:minenger/Pages/Login.dart';
 import '../Component/Webview_Signup.dart';
 
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
+final KullaniciAdi_controller = TextEditingController();
+final Mail_controller = TextEditingController();
+final Sifre_controller = TextEditingController();
+final SifreKontrol_controller = TextEditingController();
+final ReferansKodu_controller = TextEditingController();
+final CepTelefon_controller = TextEditingController();
 
 class Signup extends StatefulWidget {
   @override
@@ -43,6 +49,7 @@ class _Signup extends State<Signup> {
                     ),
 
                     TextFormField(
+                      controller: KullaniciAdi_controller,
                       textAlign: TextAlign.left,
                       showCursor: true,
                       cursorColor: Colors.black26,
@@ -50,10 +57,14 @@ class _Signup extends State<Signup> {
                       obscureText: false,
                       keyboardType: TextInputType.text,
                       autofocus: false,
-                      //controller: coin_controller,
                       decoration: InputDecoration(
                         labelText: 'Kullanıcı Adı',
                         labelStyle: TextStyle(color: Colors.black),
+                        suffixIcon: IconButton(
+                          onPressed: KullaniciAdi_controller.clear,
+                          icon: Icon(Icons.clear_sharp),
+                          color: Colors.orange,
+                        ),
                         prefixIcon: IconButton(
                           onPressed: (){},
                           icon: Icon(Icons.person_outline_outlined),
@@ -79,6 +90,7 @@ class _Signup extends State<Signup> {
                     ),
 
                     TextFormField(
+                      controller: Mail_controller,
                       textAlign: TextAlign.left,
                       showCursor: true,
                       cursorColor: Colors.black26,
@@ -86,10 +98,14 @@ class _Signup extends State<Signup> {
                       obscureText: false,
                       keyboardType: TextInputType.emailAddress,
                       autofocus: false,
-                      //controller: coin_controller,
                       decoration: InputDecoration(
                         labelText: 'Email',
                         labelStyle: TextStyle(color: Colors.black),
+                        suffixIcon: IconButton(
+                          onPressed: Mail_controller.clear,
+                          icon: Icon(Icons.clear_sharp),
+                          color: Colors.orange,
+                        ),
                         prefixIcon: IconButton(
                           onPressed: (){},
                           icon: Icon(Icons.mail_outline),
@@ -115,6 +131,7 @@ class _Signup extends State<Signup> {
                     ),
 
                     TextFormField(
+                      controller: Sifre_controller,
                       textAlign: TextAlign.left,
                       showCursor: true,
                       cursorColor: Colors.black26,
@@ -122,10 +139,14 @@ class _Signup extends State<Signup> {
                       obscureText: true,
                       keyboardType: TextInputType.visiblePassword,
                       autofocus: false,
-                      //controller: coin_controller,
                       decoration: InputDecoration(
                         labelText: 'Şifre',
                         labelStyle: TextStyle(color: Colors.black),
+                        suffixIcon: IconButton(
+                          onPressed: Sifre_controller.clear,
+                          icon: Icon(Icons.clear_sharp),
+                          color: Colors.orange,
+                        ),
                         prefixIcon: IconButton(
                           onPressed: (){},
                           icon: Icon(Icons.key),
@@ -151,6 +172,7 @@ class _Signup extends State<Signup> {
                     ),
 
                     TextFormField(
+                      controller: SifreKontrol_controller,
                       textAlign: TextAlign.left,
                       showCursor: true,
                       cursorColor: Colors.black26,
@@ -158,10 +180,14 @@ class _Signup extends State<Signup> {
                       obscureText: true,
                       keyboardType: TextInputType.visiblePassword,
                       autofocus: false,
-                      //controller: coin_controller,
                       decoration: InputDecoration(
                         labelText: '* Şifre Tekrar',
                         labelStyle: TextStyle(color: Colors.black),
+                        suffixIcon: IconButton(
+                          onPressed: SifreKontrol_controller.clear,
+                          icon: Icon(Icons.clear_sharp),
+                          color: Colors.orange,
+                        ),
                         prefixIcon: IconButton(
                           onPressed: (){},
                           icon: Icon(Icons.key),
@@ -187,6 +213,7 @@ class _Signup extends State<Signup> {
                     ),
 
                     TextFormField(
+                      controller: ReferansKodu_controller,
                       textAlign: TextAlign.left,
                       showCursor: true,
                       cursorColor: Colors.black26,
@@ -194,10 +221,14 @@ class _Signup extends State<Signup> {
                       obscureText: false,
                       keyboardType: TextInputType.text,
                       autofocus: false,
-                      //controller: coin_controller,
                       decoration: InputDecoration(
                         labelText: 'Referans Kodu',
                         labelStyle: TextStyle(color: Colors.black),
+                        suffixIcon: IconButton(
+                          onPressed: ReferansKodu_controller.clear,
+                          icon: Icon(Icons.clear_sharp),
+                          color: Colors.orange,
+                        ),
                         prefixIcon: IconButton(
                           onPressed: (){},
                           icon: Icon(Icons.account_box_outlined),
@@ -223,9 +254,15 @@ class _Signup extends State<Signup> {
                     ),
 
                     IntlPhoneField(
+                      controller: CepTelefon_controller,
                       cursorColor: Colors.black,
                       decoration: InputDecoration(
                         labelText: 'Cep Telefonu',
+                        suffixIcon: IconButton(
+                          onPressed: CepTelefon_controller.clear,
+                          icon: Icon(Icons.clear_sharp),
+                          color: Colors.orange,
+                        ),
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Colors.orange,

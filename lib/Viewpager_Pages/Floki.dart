@@ -17,9 +17,9 @@ class Floki extends StatefulWidget {
 
 class _Floki extends State<Floki> {
 
-  static const maxSeconds = 60;
+  static const maxSeconds = 30;
   Timer? timer;
-  int seconds = 60;
+  int seconds = 30;
   bool checkstatu = true;
 
   @override
@@ -137,7 +137,7 @@ class _Floki extends State<Floki> {
           onPressed: () {
             checkstatu = false;
             setState(() => checkstatu);
-            seconds = 60;
+            seconds = 29;
             startTimer();
           },
         ),
@@ -175,7 +175,7 @@ class _Floki extends State<Floki> {
   }
 
   void startTimer() {
-    timer = Timer.periodic(Duration(milliseconds: 60), (_) {
+    timer = Timer.periodic(Duration(milliseconds: 60000), (_) {
       if (seconds > 0) {
         setState(() => seconds--);
       } else {

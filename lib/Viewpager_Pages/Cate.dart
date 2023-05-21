@@ -16,9 +16,9 @@ class Cate extends StatefulWidget {
 
 class _Cate extends State<Cate> {
 
-  static const maxSeconds = 60;
+  static const maxSeconds = 30;
   Timer? timer;
-  int seconds = 60;
+  int seconds = 30;
   bool checkstatu = true;
 
   @override
@@ -136,7 +136,7 @@ class _Cate extends State<Cate> {
           onPressed: () {
             checkstatu = false;
             setState(() => checkstatu);
-            seconds = 60;
+            seconds = 29;
             startTimer();
           },
         ),
@@ -174,7 +174,7 @@ class _Cate extends State<Cate> {
   }
 
   void startTimer() {
-    timer = Timer.periodic(Duration(milliseconds: 60), (_) {
+    timer = Timer.periodic(Duration(milliseconds: 60000), (_) {
       if (seconds > 0) {
         setState(() => seconds--);
       } else {

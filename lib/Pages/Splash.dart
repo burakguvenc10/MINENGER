@@ -6,7 +6,7 @@ import 'package:minenger/Pages/Signup.dart';
 import 'package:minenger/main.dart';
 import 'package:animated_button/animated_button.dart';
 
-const button_color = Color.fromRGBO(145, 130, 110 ,1);
+const button_color = Color.fromRGBO(252, 185, 65 ,1);
 
 class FirstPage extends StatefulWidget {
   @override
@@ -19,17 +19,23 @@ class _FirstPage extends State<FirstPage> {
     return Scaffold(
       backgroundColor: Colors.orange.shade200,
       body:Padding(
-        padding: const EdgeInsets.all(40.0),
+        padding: const EdgeInsets.all(20.0),
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
 
-              Image.asset('assets/msplash.png',fit: BoxFit.contain,color: Colors.white,height: 110,width: 150,),
+              Image.asset('assets/kurdele.png',fit: BoxFit.contain,height: 80,width: 260),
 
-              Image.asset('assets/money.png',fit: BoxFit.contain,height: 45,width: 130, alignment:Alignment.center),
+              Text("MINENGER",style: TextStyle(fontSize: 35,color: Colors.white,fontWeight: FontWeight.bold,fontStyle: FontStyle.italic)),
 
-              Image.asset('assets/miner.png',fit: BoxFit.contain,height: 150,width: 200),
+              SizedBox(
+                height: 40,
+              ),
+
+              Image.asset('assets/money.png',fit: BoxFit.contain,height: 55,width: 130, alignment:Alignment.center),
+
+              Image.asset('assets/miner.png',fit: BoxFit.contain,height: 120,width: 200),
 
               SizedBox(
                 height: 20,

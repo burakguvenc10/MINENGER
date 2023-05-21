@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:minenger/Viewpager_Pages/BabyDoge.dart';
+import 'package:http/http.dart' as http;
+import 'package:html/parser.dart' as parser;
 import '../Component/Pageview.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -9,11 +10,25 @@ const button_color = Color.fromRGBO(235, 189, 94 ,1);
 const acik_turuncu = Color.fromRGBO(239, 159, 56 ,1);
 const turuncu = Color.fromRGBO(255, 116, 5 ,1);
 const siyah = Color.fromRGBO(40, 40, 48 ,1);
-const gri = Color.fromRGBO(66, 77, 78 ,1);
+const gri = Color.fromRGBO(122, 159, 191 ,1);
 const pembe = Color.fromRGBO(240, 194, 194 ,1);
 num _curr = 0;
 bool selected = true;
 int pageIndex = 0;
+//Parse-CoinsValue
+var Shiba_Url = Uri.parse("https://coinmarketcap.com/tr/currencies/shiba-inu/");
+var Bttc_Url = Uri.parse("https://coinmarketcap.com/tr/currencies/bittorrent-new/");
+var Floki_Url = Uri.parse("https://coinmarketcap.com/tr/currencies/floki-inu/");
+var Cate_Url = Uri.parse("https://coinmarketcap.com/tr/currencies/catecoin/");
+var Satoshi_Url = Uri.parse("https://coinmarketcap.com/tr/currencies/satoshi/");
+var BabyDoge_Url = Uri.parse("https://coinmarketcap.com/tr/currencies/babydoge-coin/");
+var shiba_data;
+var bttc_data;
+var floki_data;
+var cate_data;
+var satoshi_data;
+var babydoge_data;
+
 
 class Anasayfa extends StatefulWidget {
   @override
@@ -21,7 +36,6 @@ class Anasayfa extends StatefulWidget {
 }
 
 class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
-  final PageController pageviewController = PageController(initialPage: 0);
   late AnimationController translateAnimationController;
   late Animation<double> translateAnimation;
   bool isLoaded = false;
@@ -39,6 +53,48 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
   Color SatoshiCardColor = Colors.grey.shade300;
   Color BabyDogeCardColor = Colors.grey.shade300;
 
+
+  Future getCoinData() async {
+    /*var resShiba = await http.get(Shiba_Url);
+    final Shiba_body = resShiba.body;
+    final document_Shiba = parser.parse(Shiba_body);
+    var Shiba_response = document_Shiba.getElementsByClassName("sc-cadad039-0 clgqXO")[0].text;
+
+    var resBttc = await http.get(Bttc_Url);
+    final Bttc_body = resBttc.body;
+    final document_Bttc= parser.parse(Bttc_body);
+    var Bttc_response = document_Bttc.getElementsByClassName("abbreviation-price")[0].text;
+
+    /*var resFloki = await http.get(Floki_Url);
+    final Floki_body = resFloki.body;
+    final document_Floki= parser.parse(Floki_body);
+    var Floki_response = document_Floki.getElementsByClassName("Coin-stats")[0].text;
+
+    var resCate = await http.get(Cate_Url);
+    final Cate_body = resCate.body;
+    final document_Cate= parser.parse(Cate_body);
+    var Cate_response = document_Cate.getElementsByClassName("abbreviation-price")[0].text;
+
+    var resSatoshi = await http.get(Satoshi_Url);
+    final Satoshi_body = resSatoshi.body;
+    final document_Satoshi= parser.parse(Satoshi_body);
+    var Satoshi_response = document_Satoshi.getElementsByClassName("abbreviation-price")[0].text;
+
+    var resBabydoge = await http.get(BabyDoge_Url);
+    final Babydoge_body = resBabydoge.body;
+    final document_Babydoge= parser.parse(Babydoge_body);
+    var BabyDoge_response = document_Babydoge.getElementsByClassName("abbreviation-price")[0].text;*/
+
+    setState(() {
+      shiba_data = Shiba_response;
+      bttc_data = Bttc_response;
+      //floki_data = Floki_response;
+      //cate_data = Cate_response;
+      //satoshi_data = Satoshi_response;
+      //babydoge_data = BabyDoge_response;
+    });*/
+
+  }
 
   loadBannerAd(){
     bannerAd = BannerAd(
@@ -118,7 +174,8 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                       Column(
                                         children: [
                                           Image.asset('assets/shiba.png',width: 30,height: 30,),
-                                          Text("10.0",style: TextStyle(fontSize: 16)),
+                                          SizedBox(height: 2,),
+                                          Text("shiba_data",style: TextStyle(fontSize: 16)),
                                         ],
                                       ),
 
@@ -127,7 +184,8 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                       Column(
                                         children: [
                                           Image.asset('assets/bttc.png',width: 30,height: 30,),
-                                          Text("10.0",style: TextStyle(fontSize: 16)),
+                                          SizedBox(height: 2,),
+                                          Text("bttc_data",style: TextStyle(fontSize: 16)),
                                         ],
                                       ),
 
@@ -136,7 +194,8 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                       Column(
                                         children: [
                                           Image.asset('assets/floki.png',width: 30,height: 30,),
-                                          Text("10.0",style: TextStyle(fontSize: 16)),
+                                          SizedBox(height: 2,),
+                                          Text("floki_data",style: TextStyle(fontSize: 16)),
                                         ],
                                       ),
 
@@ -145,7 +204,8 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                       Column(
                                         children: [
                                           Image.asset('assets/cate.png',width: 30,height: 30,),
-                                          Text("10.0",style: TextStyle(fontSize: 16)),
+                                          SizedBox(height: 2,),
+                                          Text("cate_data",style: TextStyle(fontSize: 16)),
                                         ],
                                       ),
 
@@ -154,7 +214,8 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                       Column(
                                         children: [
                                           Image.asset('assets/satoshi.png',width: 30,height: 30,),
-                                          Text("10.0",style: TextStyle(fontSize: 16)),
+                                          SizedBox(height: 2,),
+                                          Text("satoshi_data",style: TextStyle(fontSize: 16)),
                                         ],
                                       ),
 
@@ -162,8 +223,9 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
 
                                       Column(
                                         children: [
-                                          Image.asset('assets/babydoge.png',width: 30,height: 30,),
-                                          Text("10.0",style: TextStyle(fontSize: 16)),
+                                          Image.asset('assets/babydoge.png',width: 30,height: 30, ),
+                                          SizedBox(height: 2,),
+                                          Text("babydoge_data",style: TextStyle(fontSize: 16)),
                                         ],
                                       ),
 
@@ -323,7 +385,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                     SatoshiCardColor = Colors.transparent;
                                                     BabyDogeCardColor = Colors.transparent;
 
-                                                    page_controller.animateToPage(
+                                                    page_controller. animateToPage(
                                                         3, duration: const Duration(microseconds: 300), curve: Curves.easeIn
                                                     );
                                                   });
@@ -447,6 +509,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
     loadBannerAd();
     //Animasyon-DuyuruText
     initTranslateAnimation();
+    getCoinData();
 
     //Ekran dönmesini engelleme
     SystemChrome.setPreferredOrientations([
@@ -461,8 +524,6 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
     //Admob-Banner
     bannerAd.dispose();
     loadBannerAd();
-    //Viewpager
-    pageviewController.dispose();
     //Animasyon
     initTranslateAnimation();
     translateAnimationController.dispose();

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import '../Component/Dialog_Detail.dart';
+import '../Component/Shiba_Dialog_Detail.dart';
 
 final Shiba_controller = TextEditingController();
 final Bttc_controller = TextEditingController();

@@ -60,7 +60,6 @@ class _PageView extends State<Pageview> {
   @override
   void dispose() {
     page_controller.dispose();
-    super.dispose();
   }
 
 }

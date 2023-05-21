@@ -13,6 +13,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
   bool isLoaded = false;
   late BannerAd bannerAd;
 
+
   loadBannerAd(){
     bannerAd = BannerAd(
       size: AdSize.banner,

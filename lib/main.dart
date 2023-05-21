@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'Anim/Animated_splash.dart';
+import 'Anim/Animated_Splash.dart';
 import 'Pages/Anasayfa.dart';
-import 'Pages/HesapBilgileri.dart';
-import 'Pages/ParaCekme.dart';
-import 'Pages/Referanslar.dart';
-import 'Pages/Duyurular.dart';
+import 'Pages/AccountInfo.dart';
+import 'Pages/WithdrawMoney.dart';
+import 'Pages/Referances.dart';
+import 'Pages/Notifications.dart';
 
 void main() {
   runApp(const MyApp());
@@ -59,8 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
           tooltip: 'Duyurular',
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Duyurular()));
-            /*ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Duyurular Yakında...')));*/
           }),
       ],
         centerTitle: true,

@@ -15,9 +15,9 @@ class Satoshi extends StatefulWidget {
 
 class _Satoshi extends State<Satoshi> {
 
-  static const maxSeconds = 60;
+  static const maxSeconds = 30;
   Timer? timer;
-  int seconds = 60;
+  int seconds = 30;
   bool checkstatu = true;
 
   @override
@@ -135,7 +135,7 @@ class _Satoshi extends State<Satoshi> {
           onPressed: () {
             checkstatu = false;
             setState(() => checkstatu);
-            seconds = 60;
+            seconds = 29;
             startTimer();
           },
         ),
@@ -173,7 +173,7 @@ class _Satoshi extends State<Satoshi> {
   }
 
   void startTimer() {
-    timer = Timer.periodic(Duration(milliseconds: 60), (_) {
+    timer = Timer.periodic(Duration(milliseconds: 60000), (_) {
       if (seconds > 0) {
         setState(() => seconds--);
       } else {

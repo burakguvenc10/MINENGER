@@ -19,9 +19,9 @@ class Shiba extends StatefulWidget {
 
 class _Shiba extends State<Shiba> {
 
-  static const maxSeconds = 60;
+  static const maxSeconds = 30;
   Timer? timer;
-  int seconds = 60;
+  int seconds = 30;
   bool checkstatu = true;
   late RewardedAd rewardedAd;
   double sonuc = 0;
@@ -65,7 +65,7 @@ class _Shiba extends State<Shiba> {
                 //Timer
                 checkstatu = false;
                 setState(() => checkstatu);
-                seconds = 60;
+                seconds = 29;
                 startTimer();
               });
           }
@@ -229,7 +229,7 @@ class _Shiba extends State<Shiba> {
   }
 
   void startTimer() {
-    timer = Timer.periodic(Duration(milliseconds: 60), (_) {
+    timer = Timer.periodic(Duration(milliseconds: 1800000), (_) {
       if (seconds > 0) {
         setState(() => seconds--);
       } else {

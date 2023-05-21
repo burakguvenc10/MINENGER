@@ -16,9 +16,9 @@ class Bttc extends StatefulWidget {
 
 class _Bttc extends State<Bttc> {
 
-  static const maxSeconds = 60;
+  static const maxSeconds = 30;
   Timer? timer;
-  int seconds = 60;
+  int seconds = 30;
   bool checkstatu = true;
   NotificationService notificationService = NotificationService();
 
@@ -98,7 +98,7 @@ class _Bttc extends State<Bttc> {
                   backgroundColor: button_color,
                   color: Colors.redAccent,
                   strokeWidth: 8,
-                  value: 1- seconds / maxSeconds,
+                  value: 1 - seconds / maxSeconds,
                 ),
               ),
               Center(
@@ -137,7 +137,7 @@ class _Bttc extends State<Bttc> {
           onPressed: () {
             checkstatu = false;
             setState(() => checkstatu);
-            seconds = 60;
+            seconds = 29;
             startTimer();
           },
         ),
@@ -177,7 +177,7 @@ class _Bttc extends State<Bttc> {
   }
 
   void startTimer() {
-    timer = Timer.periodic(Duration(milliseconds: 60), (_) {
+    timer = Timer.periodic(Duration(milliseconds: 60000), (_) {
       if (seconds > 0) {
         setState(() => seconds--);
       } else {
