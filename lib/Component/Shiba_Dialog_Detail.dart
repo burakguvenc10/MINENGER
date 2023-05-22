@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:animated_button/animated_button.dart';
+import 'package:material_dialogs/dialogs.dart';
+import 'package:material_dialogs/widgets/buttons/icon_button.dart';
+import 'package:material_dialogs/widgets/buttons/icon_outline_button.dart';
 import 'package:minenger/Component/Webview_Binance.dart';
+import 'package:material_dialogs/material_dialogs.dart';
 import 'package:minenger/Component/Webview_Coinbase.dart';
 
 final Mail_controller = TextEditingController();
@@ -158,7 +162,50 @@ class _Dialog_Detail extends State<Dialog_Detail> {
             shadowDegree: ShadowDegree.dark,
             height: 60,
             onPressed: () {
-
+              Dialogs.bottomMaterialDialog(
+                  msg: 'Hesap Adresinizi Doğru Yazdığınızı Onaylıyor musunuz?',
+                  title: 'Hesap Onayı',
+                  context: context,
+                  actions: [
+                    IconsOutlineButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      text: 'İptal',
+                      color: Colors.red,
+                      iconData: Icons.cancel_outlined,
+                      textStyle: TextStyle(color: Colors.white),
+                      iconColor: Colors.white,
+                    ),
+                    IconsButton(
+                      onPressed: () {
+                        Dialogs.materialDialog(
+                            color: Colors.white,
+                            msg: 'İşleminiz Onaylandı. 2-3 Gün İçerisinde Hesabınıza Aktarılacaktır.',
+                            title: 'İşlem Başarılı',
+                            context: context,
+                            actions: [
+                              IconsButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
+                                },
+                                text: 'Kapat',
+                                iconData: Icons.done,
+                                color: Colors.green,
+                                textStyle: TextStyle(color: Colors.white),
+                                iconColor: Colors.white,
+                              ),
+                            ]);
+                      },
+                      text: 'Onaylıyorum',
+                      iconData: Icons.done,
+                      color: Colors.green,
+                      textStyle: TextStyle(color: Colors.white),
+                      iconColor: Colors.white,
+                    ),
+                  ]);
             },
           ),
 
@@ -182,4 +229,7 @@ class _Dialog_Detail extends State<Dialog_Detail> {
       ),
     );
   }
+}
+
+class Lottie {
 }
