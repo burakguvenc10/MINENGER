@@ -144,102 +144,337 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
           child: Column(
             children: [
               SizedBox(
-                height: 20,
+                height: 10,
               ),
 
               Text(
-                  "Kur Oranları",
-                  style: TextStyle(color: Colors.grey.shade400),
+                "Canlı Kur Oranları",
+                style: TextStyle(color: Colors.grey.shade400),
               ),
 
-              Card(
-                color: Colors.blueGrey.shade200,
-                elevation: 5,
-                shadowColor: Colors.black12,
-                child: Container(
-                  height: 65,
+
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Padding(
+                  padding: EdgeInsets.all(10),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: turuncu.withOpacity(0.8),
+                              spreadRadius: 3,
+                              blurRadius: 10,
+                              offset: Offset(0,3),
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                child: Column(
+                                  children:[
+                                    Image.asset(
+                                      "assets/shiba.png",
+                                      height: 35,
+                                    ),
 
-                      Transform.translate(
-                          offset: Offset(
-                              translateAnimation.value * -28.0, 0.0
-                          ),
-                            child: SizedBox(
-                                child:Padding(
-                                  padding: EdgeInsets.all(5),
-                                  child: Row(
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Image.asset('assets/shiba.png',width: 30,height: 30,),
-                                          SizedBox(height: 2,),
-                                          Text("shiba_data",style: TextStyle(fontSize: 16)),
-                                        ],
-                                      ),
+                                    SizedBox(height: 1,),
 
-                                      SizedBox(width: 30,),
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          "assets/dolar.png",
+                                          height: 23,
+                                          width: 23,
+                                        ),
 
-                                      Column(
-                                        children: [
-                                          Image.asset('assets/bttc.png',width: 30,height: 30,),
-                                          SizedBox(height: 2,),
-                                          Text("bttc_data",style: TextStyle(fontSize: 16)),
-                                        ],
-                                      ),
-
-                                      SizedBox(width: 30,),
-
-                                      Column(
-                                        children: [
-                                          Image.asset('assets/floki.png',width: 30,height: 30,),
-                                          SizedBox(height: 2,),
-                                          Text("floki_data",style: TextStyle(fontSize: 16)),
-                                        ],
-                                      ),
-
-                                      SizedBox(width: 30,),
-
-                                      Column(
-                                        children: [
-                                          Image.asset('assets/cate.png',width: 30,height: 30,),
-                                          SizedBox(height: 2,),
-                                          Text("cate_data",style: TextStyle(fontSize: 16)),
-                                        ],
-                                      ),
-
-                                      SizedBox(width: 30,),
-
-                                      Column(
-                                        children: [
-                                          Image.asset('assets/satoshi.png',width: 30,height: 30,),
-                                          SizedBox(height: 2,),
-                                          Text("satoshi_data",style: TextStyle(fontSize: 16)),
-                                        ],
-                                      ),
-
-                                      SizedBox(width: 30,),
-
-                                      Column(
-                                        children: [
-                                          Image.asset('assets/babydoge.png',width: 30,height: 30, ),
-                                          SizedBox(height: 2,),
-                                          Text("babydoge_data",style: TextStyle(fontSize: 16)),
-                                        ],
-                                      ),
-
-                                    ],
-                                  ),
+                                        Text("0",style: TextStyle(fontSize: 17)),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(width: 10,),
+
+                      Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: siyah.withOpacity(0.8),
+                              spreadRadius: 3,
+                              blurRadius: 10,
+                              offset: Offset(0,3),
                             ),
-                     ],
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                child: Column(
+                                  children:[
+                                    Image.asset(
+                                      "assets/bttc.png",
+                                      height: 35,
+                                    ),
+
+                                    SizedBox(height: 1,),
+
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          "assets/dolar.png",
+                                          height: 23,
+                                          width: 23,
+                                        ),
+
+                                        Text("0",style: TextStyle(fontSize: 17)),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(width: 10,),
+
+                      Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: gri.withOpacity(0.8),
+                              spreadRadius: 3,
+                              blurRadius: 10,
+                              offset: Offset(0,3),
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                child: Column(
+                                  children:[
+                                    Image.asset(
+                                      "assets/floki.png",
+                                      height: 35,
+                                    ),
+
+                                    SizedBox(height: 1,),
+
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          "assets/dolar.png",
+                                          height: 23,
+                                          width: 23,
+                                        ),
+
+                                        Text("0",style: TextStyle(fontSize: 17)),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(width: 10,),
+
+                      Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: pembe.withOpacity(0.8),
+                              spreadRadius: 3,
+                              blurRadius: 10,
+                              offset: Offset(0,3),
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                child: Column(
+                                  children:[
+                                    Image.asset(
+                                      "assets/cate.png",
+                                      height: 35,
+                                    ),
+
+                                    SizedBox(height: 1,),
+
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          "assets/dolar.png",
+                                          height: 23,
+                                          width: 23,
+                                        ),
+
+                                        Text("0",style: TextStyle(fontSize: 17)),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(width: 10,),
+
+                      Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: turuncu.withOpacity(0.8),
+                              spreadRadius: 3,
+                              blurRadius: 10,
+                              offset: Offset(0,3),
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                child: Column(
+                                  children:[
+                                    Image.asset(
+                                      "assets/satoshi.png",
+                                      height: 35,
+                                    ),
+
+                                    SizedBox(height: 1,),
+
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          "assets/dolar.png",
+                                          height: 23,
+                                          width: 23,
+                                        ),
+
+                                        Text("0",style: TextStyle(fontSize: 17)),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(width: 10,),
+
+                      Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: button_color.withOpacity(0.8),
+                              spreadRadius: 3,
+                              blurRadius: 10,
+                              offset: Offset(0,3),
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                child: Column(
+                                  children:[
+                                    Image.asset(
+                                      "assets/babydoge.png",
+                                      height: 35,
+                                    ),
+
+                                    SizedBox(height: 1,),
+
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          "assets/dolar.png",
+                                          height: 23,
+                                          width: 23,
+                                        ),
+
+                                        Text("0",style: TextStyle(fontSize: 17)),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
 
-             SizedBox(
+              SizedBox(
                 height: 20,
               ),
 

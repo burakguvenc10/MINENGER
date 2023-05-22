@@ -9,9 +9,8 @@ import 'package:minenger/Component/Webview_Coinbase.dart';
 
 final Mail_controller = TextEditingController();
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
-bool isCheck = true;
-var text = "Coinbase";
-var path = "assets/coinbase.png";
+bool isCoinbaseCheck = false;
+bool isBinanceCheck = false;
 var coinsayisi = 0;
 
 class Dialog_Detail extends StatefulWidget {
@@ -60,31 +59,57 @@ class _Dialog_Detail extends State<Dialog_Detail> {
 
           Row(
             children: [
-              Switch(
-                  value: isCheck,
-                  activeColor: Colors.orange,
+              Checkbox(
+                  value: isCoinbaseCheck,
+                  activeColor: Colors.blue.shade800,
                   onChanged: (val){
                     setState(() {
-                      if(isCheck == false){
-                        text = "Coinbase";
-                        path = "assets/coinbase.png";
-                        isCheck = true;
+                      if(isCoinbaseCheck == false){
+                        isCoinbaseCheck = true;
+                        isBinanceCheck = false;
                       }else{
-                        text = "Binance";
-                        path = "assets/binance.png";
-                        isCheck = false;
+                        isCoinbaseCheck = false;
+                        isBinanceCheck = true;
                       }
                     });
                   }
               ),
 
-              Image.asset("${path}",height: 25,width: 25,),
+              Image.asset("assets/coinbase.png",height: 25,width: 25,),
 
               SizedBox(
                 width: 5,
               ),
 
-              Text("${text}",style:TextStyle(fontSize: 17,),),
+              Text("Coinbase",style:TextStyle(fontSize: 17,),),
+
+              SizedBox(
+                width: 10,
+              ),
+
+              Checkbox(
+                  value: isBinanceCheck,
+                  activeColor: Colors.orange,
+                  onChanged: (val){
+                    setState(() {
+                      if(isBinanceCheck == false){
+                        isBinanceCheck = true;
+                        isCoinbaseCheck = false;
+                      }else{
+                        isBinanceCheck = false;
+                        isCoinbaseCheck = true;
+                      }
+                    });
+                  }
+              ),
+
+              Image.asset("assets/binance.png",height: 25,width: 25,),
+
+              SizedBox(
+                width: 5,
+              ),
+
+              Text("Binance",style:TextStyle(fontSize: 17,),),
 
             ],
           ),
@@ -216,9 +241,10 @@ class _Dialog_Detail extends State<Dialog_Detail> {
           TextButton(
             child: Text('Hesabınız yoksa bu Linkten kayıt olabilirsiniz ',textAlign: TextAlign.left,style: TextStyle(color: Colors.blueAccent,fontSize: 14,decoration: TextDecoration.underline)),
             onPressed: () {
-              if(text == "Coinbase"){
+              if(isCoinbaseCheck == true){
                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Webview_Coinbase()));
-              }else{
+              }
+              if(isBinanceCheck == true){
                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Webview_Binance()));
               }
             },
