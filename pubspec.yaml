@@ -3,7 +3,7 @@ description: Minenger App
 
 publish_to: 'pub.dev' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.12
+version: 1.0.13
 
 environment:
   sdk: '>=2.19.0-444.6.beta <3.0.0'
@@ -32,6 +32,7 @@ dependencies:
   html: ^0.15.3
   animated_text_kit: ^4.2.2
   material_dialogs: ^1.1.4
+  flip_card: ^0.7.0
 
 
 dev_dependencies:

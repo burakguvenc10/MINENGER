@@ -78,7 +78,9 @@ class _Shiba extends State<Shiba> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+          color: button_color,
+          borderRadius: BorderRadius.circular(15),
+          gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [turuncu,button_color,Colors.white,Colors.white,Colors.white],

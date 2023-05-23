@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -180,34 +181,68 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Container(
-                                child: Column(
-                                  children:[
-                                    Image.asset(
-                                      "assets/shiba.png",
-                                      height: 35,
-                                    ),
 
-                                    SizedBox(height: 1,),
+                            FlipCard(
+                              direction: FlipDirection.VERTICAL,
+                              side: CardSide.BACK,
+                              speed: 1000,
+                              onFlipDone: (status) {
+                                print(status);
+                              },
+                              front: Container(
+                                  child: Column(
+                                    children:[
+                                      Image.asset(
+                                        "assets/shiba.png",
+                                        height: 35,
+                                      ),
 
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          "assets/dolar.png",
-                                          height: 23,
-                                          width: 23,
-                                        ),
+                                      SizedBox(height: 1,),
 
-                                        Text("0",style: TextStyle(fontSize: 17)),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            "assets/dolar.png",
+                                            height: 23,
+                                            width: 23,
+                                          ),
+
+                                          Text("0",style: TextStyle(fontSize: 17)),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                               ),
-                            ],
-                          ),
+                            back: Container(
+                              child: Column(
+                                children:[
+                                  Image.asset(
+                                    "assets/shiba.png",
+                                    height: 35,
+                                  ),
+
+                                  SizedBox(height: 1,),
+
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        "assets/dolar.png",
+                                        height: 23,
+                                        width: 23,
+                                      ),
+
+                                      Text("0",style: TextStyle(fontSize: 17)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                             ),
+                            ),
+                          ],
                         ),
+                       ),
                       ),
 
                       SizedBox(width: 10,),
@@ -232,29 +267,62 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Container(
-                                child: Column(
-                                  children:[
-                                    Image.asset(
-                                      "assets/bttc.png",
-                                      height: 35,
-                                    ),
+                              FlipCard(
+                                direction: FlipDirection.VERTICAL,
+                                side: CardSide.BACK,
+                                speed: 1000,
+                                onFlipDone: (status) {
+                                  print(status);
+                                },
+                                front: Container(
+                                  child: Column(
+                                    children:[
+                                      Image.asset(
+                                        "assets/bttc.png",
+                                        height: 35,
+                                      ),
 
-                                    SizedBox(height: 1,),
+                                      SizedBox(height: 1,),
 
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          "assets/dolar.png",
-                                          height: 23,
-                                          width: 23,
-                                        ),
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            "assets/dolar.png",
+                                            height: 23,
+                                            width: 23,
+                                          ),
 
-                                        Text("0",style: TextStyle(fontSize: 17)),
-                                      ],
-                                    ),
-                                  ],
+                                          Text("0",style: TextStyle(fontSize: 17)),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                back: Container(
+                                  child: Column(
+                                    children:[
+                                      Image.asset(
+                                        "assets/bttc.png",
+                                        height: 35,
+                                      ),
+
+                                      SizedBox(height: 1,),
+
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            "assets/dolar.png",
+                                            height: 23,
+                                            width: 23,
+                                          ),
+
+                                          Text("0",style: TextStyle(fontSize: 17)),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -284,29 +352,62 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Container(
-                                child: Column(
-                                  children:[
-                                    Image.asset(
-                                      "assets/floki.png",
-                                      height: 35,
-                                    ),
+                              FlipCard(
+                                direction: FlipDirection.VERTICAL,
+                                side: CardSide.BACK,
+                                speed: 1000,
+                                onFlipDone: (status) {
+                                  print(status);
+                                },
+                                front: Container(
+                                  child: Column(
+                                    children:[
+                                      Image.asset(
+                                        "assets/floki.png",
+                                        height: 35,
+                                      ),
 
-                                    SizedBox(height: 1,),
+                                      SizedBox(height: 1,),
 
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          "assets/dolar.png",
-                                          height: 23,
-                                          width: 23,
-                                        ),
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            "assets/dolar.png",
+                                            height: 23,
+                                            width: 23,
+                                          ),
 
-                                        Text("0",style: TextStyle(fontSize: 17)),
-                                      ],
-                                    ),
-                                  ],
+                                          Text("0",style: TextStyle(fontSize: 17)),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                back: Container(
+                                  child: Column(
+                                    children:[
+                                      Image.asset(
+                                        "assets/floki.png",
+                                        height: 35,
+                                      ),
+
+                                      SizedBox(height: 1,),
+
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            "assets/dolar.png",
+                                            height: 23,
+                                            width: 23,
+                                          ),
+
+                                          Text("0",style: TextStyle(fontSize: 17)),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -336,29 +437,62 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Container(
-                                child: Column(
-                                  children:[
-                                    Image.asset(
-                                      "assets/cate.png",
-                                      height: 35,
-                                    ),
+                              FlipCard(
+                                direction: FlipDirection.VERTICAL,
+                                side: CardSide.BACK,
+                                speed: 1000,
+                                onFlipDone: (status) {
+                                  print(status);
+                                },
+                                front: Container(
+                                  child: Column(
+                                    children:[
+                                      Image.asset(
+                                        "assets/cate.png",
+                                        height: 35,
+                                      ),
 
-                                    SizedBox(height: 1,),
+                                      SizedBox(height: 1,),
 
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          "assets/dolar.png",
-                                          height: 23,
-                                          width: 23,
-                                        ),
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            "assets/dolar.png",
+                                            height: 23,
+                                            width: 23,
+                                          ),
 
-                                        Text("0",style: TextStyle(fontSize: 17)),
-                                      ],
-                                    ),
-                                  ],
+                                          Text("0",style: TextStyle(fontSize: 17)),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                back: Container(
+                                  child: Column(
+                                    children:[
+                                      Image.asset(
+                                        "assets/cate.png",
+                                        height: 35,
+                                      ),
+
+                                      SizedBox(height: 1,),
+
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            "assets/dolar.png",
+                                            height: 23,
+                                            width: 23,
+                                          ),
+
+                                          Text("0",style: TextStyle(fontSize: 17)),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -388,29 +522,62 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Container(
-                                child: Column(
-                                  children:[
-                                    Image.asset(
-                                      "assets/satoshi.png",
-                                      height: 35,
-                                    ),
+                              FlipCard(
+                                direction: FlipDirection.VERTICAL,
+                                side: CardSide.BACK,
+                                speed: 1000,
+                                onFlipDone: (status) {
+                                  print(status);
+                                },
+                                front: Container(
+                                  child: Column(
+                                    children:[
+                                      Image.asset(
+                                        "assets/satoshi.png",
+                                        height: 35,
+                                      ),
 
-                                    SizedBox(height: 1,),
+                                      SizedBox(height: 1,),
 
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          "assets/dolar.png",
-                                          height: 23,
-                                          width: 23,
-                                        ),
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            "assets/dolar.png",
+                                            height: 23,
+                                            width: 23,
+                                          ),
 
-                                        Text("0",style: TextStyle(fontSize: 17)),
-                                      ],
-                                    ),
-                                  ],
+                                          Text("0",style: TextStyle(fontSize: 17)),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                back: Container(
+                                  child: Column(
+                                    children:[
+                                      Image.asset(
+                                        "assets/satoshi.png",
+                                        height: 35,
+                                      ),
+
+                                      SizedBox(height: 1,),
+
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            "assets/dolar.png",
+                                            height: 23,
+                                            width: 23,
+                                          ),
+
+                                          Text("0",style: TextStyle(fontSize: 17)),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -440,29 +607,62 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Container(
-                                child: Column(
-                                  children:[
-                                    Image.asset(
-                                      "assets/babydoge.png",
-                                      height: 35,
-                                    ),
+                              FlipCard(
+                                direction: FlipDirection.VERTICAL,
+                                side: CardSide.BACK,
+                                speed: 1000,
+                                onFlipDone: (status) {
+                                  print(status);
+                                },
+                                front: Container(
+                                  child: Column(
+                                    children:[
+                                      Image.asset(
+                                        "assets/babydoge.png",
+                                        height: 35,
+                                      ),
 
-                                    SizedBox(height: 1,),
+                                      SizedBox(height: 1,),
 
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          "assets/dolar.png",
-                                          height: 23,
-                                          width: 23,
-                                        ),
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            "assets/dolar.png",
+                                            height: 23,
+                                            width: 23,
+                                          ),
 
-                                        Text("0",style: TextStyle(fontSize: 17)),
-                                      ],
-                                    ),
-                                  ],
+                                          Text("0",style: TextStyle(fontSize: 17)),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                back: Container(
+                                  child: Column(
+                                    children:[
+                                      Image.asset(
+                                        "assets/babydoge.png",
+                                        height: 35,
+                                      ),
+
+                                      SizedBox(height: 1,),
+
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            "assets/dolar.png",
+                                            height: 23,
+                                            width: 23,
+                                          ),
+
+                                          Text("0",style: TextStyle(fontSize: 17)),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -480,61 +680,70 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
 
               Column(
                   children: [
-                    Card(
-                      color: Colors.grey.shade300,
-                      elevation: 2,
-                      shadowColor: Colors.grey,
-                      child: Column(
-                        children: [
-                          Row(
-                            children:[
-                              // Coin Ikonlar
-                                  Container(
-                                    height: 490,
-                                    padding: EdgeInsets.all(1),
-                                    child:Column(
-                                      children:[
-                                        SingleChildScrollView(
-                                          child:Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.8),
+                            spreadRadius: 3,
+                            blurRadius: 10,
+                            offset: Offset(0,3),
+                          ),
+                        ],
+                      ),
+                        child: Column(
+                          children: [
+                            Row(
+                              children:[
+                                // Coin Ikonlar
+                                Container(
+                                  height: 490,
+                                  padding: EdgeInsets.all(1),
+                                  child:Column(
+                                    children:[
+                                      SingleChildScrollView(
+                                        child:Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
 
-                                              Image.network(
-                                                'https://art.ngfiles.com/images/2173000/2173045_supertrekkie92_spinning-coin.gif?f1636079576',width: 35,height: 35,),
+                                            Image.network(
+                                              'https://art.ngfiles.com/images/2173000/2173045_supertrekkie92_spinning-coin.gif?f1636079576',width: 35,height: 35,),
 
-                                              CircleAvatar(
-                                                backgroundColor: ShibaCardColor,
-                                                radius: 35,
-                                                child: IconButton(
-                                                  tooltip: 'SHIBA',
-                                                  splashColor:turuncu,
-                                                  isSelected: selected,
-                                                  icon:  Image.asset(
-                                                    'assets/shiba.png', height: 35, width: 35,
-                                                  ),
-                                                  iconSize: 50,
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      selected_ShibaIcon = true;
-                                                      ShibaCardColor = turuncu;
-                                                      BttcCardColor = Colors.transparent;
-                                                      FlokiCardColor = Colors.transparent;
-                                                      CateCardColor = Colors.transparent;
-                                                      SatoshiCardColor = Colors.transparent;
-                                                      BabyDogeCardColor = Colors.transparent;
-
-                                                      page_controller.animateToPage(
-                                                          0, duration: const Duration(microseconds: 300), curve: Curves.easeIn
-                                                      );
-                                                    });
-                                                  },
+                                            CircleAvatar(
+                                              backgroundColor: ShibaCardColor,
+                                              radius: 35,
+                                              child: IconButton(
+                                                tooltip: 'SHIBA',
+                                                splashColor:turuncu,
+                                                isSelected: selected,
+                                                icon:  Image.asset(
+                                                  'assets/shiba.png', height: 35, width: 35,
                                                 ),
+                                                iconSize: 50,
+                                                onPressed: () {
+                                                  setState(() {
+                                                    selected_ShibaIcon = true;
+                                                    ShibaCardColor = turuncu;
+                                                    BttcCardColor = Colors.transparent;
+                                                    FlokiCardColor = Colors.transparent;
+                                                    CateCardColor = Colors.transparent;
+                                                    SatoshiCardColor = Colors.transparent;
+                                                    BabyDogeCardColor = Colors.transparent;
+
+                                                    page_controller.animateToPage(
+                                                        0, duration: const Duration(microseconds: 300), curve: Curves.easeIn
+                                                    );
+                                                  });
+                                                },
                                               ),
+                                            ),
 
 
-                                              SizedBox(
-                                                height: 5,
-                                              ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
 
                                             CircleAvatar(
                                               backgroundColor: BttcCardColor,
@@ -564,9 +773,9 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                               ),
                                             ),
 
-                                              SizedBox(
-                                                height: 5,
-                                              ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
 
                                             CircleAvatar(
                                               backgroundColor: FlokiCardColor,
@@ -596,9 +805,9 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                               ),
                                             ),
 
-                                              SizedBox(
-                                                height: 5,
-                                              ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
 
                                             CircleAvatar(
                                               backgroundColor: CateCardColor,
@@ -628,9 +837,9 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                               ),
                                             ),
 
-                                              SizedBox(
-                                                height: 5,
-                                              ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
 
                                             CircleAvatar(
                                               backgroundColor: SatoshiCardColor,
@@ -660,9 +869,9 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                               ),
                                             ),
 
-                                              SizedBox(
-                                                height: 5,
-                                              ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
 
                                             CircleAvatar(
                                               backgroundColor: BabyDogeCardColor,
@@ -690,28 +899,28 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                 },
                                               ),
                                             ),
-                                            ],
-                                          ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
+                                ),
 
-                                  Container(
-                                    height: 450,
-                                    width: 280,
-                                    alignment: Alignment.center,
-                                    child: Column(
-                                      children: [
-                                        Pageview(pageIndex),
-                                      ],
-                                    ),
+                                Container(
+                                  height: 450,
+                                  width: 280,
+                                  alignment: Alignment.center,
+                                  child: Column(
+                                    children: [
+                                      Pageview(pageIndex),
+                                    ],
                                   ),
+                                ),
 
-                            ],
-                          ),
-                        ],
-                      ),
+                              ],
+                            ),
+                          ],
+                        ),
                     ),
 
                     SizedBox(

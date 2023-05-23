@@ -9,6 +9,7 @@ import '../Viewpager_Pages/BabyDoge.dart';
 final PageController page_controller = PageController(initialPage: 0);
 num _curr = 0;
 bool selected = true;
+const button_color = Color.fromRGBO(235, 189, 94 ,1);
 
 
 class Pageview extends StatefulWidget {
@@ -26,6 +27,7 @@ class _PageView extends State<Pageview> {
       height: 450,
       width: 270,
       child: Material(
+        borderRadius: BorderRadius.circular(15),
         child:
           PageView(
             controller: page_controller,

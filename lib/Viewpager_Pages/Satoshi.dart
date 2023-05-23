@@ -24,6 +24,7 @@ class _Satoshi extends State<Satoshi> {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
         gradient: LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,

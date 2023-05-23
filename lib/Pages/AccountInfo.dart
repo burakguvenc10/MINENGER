@@ -49,12 +49,20 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                     height: 20,
                   ),
 
-                  Card(
-                    color: Colors.grey.shade200,
-                    elevation: 5,
-                    shadowColor: Colors.grey,
-                    child: Container(
+                  Container(
                       height: 560,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.8),
+                          spreadRadius: 3,
+                          blurRadius: 10,
+                          offset: Offset(0,3),
+                        ),
+                      ],
+                    ),
                       padding: const EdgeInsets.all(20.0),
                       child:SingleChildScrollView(
                       child:Column(
@@ -267,12 +275,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                           ],
                         ),
                       ),
-                    ),
                   ),
-
-
-
-
                 ],
               ),
 

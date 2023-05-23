@@ -26,6 +26,7 @@ class _Floki extends State<Floki> {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
         gradient: LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,

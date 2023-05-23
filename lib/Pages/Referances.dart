@@ -50,12 +50,20 @@ class _Referanslar extends State<Referanslar> {
                   SizedBox(
                     height: 20,
                   ),
-                  Card(
-                    color: Colors.grey.shade200,
-                    elevation: 5,
-                    shadowColor: Colors.grey,
-                    child: Container(
+                  Container(
                       height: 200,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.8),
+                          spreadRadius: 3,
+                          blurRadius: 10,
+                          offset: Offset(0,3),
+                        ),
+                      ],
+                    ),
                       padding: const EdgeInsets.all(20.0),
                       child:Column(
                         children: [
@@ -100,7 +108,6 @@ class _Referanslar extends State<Referanslar> {
                           ),
                         ],
                       ),
-                    ),
                   ),
                 ],
               ),
