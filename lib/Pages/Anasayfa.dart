@@ -3,7 +3,8 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:html/parser.dart' as parser;
+import 'package:html/dom.dart' as dom;
+import 'package:csslib/parser.dart' as parser;
 import '../Component/Pageview.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -16,19 +17,12 @@ const pembe = Color.fromRGBO(240, 194, 194 ,1);
 num _curr = 0;
 bool selected = true;
 int pageIndex = 0;
-//Parse-CoinsValue
-var Shiba_Url = Uri.parse("https://coinmarketcap.com/tr/currencies/shiba-inu/");
-var Bttc_Url = Uri.parse("https://coinmarketcap.com/tr/currencies/bittorrent-new/");
-var Floki_Url = Uri.parse("https://coinmarketcap.com/tr/currencies/floki-inu/");
-var Cate_Url = Uri.parse("https://coinmarketcap.com/tr/currencies/catecoin/");
-var Satoshi_Url = Uri.parse("https://coinmarketcap.com/tr/currencies/satoshi/");
-var BabyDoge_Url = Uri.parse("https://coinmarketcap.com/tr/currencies/babydoge-coin/");
-var shiba_data;
-var bttc_data;
-var floki_data;
-var cate_data;
-var satoshi_data;
-var babydoge_data;
+var shiba_data = "Yükleniyor..";
+var bttc_data = "Yükleniyor..";
+var floki_data = "Yükleniyor..";
+var cate_data = "Yükleniyor..";
+var satoshi_data = "Yükleniyor..";
+var babydoge_data = "Yükleniyor..";
 
 
 class Anasayfa extends StatefulWidget {
@@ -55,47 +49,114 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
   Color BabyDogeCardColor = Colors.grey.shade300;
 
 
-  Future getCoinData() async {
-    /*var resShiba = await http.get(Shiba_Url);
-    final Shiba_body = resShiba.body;
-    final document_Shiba = parser.parse(Shiba_body);
-    var Shiba_response = document_Shiba.getElementsByClassName("sc-cadad039-0 clgqXO")[0].text;
+  Future getShibaData() async {
+    //Parse-CoinsValue
+    var Shiba_Url = Uri.parse(
+        "https://www.binance.com/en/price/shiba-inu");
 
-    var resBttc = await http.get(Bttc_Url);
-    final Bttc_body = resBttc.body;
-    final document_Bttc= parser.parse(Bttc_body);
-    var Bttc_response = document_Bttc.getElementsByClassName("abbreviation-price")[0].text;
-
-    /*var resFloki = await http.get(Floki_Url);
-    final Floki_body = resFloki.body;
-    final document_Floki= parser.parse(Floki_body);
-    var Floki_response = document_Floki.getElementsByClassName("Coin-stats")[0].text;
-
-    var resCate = await http.get(Cate_Url);
-    final Cate_body = resCate.body;
-    final document_Cate= parser.parse(Cate_body);
-    var Cate_response = document_Cate.getElementsByClassName("abbreviation-price")[0].text;
-
-    var resSatoshi = await http.get(Satoshi_Url);
-    final Satoshi_body = resSatoshi.body;
-    final document_Satoshi= parser.parse(Satoshi_body);
-    var Satoshi_response = document_Satoshi.getElementsByClassName("abbreviation-price")[0].text;
-
-    var resBabydoge = await http.get(BabyDoge_Url);
-    final Babydoge_body = resBabydoge.body;
-    final document_Babydoge= parser.parse(Babydoge_body);
-    var BabyDoge_response = document_Babydoge.getElementsByClassName("abbreviation-price")[0].text;*/
+    var resShiba = await http.get(Shiba_Url);
+    dom.Document htmlShiba = dom.Document.html(resShiba.body);
+    final Shiba_titles = htmlShiba
+        .querySelectorAll(
+        '#__APP > div > main > section > div > div.css-871wnf > div.css-1wh66rn > div.css-1267ixm > div.css-1bwgsh3')
+        .map((element) => element.innerHtml.substring(1).trim()).toString();
 
     setState(() {
-      shiba_data = Shiba_response;
-      bttc_data = Bttc_response;
-      //floki_data = Floki_response;
-      //cate_data = Cate_response;
-      //satoshi_data = Satoshi_response;
-      //babydoge_data = BabyDoge_response;
-    });*/
+      shiba_data = Shiba_titles;
+    });
 
   }
+
+  Future getBttcData() async {
+    //Parse-CoinsValue
+    var Bttc_Url = Uri.parse(
+        "https://www.binance.com/en/price/bittorrent-new");
+
+    var resBttc = await http.get(Bttc_Url);
+    dom.Document htmlBttc = dom.Document.html(resBttc.body);
+    final Bttc_titles = htmlBttc
+        .querySelectorAll(
+        '#__APP > div > main > section > div > div.css-871wnf > div.css-1wh66rn > div.css-1267ixm > div.css-1bwgsh3')
+        .map((element) => element.innerHtml.substring(1).trim()).toString();
+
+    setState(() {
+      bttc_data = Bttc_titles;
+    });
+
+  }
+
+  Future getFlokiData() async {
+    //Parse-CoinsValue
+    var Floki_Url = Uri.parse(
+        "https://www.binance.com/en/price/floki-inu");
+
+    var resFloki = await http.get(Floki_Url);
+    dom.Document htmlFloki = dom.Document.html(resFloki.body);
+    final Floki_titles = htmlFloki
+        .querySelectorAll(
+        '#__APP > div > main > section > div > div.css-871wnf > div.css-1wh66rn > div.css-1267ixm > div.css-1bwgsh3')
+        .map((element) => element.innerHtml.substring(1).trim()).toString();
+
+    setState(() {
+      floki_data = Floki_titles;
+    });
+
+  }
+
+  Future getCateData() async {
+    //Parse-CoinsValue
+    var Cate_Url = Uri.parse(
+        "https://www.binance.com/en/price/catecoin");
+
+    var resCate = await http.get(Cate_Url);
+    dom.Document htmlCate = dom.Document.html(resCate.body);
+    final Cate_titles = htmlCate
+        .querySelectorAll(
+        '#__APP > div > main > section > div > div.css-871wnf > div.css-1wh66rn > div.css-1267ixm > div.css-1bwgsh3')
+        .map((element) => element.innerHtml.substring(1).trim()).toString();
+
+    setState(() {
+      cate_data = Cate_titles;
+    });
+
+  }
+
+  Future getSatoshiData() async {
+    //Parse-CoinsValue
+    var Satoshi_Url = Uri.parse(
+        "https://www.binance.com/en/price/satoshi");
+
+    var resSatoshi = await http.get(Satoshi_Url);
+    dom.Document htmlSatoshi= dom.Document.html(resSatoshi.body);
+    final Satoshi_titles = htmlSatoshi
+        .querySelectorAll(
+        '#__APP > div > main > section > div > div.css-871wnf > div.css-1wh66rn > div.css-1267ixm > div.css-1bwgsh3')
+        .map((element) => element.innerHtml.substring(1).trim()).toString();
+
+    setState(() {
+      satoshi_data = Satoshi_titles;
+    });
+
+  }
+
+  Future getBabyDogeData() async {
+    //Parse-CoinsValue
+    var BabyDoge_Url = Uri.parse(
+        "https://www.binance.com/en/price/baby-doge-coin");
+
+    var resBabydoge = await http.get(BabyDoge_Url);
+    dom.Document htmlBaby= dom.Document.html(resBabydoge.body);
+    final Babydoge_titles = htmlBaby
+        .querySelectorAll(
+        '#__APP > div > main > section > div > div.css-871wnf > div.css-1wh66rn > div.css-1267ixm > div.css-1bwgsh3')
+        .map((element) => element.innerHtml.substring(1).trim()).toString();
+
+    setState(() {
+      babydoge_data = Babydoge_titles;
+    });
+
+  }
+
 
   loadBannerAd(){
     bannerAd = BannerAd(
@@ -162,8 +223,8 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        width: 80,
-                        height: 80,
+                        width: 120 ,
+                        height: 90,
                         decoration: BoxDecoration(
                           color: Colors.grey.shade200,
                           borderRadius: BorderRadius.circular(15),
@@ -187,7 +248,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                               side: CardSide.BACK,
                               speed: 1000,
                               onFlipDone: (status) {
-                                print(status);
+                                getShibaData();
                               },
                               front: Container(
                                   child: Column(
@@ -203,12 +264,12 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                            "assets/dolar.png",
-                                            height: 23,
-                                            width: 23,
+                                            "assets/tl.png",
+                                            height: 30,
+                                            width: 28,
                                           ),
 
-                                          Text("0",style: TextStyle(fontSize: 17)),
+                                          Text(shiba_data,style: TextStyle(fontSize: 16)),
                                         ],
                                       ),
                                     ],
@@ -228,12 +289,12 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Image.asset(
-                                        "assets/dolar.png",
-                                        height: 23,
-                                        width: 23,
+                                        "assets/tl.png",
+                                        height: 30,
+                                        width: 28,
                                       ),
 
-                                      Text("0",style: TextStyle(fontSize: 17)),
+                                      Text(shiba_data,style: TextStyle(fontSize: 16)),
                                     ],
                                   ),
                                 ],
@@ -248,8 +309,8 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                       SizedBox(width: 10,),
 
                       Container(
-                        width: 80,
-                        height: 80,
+                        width: 120,
+                        height: 90,
                         decoration: BoxDecoration(
                           color: Colors.grey.shade200,
                           borderRadius: BorderRadius.circular(15),
@@ -272,7 +333,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                 side: CardSide.BACK,
                                 speed: 1000,
                                 onFlipDone: (status) {
-                                  print(status);
+                                  getBttcData();
                                 },
                                 front: Container(
                                   child: Column(
@@ -288,12 +349,12 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                            "assets/dolar.png",
-                                            height: 23,
-                                            width: 23,
+                                            "assets/tl.png",
+                                            height: 30,
+                                            width: 28,
                                           ),
 
-                                          Text("0",style: TextStyle(fontSize: 17)),
+                                          Text(bttc_data,style: TextStyle(fontSize: 16)),
                                         ],
                                       ),
                                     ],
@@ -313,12 +374,12 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                            "assets/dolar.png",
-                                            height: 23,
-                                            width: 23,
+                                            "assets/tl.png",
+                                            height: 30,
+                                            width: 28,
                                           ),
 
-                                          Text("0",style: TextStyle(fontSize: 17)),
+                                          Text(bttc_data,style: TextStyle(fontSize: 16)),
                                         ],
                                       ),
                                     ],
@@ -333,8 +394,8 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                       SizedBox(width: 10,),
 
                       Container(
-                        width: 80,
-                        height: 80,
+                        width: 120,
+                        height: 90,
                         decoration: BoxDecoration(
                           color: Colors.grey.shade200,
                           borderRadius: BorderRadius.circular(15),
@@ -357,7 +418,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                 side: CardSide.BACK,
                                 speed: 1000,
                                 onFlipDone: (status) {
-                                  print(status);
+                                  getFlokiData();
                                 },
                                 front: Container(
                                   child: Column(
@@ -373,12 +434,12 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                            "assets/dolar.png",
-                                            height: 23,
-                                            width: 23,
+                                            "assets/tl.png",
+                                            height: 30,
+                                            width: 28,
                                           ),
 
-                                          Text("0",style: TextStyle(fontSize: 17)),
+                                          Text(floki_data,style: TextStyle(fontSize: 16)),
                                         ],
                                       ),
                                     ],
@@ -398,12 +459,12 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                            "assets/dolar.png",
-                                            height: 23,
-                                            width: 23,
+                                            "assets/tl.png",
+                                            height: 30,
+                                            width: 28,
                                           ),
 
-                                          Text("0",style: TextStyle(fontSize: 17)),
+                                          Text(floki_data,style: TextStyle(fontSize: 16)),
                                         ],
                                       ),
                                     ],
@@ -418,8 +479,8 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                       SizedBox(width: 10,),
 
                       Container(
-                        width: 80,
-                        height: 80,
+                        width: 120,
+                        height: 90,
                         decoration: BoxDecoration(
                           color: Colors.grey.shade200,
                           borderRadius: BorderRadius.circular(15),
@@ -442,7 +503,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                 side: CardSide.BACK,
                                 speed: 1000,
                                 onFlipDone: (status) {
-                                  print(status);
+                                  getCateData();
                                 },
                                 front: Container(
                                   child: Column(
@@ -458,12 +519,12 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                            "assets/dolar.png",
-                                            height: 23,
-                                            width: 23,
+                                            "assets/tl.png",
+                                            height: 30,
+                                            width: 28,
                                           ),
 
-                                          Text("0",style: TextStyle(fontSize: 17)),
+                                          Text(cate_data,style: TextStyle(fontSize: 16)),
                                         ],
                                       ),
                                     ],
@@ -483,12 +544,12 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                            "assets/dolar.png",
-                                            height: 23,
-                                            width: 23,
+                                            "assets/tl.png",
+                                            height: 30,
+                                            width: 28,
                                           ),
 
-                                          Text("0",style: TextStyle(fontSize: 17)),
+                                          Text(cate_data,style: TextStyle(fontSize: 16)),
                                         ],
                                       ),
                                     ],
@@ -503,8 +564,8 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                       SizedBox(width: 10,),
 
                       Container(
-                        width: 80,
-                        height: 80,
+                        width: 120,
+                        height: 90,
                         decoration: BoxDecoration(
                           color: Colors.grey.shade200,
                           borderRadius: BorderRadius.circular(15),
@@ -527,7 +588,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                 side: CardSide.BACK,
                                 speed: 1000,
                                 onFlipDone: (status) {
-                                  print(status);
+                                  getSatoshiData();
                                 },
                                 front: Container(
                                   child: Column(
@@ -543,12 +604,12 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                            "assets/dolar.png",
-                                            height: 23,
-                                            width: 23,
+                                            "assets/tl.png",
+                                            height: 30,
+                                            width: 28,
                                           ),
 
-                                          Text("0",style: TextStyle(fontSize: 17)),
+                                          Text(satoshi_data,style: TextStyle(fontSize: 16)),
                                         ],
                                       ),
                                     ],
@@ -568,12 +629,12 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                            "assets/dolar.png",
-                                            height: 23,
-                                            width: 23,
+                                            "assets/tl.png",
+                                            height: 30,
+                                            width: 28,
                                           ),
 
-                                          Text("0",style: TextStyle(fontSize: 17)),
+                                          Text(satoshi_data,style: TextStyle(fontSize: 16)),
                                         ],
                                       ),
                                     ],
@@ -588,8 +649,8 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                       SizedBox(width: 10,),
 
                       Container(
-                        width: 80,
-                        height: 80,
+                        width: 120,
+                        height: 90,
                         decoration: BoxDecoration(
                           color: Colors.grey.shade200,
                           borderRadius: BorderRadius.circular(15),
@@ -612,7 +673,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                 side: CardSide.BACK,
                                 speed: 1000,
                                 onFlipDone: (status) {
-                                  print(status);
+                                  getBabyDogeData();
                                 },
                                 front: Container(
                                   child: Column(
@@ -628,12 +689,12 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                            "assets/dolar.png",
-                                            height: 23,
-                                            width: 23,
+                                            "assets/tl.png",
+                                            height: 30,
+                                            width: 28,
                                           ),
 
-                                          Text("0",style: TextStyle(fontSize: 17)),
+                                          Text(babydoge_data,style: TextStyle(fontSize: 16)),
                                         ],
                                       ),
                                     ],
@@ -653,12 +714,12 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                            "assets/dolar.png",
-                                            height: 23,
-                                            width: 23,
+                                            "assets/tl.png",
+                                            height: 30,
+                                            width: 28,
                                           ),
 
-                                          Text("0",style: TextStyle(fontSize: 17)),
+                                          Text(babydoge_data,style: TextStyle(fontSize: 16)),
                                         ],
                                       ),
                                     ],
@@ -953,7 +1014,12 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
     loadBannerAd();
     //Animasyon-DuyuruText
     initTranslateAnimation();
-    getCoinData();
+    getShibaData();
+    getBttcData();
+    getFlokiData();
+    getCateData();
+    getSatoshiData();
+    getBabyDogeData();
 
     //Ekran dönmesini engelleme
     SystemChrome.setPreferredOrientations([
@@ -971,5 +1037,11 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
     //Animasyon
     initTranslateAnimation();
     translateAnimationController.dispose();
+    getShibaData();
+    getBttcData();
+    getFlokiData();
+    getCateData();
+    getSatoshiData();
+    getBabyDogeData();
   }
 }

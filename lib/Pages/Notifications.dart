@@ -6,7 +6,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:minenger/Pages/Anasayfa.dart';
 
 const appbarColor = Color.fromRGBO(235, 189, 94 ,1);
-const bottombarColor = Color.fromRGBO(252, 207, 38  ,1);
 
 class Duyurular extends StatefulWidget {
   @override
@@ -87,10 +86,19 @@ class _Duyurular extends State<Duyurular> {
 
               else {
                   return ListTile(
-                    title: Card(
-                      color: Colors.blueGrey.shade100,
-                      elevation: 2,
-                      shadowColor: Colors.grey,
+                    title: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                            color: appbarColor.withOpacity(0.6),
+                            spreadRadius: 3,
+                            blurRadius: 10,
+                            offset: Offset(0,3),
+                          ),
+                        ],
+                      ),
                       child: Column(
                         children: [
                           SizedBox(
@@ -99,19 +107,19 @@ class _Duyurular extends State<Duyurular> {
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                           children: [
-
+                            children: [
                              Text(
                                  jsonList[index]['name'], //'Duyuru Başlık'
                                  textAlign: TextAlign.center,
-                                 style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold)
+                                 style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold,)
                              ),
-
                            ],
                           ),
 
-                          SizedBox(
-                            height: 10,
+                          Container(
+                            height: 0.7,
+                            margin: EdgeInsets.all(5),
+                            color: Colors.grey.shade400,
                           ),
 
                           ListTile(
@@ -126,7 +134,7 @@ class _Duyurular extends State<Duyurular> {
                           Text(
                               "2023-05-16 10:04:00", //'Duyuru Tarih'
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal,color: Colors.grey.shade600)
+                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal,color: Colors.grey.shade500)
                           ),
 
                         ],
