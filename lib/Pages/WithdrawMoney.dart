@@ -504,10 +504,10 @@ class _ParaCekme extends State<ParaCekme> {
                                       labelStyle: TextStyle(color: Colors.black),
                                       suffixIcon: IconButton(
                                         onPressed: (){},
-                                        icon: Image.asset('assets/babydoge.png',width: 25,height: 25,),
+                                        icon: Image.asset('assets/fightclub.png',width: 25,height: 25,),
                                         color: Colors.black54,
                                       ),
-                                      labelText: 'BABY DOGE',
+                                      labelText: 'FIGHT CLUB',
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Colors.orange,

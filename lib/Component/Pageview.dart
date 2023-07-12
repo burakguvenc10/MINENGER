@@ -4,7 +4,7 @@ import '../Viewpager_Pages/Floki.dart';
 import '../Viewpager_Pages/Bttc.dart';
 import '../Viewpager_Pages/Cate.dart';
 import '../Viewpager_Pages/Satoshi.dart';
-import '../Viewpager_Pages/BabyDoge.dart';
+import '../Viewpager_Pages/FightClub.dart';
 
 final PageController page_controller = PageController(initialPage: 0);
 num _curr = 0;
@@ -55,7 +55,7 @@ class _PageView extends State<Pageview> {
     Center(
         child: Satoshi()),
     Center(
-        child: BabyDoge()),
+        child: FightClub()),
 
   ];
 

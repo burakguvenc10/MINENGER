@@ -5,15 +5,16 @@ import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 
 final coin_controller = TextEditingController();
 late final AnimatedButton animButton;
-const button_color = Color.fromRGBO(252, 185, 65 ,1);
-const turuncu = Color.fromRGBO(239, 159, 56 ,1);
+const kirmizi = Color.fromRGBO(207, 10, 50 ,1);
+const acikkirmizi = Color.fromRGBO(224, 25, 60 ,1);
+const button_color = Color.fromRGBO(235, 189, 94 ,1);
 
-class BabyDoge extends StatefulWidget {
+class FightClub extends StatefulWidget {
   @override
-  _BabyDoge createState() => _BabyDoge();
+  _FightClub createState() => _FightClub();
 }
 
-class _BabyDoge extends State<BabyDoge> {
+class _FightClub extends State<FightClub> {
 
   static const maxSeconds = 30;
   Timer? timer;
@@ -28,7 +29,7 @@ class _BabyDoge extends State<BabyDoge> {
         gradient: LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [turuncu,button_color,Colors.white,Colors.white,Colors.white],
+        colors: [kirmizi,acikkirmizi,Colors.white,Colors.white,Colors.white],
      ),
     ),
     child: Column(
@@ -38,7 +39,7 @@ class _BabyDoge extends State<BabyDoge> {
           height: 20,
         ),
 
-        Text('BABY DOGE', textAlign: TextAlign.center,
+        Text('FIGHT CLUB', textAlign: TextAlign.center,
           style: TextStyle(
           fontSize: 35,
           foreground: Paint()
@@ -74,7 +75,7 @@ class _BabyDoge extends State<BabyDoge> {
               hintText: 'Kazılan Coin',
               suffixIcon: IconButton(
                 onPressed: (){},
-                icon: Image.asset('assets/babydoge.png',width: 25,height: 25,),
+                icon: Image.asset('assets/fightclub.png',width: 25,height: 25,),
               ),
             ),
             maxLines: 1,
