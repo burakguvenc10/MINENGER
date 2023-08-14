@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/dom.dart' as dom;
 import 'package:csslib/parser.dart' as parser;
-import 'package:minenger/Viewpager_Pages/FightClub.dart';
+import 'package:minenger/Viewpager_Pages/FlightClup.dart';
 import '../Component/Pageview.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -16,6 +16,8 @@ const siyah = Color.fromRGBO(40, 40, 48 ,1);
 const gri = Color.fromRGBO(122, 159, 191 ,1);
 const pembe = Color.fromRGBO(240, 194, 194 ,1);
 const kirmizi = Color.fromRGBO(224, 25, 60 ,1);
+const acikmavi = Color.fromRGBO(61,142,185,1);
+const mavi = Color.fromRGBO(44,130,201 ,1);
 num _curr = 0;
 bool selected = true;
 int pageIndex = 0;
@@ -48,7 +50,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
   Color FlokiCardColor = Colors.grey.shade300;
   Color CateCardColor = Colors.grey.shade300;
   Color SatoshiCardColor = Colors.grey.shade300;
-  Color FightClubCardColor = Colors.grey.shade300;
+  Color FLightClupCardColor = Colors.grey.shade300;
 
 
   Future getShibaData() async {
@@ -266,7 +268,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                            "assets/tl.png",
+                                            "assets/dolar.png",
                                             height: 30,
                                             width: 28,
                                           ),
@@ -351,7 +353,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                            "assets/tl.png",
+                                            "assets/dolar.png",
                                             height: 30,
                                             width: 28,
                                           ),
@@ -436,7 +438,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                            "assets/tl.png",
+                                            "assets/dolar.png",
                                             height: 30,
                                             width: 28,
                                           ),
@@ -512,7 +514,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                     children:[
                                       Image.asset(
                                         "assets/cate.png",
-                                        height: 35,
+                                        height: 39,
                                       ),
 
                                       SizedBox(height: 1,),
@@ -521,7 +523,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                            "assets/tl.png",
+                                            "assets/dolar.png",
                                             height: 30,
                                             width: 28,
                                           ),
@@ -537,7 +539,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                     children:[
                                       Image.asset(
                                         "assets/cate.png",
-                                        height: 35,
+                                        height: 39,
                                       ),
 
                                       SizedBox(height: 1,),
@@ -606,7 +608,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                            "assets/tl.png",
+                                            "assets/dolar.png",
                                             height: 30,
                                             width: 28,
                                           ),
@@ -658,7 +660,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                           borderRadius: BorderRadius.circular(15),
                           boxShadow: [
                             BoxShadow(
-                              color: acikkirmizi.withOpacity(0.8),
+                              color: acikmavi.withOpacity(0.8),
                               spreadRadius: 3,
                               blurRadius: 10,
                               offset: Offset(0,3),
@@ -681,7 +683,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                   child: Column(
                                     children:[
                                       Image.asset(
-                                        "assets/fightclub.png",
+                                        "assets/flightclup.jpeg",
                                         height: 35,
                                       ),
 
@@ -691,7 +693,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                            "assets/tl.png",
+                                            "assets/dolar.png",
                                             height: 30,
                                             width: 28,
                                           ),
@@ -706,7 +708,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                   child: Column(
                                     children:[
                                       Image.asset(
-                                        "assets/fightclub.png",
+                                        "assets/flightclup.jpeg",
                                         height: 35,
                                       ),
 
@@ -793,7 +795,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                     FlokiCardColor = Colors.transparent;
                                                     CateCardColor = Colors.transparent;
                                                     SatoshiCardColor = Colors.transparent;
-                                                    FightClubCardColor = Colors.transparent;
+                                                    FLightClupCardColor = Colors.transparent;
 
                                                     page_controller.animateToPage(
                                                         0, duration: const Duration(microseconds: 300), curve: Curves.easeIn
@@ -826,7 +828,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                     FlokiCardColor = Colors.transparent;
                                                     CateCardColor = Colors.transparent;
                                                     SatoshiCardColor = Colors.transparent;
-                                                    FightClubCardColor = Colors.transparent;
+                                                    FLightClupCardColor = Colors.transparent;
 
                                                     page_controller.animateToPage(
                                                         1, duration: const Duration(microseconds: 300), curve: Curves.easeIn
@@ -858,7 +860,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                     ShibaCardColor = Colors.transparent;
                                                     CateCardColor = Colors.transparent;
                                                     SatoshiCardColor = Colors.transparent;
-                                                    FightClubCardColor = Colors.transparent;
+                                                    FLightClupCardColor = Colors.transparent;
 
                                                     page_controller.animateToPage(
                                                         2, duration: const Duration(microseconds: 300), curve: Curves.easeIn
@@ -890,7 +892,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                     BttcCardColor = Colors.transparent;
                                                     ShibaCardColor = Colors.transparent;
                                                     SatoshiCardColor = Colors.transparent;
-                                                    FightClubCardColor = Colors.transparent;
+                                                    FLightClupCardColor = Colors.transparent;
 
                                                     page_controller. animateToPage(
                                                         3, duration: const Duration(microseconds: 300), curve: Curves.easeIn
@@ -923,7 +925,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                     FlokiCardColor = Colors.transparent;
                                                     BttcCardColor = Colors.transparent;
                                                     ShibaCardColor = Colors.transparent;
-                                                    FightClubCardColor = Colors.transparent;
+                                                    FLightClupCardColor = Colors.transparent;
                                                     page_controller.animateToPage(
                                                         4, duration: const Duration(microseconds: 300), curve: Curves.easeIn
                                                     );
@@ -937,19 +939,19 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                             ),
 
                                             CircleAvatar(
-                                              backgroundColor: FightClubCardColor,
+                                              backgroundColor: FLightClupCardColor,
                                               radius: 35,
                                               child: IconButton(
-                                                tooltip: 'FIGHT CLUB',
+                                                tooltip: 'FLIGHT CLUP',
                                                 splashColor: kirmizi,
                                                 icon:  Image.asset(
-                                                  'assets/fightclub.png', height: 35, width: 35,
+                                                  "assets/flightclup.jpeg", height: 35, width: 35,
                                                 ),
                                                 iconSize: 50,
                                                 onPressed: () {
                                                   setState(() {
                                                     selected_FightclubIcon = true;
-                                                    FightClubCardColor = kirmizi;
+                                                    FLightClupCardColor = mavi;
                                                     SatoshiCardColor = Colors.transparent;
                                                     CateCardColor = Colors.transparent;;
                                                     FlokiCardColor = Colors.transparent;

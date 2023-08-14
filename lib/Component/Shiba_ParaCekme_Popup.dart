@@ -82,6 +82,12 @@ class _Dialog_Detail extends State<Dialog_Detail> {
                 width: 5,
               ),
 
+              Image.asset("assets/binance.png",height: 25,width: 25,),
+
+              SizedBox(
+                width: 5,
+              ),
+
               Text("BEP-20",style:TextStyle(fontSize: 17,),),
 
               SizedBox(
@@ -183,13 +189,13 @@ class _Dialog_Detail extends State<Dialog_Detail> {
                           beb20_value = paste_value;
                         });
                       },
-                      icon: Icon(Icons.paste_sharp),
+                      icon: Icon(Icons.content_paste_go_outlined),
                       color: Colors.black54,
                     ),
                     labelStyle: TextStyle(color: Colors.black),
                     prefixIcon: IconButton(
                       onPressed: (){},
-                      icon: Icon(Icons.token),
+                      icon: Icon(Icons.numbers),
                       color: Colors.black54,
                     ),
                     focusedBorder: OutlineInputBorder(

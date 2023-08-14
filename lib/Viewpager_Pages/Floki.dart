@@ -96,7 +96,7 @@ class _Floki extends State<Floki> {
                 height: 120,
                 child: CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation(Colors.blueGrey.shade200),
-                  backgroundColor: button_color,
+                  backgroundColor: acik,
                   color: Colors.redAccent,
                   strokeWidth: 8,
                   value: 1- seconds / maxSeconds,

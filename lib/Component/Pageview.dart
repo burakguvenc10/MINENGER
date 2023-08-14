@@ -4,7 +4,7 @@ import '../Viewpager_Pages/Floki.dart';
 import '../Viewpager_Pages/Bttc.dart';
 import '../Viewpager_Pages/Cate.dart';
 import '../Viewpager_Pages/Satoshi.dart';
-import '../Viewpager_Pages/FightClub.dart';
+import '../Viewpager_Pages/FlightClup.dart';
 
 final PageController page_controller = PageController(initialPage: 0);
 num _curr = 0;

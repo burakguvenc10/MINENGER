@@ -94,7 +94,7 @@ class _Satoshi extends State<Satoshi> {
                 height: 120,
                 child: CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation(Colors.blueGrey.shade200),
-                  backgroundColor: button_color,
+                  backgroundColor: turuncu,
                   color: Colors.redAccent,
                   strokeWidth: 8,
                   value: 1- seconds / maxSeconds,

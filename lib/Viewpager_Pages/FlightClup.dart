@@ -5,8 +5,8 @@ import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 
 final coin_controller = TextEditingController();
 late final AnimatedButton animButton;
-const kirmizi = Color.fromRGBO(207, 10, 50 ,1);
-const acikkirmizi = Color.fromRGBO(224, 25, 60 ,1);
+const acikmavi = Color.fromRGBO(61,142,185,1);
+const mavi = Color.fromRGBO(44,130,201 ,1);
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
 
 class FightClub extends StatefulWidget {
@@ -29,7 +29,7 @@ class _FightClub extends State<FightClub> {
         gradient: LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [kirmizi,acikkirmizi,Colors.white,Colors.white,Colors.white],
+        colors: [mavi,mavi,Colors.white,Colors.white,Colors.white],
      ),
     ),
     child: Column(
@@ -39,7 +39,7 @@ class _FightClub extends State<FightClub> {
           height: 20,
         ),
 
-        Text('FIGHT CLUB', textAlign: TextAlign.center,
+        Text('FLIGHT CLUP', textAlign: TextAlign.center,
           style: TextStyle(
           fontSize: 35,
           foreground: Paint()
@@ -75,7 +75,7 @@ class _FightClub extends State<FightClub> {
               hintText: 'Kazılan Coin',
               suffixIcon: IconButton(
                 onPressed: (){},
-                icon: Image.asset('assets/fightclub.png',width: 25,height: 25,),
+                icon: Image.asset('assets/flightclup.jpeg',width: 25,height: 25,),
               ),
             ),
             maxLines: 1,
@@ -96,7 +96,7 @@ class _FightClub extends State<FightClub> {
                 height: 120,
                 child: CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation(Colors.blueGrey.shade200),
-                  backgroundColor: button_color,
+                  backgroundColor: mavi,
                   color: Colors.redAccent,
                   strokeWidth: 8,
                   value: 1- seconds / maxSeconds,
