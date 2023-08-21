@@ -1,11 +1,19 @@
 import 'dart:io';
+import 'package:dio/dio.dart';
+import 'package:easy_animate/animation/fade_in_animation.dart';
+import 'package:easy_animate/animation/pulse_animation.dart';
+import 'package:easy_animate/animation/scale_in_animation.dart';
+import 'package:easy_animate/enum/animate_direction.dart';
+import 'package:easy_animate/enum/animate_type.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gif/flutter_gif.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/dom.dart' as dom;
 import 'package:csslib/parser.dart' as parser;
 import 'package:minenger/Viewpager_Pages/FlightClup.dart';
+import '../Component/NotificationService.dart';
 import '../Component/Pageview.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -15,7 +23,6 @@ const turuncu = Color.fromRGBO(255, 116, 5 ,1);
 const siyah = Color.fromRGBO(40, 40, 48 ,1);
 const gri = Color.fromRGBO(122, 159, 191 ,1);
 const pembe = Color.fromRGBO(240, 194, 194 ,1);
-const kirmizi = Color.fromRGBO(224, 25, 60 ,1);
 const acikmavi = Color.fromRGBO(61,142,185,1);
 const mavi = Color.fromRGBO(44,130,201 ,1);
 num _curr = 0;
@@ -28,13 +35,13 @@ var cate_data = "Yükleniyor..";
 var satoshi_data = "Yükleniyor..";
 var fightclub_data = "Yükleniyor..";
 
-
 class Anasayfa extends StatefulWidget {
   @override
   _Anasayfa createState() => _Anasayfa();
 }
 
 class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
+  late FlutterGifController controller1 = FlutterGifController(vsync: this);
   late AnimationController translateAnimationController;
   late Animation<double> translateAnimation;
   bool isLoaded = false;
@@ -51,9 +58,12 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
   Color CateCardColor = Colors.grey.shade300;
   Color SatoshiCardColor = Colors.grey.shade300;
   Color FLightClupCardColor = Colors.grey.shade300;
+  var jsonList;
+  var response;
+  Dio dio = Dio();
 
 
-  Future getShibaData() async {
+  /*Future getShibaData() async {
     //Parse-CoinsValue
     var Shiba_Url = Uri.parse(
         "https://www.binance.com/en/price/shiba-inu");
@@ -159,6 +169,21 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
       fightclub_data = Babydoge_titles;
     });
 
+  }*/
+
+  Future getShibaData() async {
+    try {
+      response = await Dio().get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest');
+      if (response.statusCode == 200) {
+        setState(() {
+          jsonList = response.data["quote"] as List;
+          shiba_data = jsonList.toString().substring(0,8);
+        });
+      }
+    }catch(e){
+      print(e);
+    }
+
   }
 
 
@@ -226,165 +251,518 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        width: 120 ,
-                        height: 90,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: [
-                            BoxShadow(
-                              color: turuncu.withOpacity(0.8),
-                              spreadRadius: 3,
-                              blurRadius: 10,
-                              offset: Offset(0,3),
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
+
+                      //Canlı Kur Oranları Flips
+                      FadeInAnimation(
+                        animateDirection: AnimateDirection.right,
+                        animateType: AnimateType.once,
+                        durationMilliseconds: 2000,
+                        moveAmount: 400,
+                        child: Row(
                             children: [
-
-                            FlipCard(
-                              direction: FlipDirection.VERTICAL,
-                              side: CardSide.BACK,
-                              speed: 1000,
-                              onFlipDone: (status) {
-                                getShibaData();
-                              },
-                              front: Container(
+                              Container(
+                                width: 120 ,
+                                height: 90,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade200,
+                                  borderRadius: BorderRadius.circular(15),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: turuncu.withOpacity(0.8),
+                                      spreadRadius: 3,
+                                      blurRadius: 10,
+                                      offset: Offset(0,3),
+                                    ),
+                                  ],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                                   child: Column(
-                                    children:[
-                                      Image.asset(
-                                        "assets/shiba.png",
-                                        height: 35,
-                                      ),
-
-                                      SizedBox(height: 1,),
-
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            "assets/dolar.png",
-                                            height: 30,
-                                            width: 28,
-                                          ),
-
-                                          Text(shiba_data,style: TextStyle(fontSize: 16)),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                              ),
-                            back: Container(
-                              child: Column(
-                                children:[
-                                  Image.asset(
-                                    "assets/shiba.png",
-                                    height: 35,
-                                  ),
-
-                                  SizedBox(height: 1,),
-
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Image.asset(
-                                        "assets/tl.png",
-                                        height: 30,
-                                        width: 28,
-                                      ),
 
-                                      Text(shiba_data,style: TextStyle(fontSize: 16)),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                             ),
-                            ),
-                          ],
-                        ),
-                       ),
-                      ),
+                                      FlipCard(
+                                        direction: FlipDirection.VERTICAL,
+                                        side: CardSide.BACK,
+                                        speed: 1000,
+                                        onFlipDone: (status) {
+                                          getShibaData();
+                                        },
+                                        front: Container(
+                                          child: Column(
+                                            children:[
+                                              Image.asset(
+                                                "assets/shiba.png",
+                                                height: 35,
+                                              ),
 
-                      SizedBox(width: 10,),
+                                              SizedBox(height: 1,),
 
-                      Container(
-                        width: 120,
-                        height: 90,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: [
-                            BoxShadow(
-                              color: siyah.withOpacity(0.8),
-                              spreadRadius: 3,
-                              blurRadius: 10,
-                              offset: Offset(0,3),
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              FlipCard(
-                                direction: FlipDirection.VERTICAL,
-                                side: CardSide.BACK,
-                                speed: 1000,
-                                onFlipDone: (status) {
-                                  getBttcData();
-                                },
-                                front: Container(
-                                  child: Column(
-                                    children:[
-                                      Image.asset(
-                                        "assets/bttc.png",
-                                        height: 35,
-                                      ),
+                                              Row(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/tl.png",
+                                                    height: 30,
+                                                    width: 28,
+                                                  ),
 
-                                      SizedBox(height: 1,),
-
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            "assets/dolar.png",
-                                            height: 30,
-                                            width: 28,
+                                                  Text(shiba_data,style: TextStyle(fontSize: 16)),
+                                                ],
+                                              ),
+                                            ],
                                           ),
+                                        ),
+                                        back: Container(
+                                          child: Column(
+                                            children:[
+                                              Image.asset(
+                                                "assets/shiba.png",
+                                                height: 35,
+                                              ),
 
-                                          Text(bttc_data,style: TextStyle(fontSize: 16)),
-                                        ],
+                                              SizedBox(height: 1,),
+
+                                              Row(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/dolar.png",
+                                                    height: 30,
+                                                    width: 28,
+                                                  ),
+
+                                                  Text(shiba_data,style: TextStyle(fontSize: 16)),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
-                                back: Container(
+                              ),
+
+                              SizedBox(width: 10,),
+
+                              Container(
+                                width: 120,
+                                height: 90,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade200,
+                                  borderRadius: BorderRadius.circular(15),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: siyah.withOpacity(0.8),
+                                      spreadRadius: 3,
+                                      blurRadius: 10,
+                                      offset: Offset(0,3),
+                                    ),
+                                  ],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                                   child: Column(
-                                    children:[
-                                      Image.asset(
-                                        "assets/bttc.png",
-                                        height: 35,
-                                      ),
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      FlipCard(
+                                        direction: FlipDirection.VERTICAL,
+                                        side: CardSide.BACK,
+                                        speed: 1000,
+                                        onFlipDone: (status) {
+                                          //getBttcData();
+                                        },
+                                        front: Container(
+                                          child: Column(
+                                            children:[
+                                              Image.asset(
+                                                "assets/bttc.png",
+                                                height: 35,
+                                              ),
 
-                                      SizedBox(height: 1,),
+                                              SizedBox(height: 1,),
 
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            "assets/tl.png",
-                                            height: 30,
-                                            width: 28,
+                                              Row(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/tl.png",
+                                                    height: 30,
+                                                    width: 28,
+                                                  ),
+
+                                                  Text(bttc_data,style: TextStyle(fontSize: 16)),
+                                                ],
+                                              ),
+                                            ],
                                           ),
+                                        ),
+                                        back: Container(
+                                          child: Column(
+                                            children:[
+                                              Image.asset(
+                                                "assets/bttc.png",
+                                                height: 35,
+                                              ),
 
-                                          Text(bttc_data,style: TextStyle(fontSize: 16)),
-                                        ],
+                                              SizedBox(height: 1,),
+
+                                              Row(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/dolar.png",
+                                                    height: 30,
+                                                    width: 28,
+                                                  ),
+
+                                                  Text(bttc_data,style: TextStyle(fontSize: 16)),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+
+                              SizedBox(width: 10,),
+
+                              Container(
+                                width: 120,
+                                height: 90,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade200,
+                                  borderRadius: BorderRadius.circular(15),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: gri.withOpacity(0.8),
+                                      spreadRadius: 3,
+                                      blurRadius: 10,
+                                      offset: Offset(0,3),
+                                    ),
+                                  ],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      FlipCard(
+                                        direction: FlipDirection.VERTICAL,
+                                        side: CardSide.BACK,
+                                        speed: 1000,
+                                        onFlipDone: (status) {
+                                          //getFlokiData();
+                                        },
+                                        front: Container(
+                                          child: Column(
+                                            children:[
+                                              Image.asset(
+                                                "assets/floki.png",
+                                                height: 35,
+                                              ),
+
+                                              SizedBox(height: 1,),
+
+                                              Row(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/tl.png",
+                                                    height: 30,
+                                                    width: 28,
+                                                  ),
+
+                                                  Text(floki_data,style: TextStyle(fontSize: 16)),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        back: Container(
+                                          child: Column(
+                                            children:[
+                                              Image.asset(
+                                                "assets/floki.png",
+                                                height: 35,
+                                              ),
+
+                                              SizedBox(height: 1,),
+
+                                              Row(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/dolar.png",
+                                                    height: 30,
+                                                    width: 28,
+                                                  ),
+
+                                                  Text(floki_data,style: TextStyle(fontSize: 16)),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+
+                              SizedBox(width: 10,),
+
+                              Container(
+                                width: 120,
+                                height: 90,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade200,
+                                  borderRadius: BorderRadius.circular(15),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: pembe.withOpacity(0.8),
+                                      spreadRadius: 3,
+                                      blurRadius: 10,
+                                      offset: Offset(0,3),
+                                    ),
+                                  ],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      FlipCard(
+                                        direction: FlipDirection.VERTICAL,
+                                        side: CardSide.BACK,
+                                        speed: 1000,
+                                        onFlipDone: (status) {
+                                          //getCateData();
+                                        },
+                                        front: Container(
+                                          child: Column(
+                                            children:[
+                                              Image.asset(
+                                                "assets/cate.png",
+                                                height: 39,
+                                              ),
+
+                                              SizedBox(height: 1,),
+
+                                              Row(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/tl.png",
+                                                    height: 30,
+                                                    width: 28,
+                                                  ),
+
+                                                  Text(cate_data,style: TextStyle(fontSize: 16)),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        back: Container(
+                                          child: Column(
+                                            children:[
+                                              Image.asset(
+                                                "assets/cate.png",
+                                                height: 39,
+                                              ),
+
+                                              SizedBox(height: 1,),
+
+                                              Row(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/dolar.png",
+                                                    height: 30,
+                                                    width: 28,
+                                                  ),
+
+                                                  Text(cate_data,style: TextStyle(fontSize: 16)),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+
+                              SizedBox(width: 10,),
+
+                              Container(
+                                width: 120,
+                                height: 90,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade200,
+                                  borderRadius: BorderRadius.circular(15),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: turuncu.withOpacity(0.8),
+                                      spreadRadius: 3,
+                                      blurRadius: 10,
+                                      offset: Offset(0,3),
+                                    ),
+                                  ],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      FlipCard(
+                                        direction: FlipDirection.VERTICAL,
+                                        side: CardSide.BACK,
+                                        speed: 1000,
+                                        onFlipDone: (status) {
+                                          //getSatoshiData();
+                                        },
+                                        front: Container(
+                                          child: Column(
+                                            children:[
+                                              Image.asset(
+                                                "assets/satoshi.png",
+                                                height: 35,
+                                              ),
+
+                                              SizedBox(height: 1,),
+
+                                              Row(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/tl.png",
+                                                    height: 30,
+                                                    width: 28,
+                                                  ),
+
+                                                  Text(satoshi_data,style: TextStyle(fontSize: 16)),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        back: Container(
+                                          child: Column(
+                                            children:[
+                                              Image.asset(
+                                                "assets/satoshi.png",
+                                                height: 35,
+                                              ),
+
+                                              SizedBox(height: 1,),
+
+                                              Row(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/dolar.png",
+                                                    height: 30,
+                                                    width: 28,
+                                                  ),
+
+                                                  Text(satoshi_data,style: TextStyle(fontSize: 16)),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+
+                              SizedBox(width: 10,),
+
+                              Container(
+                                width: 120,
+                                height: 90,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade200,
+                                  borderRadius: BorderRadius.circular(15),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: acikmavi.withOpacity(0.8),
+                                      spreadRadius: 3,
+                                      blurRadius: 10,
+                                      offset: Offset(0,3),
+                                    ),
+                                  ],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      FlipCard(
+                                        direction: FlipDirection.VERTICAL,
+                                        side: CardSide.BACK,
+                                        speed: 1000,
+                                        onFlipDone: (status) {
+                                          //getFightClub();
+                                        },
+                                        front: Container(
+                                          child: Column(
+                                            children:[
+                                              Image.asset(
+                                                "assets/flightclup.jpeg",
+                                                height: 35,
+                                              ),
+
+                                              SizedBox(height: 1,),
+
+                                              Row(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/tl.png",
+                                                    height: 30,
+                                                    width: 28,
+                                                  ),
+
+                                                  Text(fightclub_data,style: TextStyle(fontSize: 16)),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        back: Container(
+                                          child: Column(
+                                            children:[
+                                              Image.asset(
+                                                "assets/flightclup.jpeg",
+                                                height: 35,
+                                              ),
+
+                                              SizedBox(height: 1,),
+
+                                              Row(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/dolar.png",
+                                                    height: 30,
+                                                    width: 28,
+                                                  ),
+
+                                                  Text(fightclub_data,style: TextStyle(fontSize: 16)),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -392,347 +770,6 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                               ),
                             ],
                           ),
-                        ),
-                      ),
-
-                      SizedBox(width: 10,),
-
-                      Container(
-                        width: 120,
-                        height: 90,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: [
-                            BoxShadow(
-                              color: gri.withOpacity(0.8),
-                              spreadRadius: 3,
-                              blurRadius: 10,
-                              offset: Offset(0,3),
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              FlipCard(
-                                direction: FlipDirection.VERTICAL,
-                                side: CardSide.BACK,
-                                speed: 1000,
-                                onFlipDone: (status) {
-                                  getFlokiData();
-                                },
-                                front: Container(
-                                  child: Column(
-                                    children:[
-                                      Image.asset(
-                                        "assets/floki.png",
-                                        height: 35,
-                                      ),
-
-                                      SizedBox(height: 1,),
-
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            "assets/dolar.png",
-                                            height: 30,
-                                            width: 28,
-                                          ),
-
-                                          Text(floki_data,style: TextStyle(fontSize: 16)),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                back: Container(
-                                  child: Column(
-                                    children:[
-                                      Image.asset(
-                                        "assets/floki.png",
-                                        height: 35,
-                                      ),
-
-                                      SizedBox(height: 1,),
-
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            "assets/tl.png",
-                                            height: 30,
-                                            width: 28,
-                                          ),
-
-                                          Text(floki_data,style: TextStyle(fontSize: 16)),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                      SizedBox(width: 10,),
-
-                      Container(
-                        width: 120,
-                        height: 90,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: [
-                            BoxShadow(
-                              color: pembe.withOpacity(0.8),
-                              spreadRadius: 3,
-                              blurRadius: 10,
-                              offset: Offset(0,3),
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              FlipCard(
-                                direction: FlipDirection.VERTICAL,
-                                side: CardSide.BACK,
-                                speed: 1000,
-                                onFlipDone: (status) {
-                                  getCateData();
-                                },
-                                front: Container(
-                                  child: Column(
-                                    children:[
-                                      Image.asset(
-                                        "assets/cate.png",
-                                        height: 39,
-                                      ),
-
-                                      SizedBox(height: 1,),
-
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            "assets/dolar.png",
-                                            height: 30,
-                                            width: 28,
-                                          ),
-
-                                          Text(cate_data,style: TextStyle(fontSize: 16)),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                back: Container(
-                                  child: Column(
-                                    children:[
-                                      Image.asset(
-                                        "assets/cate.png",
-                                        height: 39,
-                                      ),
-
-                                      SizedBox(height: 1,),
-
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            "assets/tl.png",
-                                            height: 30,
-                                            width: 28,
-                                          ),
-
-                                          Text(cate_data,style: TextStyle(fontSize: 16)),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                      SizedBox(width: 10,),
-
-                      Container(
-                        width: 120,
-                        height: 90,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: [
-                            BoxShadow(
-                              color: turuncu.withOpacity(0.8),
-                              spreadRadius: 3,
-                              blurRadius: 10,
-                              offset: Offset(0,3),
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              FlipCard(
-                                direction: FlipDirection.VERTICAL,
-                                side: CardSide.BACK,
-                                speed: 1000,
-                                onFlipDone: (status) {
-                                  getSatoshiData();
-                                },
-                                front: Container(
-                                  child: Column(
-                                    children:[
-                                      Image.asset(
-                                        "assets/satoshi.png",
-                                        height: 35,
-                                      ),
-
-                                      SizedBox(height: 1,),
-
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            "assets/dolar.png",
-                                            height: 30,
-                                            width: 28,
-                                          ),
-
-                                          Text(satoshi_data,style: TextStyle(fontSize: 16)),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                back: Container(
-                                  child: Column(
-                                    children:[
-                                      Image.asset(
-                                        "assets/satoshi.png",
-                                        height: 35,
-                                      ),
-
-                                      SizedBox(height: 1,),
-
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            "assets/tl.png",
-                                            height: 30,
-                                            width: 28,
-                                          ),
-
-                                          Text(satoshi_data,style: TextStyle(fontSize: 16)),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                      SizedBox(width: 10,),
-
-                      Container(
-                        width: 120,
-                        height: 90,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: [
-                            BoxShadow(
-                              color: acikmavi.withOpacity(0.8),
-                              spreadRadius: 3,
-                              blurRadius: 10,
-                              offset: Offset(0,3),
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              FlipCard(
-                                direction: FlipDirection.VERTICAL,
-                                side: CardSide.BACK,
-                                speed: 1000,
-                                onFlipDone: (status) {
-                                  getFightClub();
-                                },
-                                front: Container(
-                                  child: Column(
-                                    children:[
-                                      Image.asset(
-                                        "assets/flightclup.jpeg",
-                                        height: 35,
-                                      ),
-
-                                      SizedBox(height: 1,),
-
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            "assets/dolar.png",
-                                            height: 30,
-                                            width: 28,
-                                          ),
-
-                                          Text(fightclub_data,style: TextStyle(fontSize: 16)),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                back: Container(
-                                  child: Column(
-                                    children:[
-                                      Image.asset(
-                                        "assets/flightclup.jpeg",
-                                        height: 35,
-                                      ),
-
-                                      SizedBox(height: 1,),
-
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            "assets/tl.png",
-                                            height: 30,
-                                            width: 28,
-                                          ),
-
-                                          Text(fightclub_data,style: TextStyle(fontSize: 16)),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
                       ),
                     ],
                   ),
@@ -743,6 +780,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                 height: 20,
               ),
 
+              // Coin Ikonlar
               Column(
                   children: [
                     Container(
@@ -773,35 +811,48 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
 
-                                            Image.network(
-                                              'https://art.ngfiles.com/images/2173000/2173045_supertrekkie92_spinning-coin.gif?f1636079576',width: 35,height: 35,),
+                                            Container(
+                                              height: 35,
+                                              width: 35,
+                                              //child: GifImage(
+                                                //controller: controller1,
+                                                //image: const AssetImage("assets/gif/coin.gif"),
+                                                child:Image.network(
+                                                  'https://art.ngfiles.com/images/2173000/2173045_supertrekkie92_spinning-coin.gif?f1636079576'
+                                                //),
+                                              ),
+                                            ),
 
-                                            CircleAvatar(
-                                              backgroundColor: ShibaCardColor,
-                                              radius: 35,
-                                              child: IconButton(
-                                                tooltip: 'SHIBA',
-                                                splashColor:turuncu,
-                                                isSelected: selected,
-                                                icon:  Image.asset(
-                                                  'assets/shiba.png', height: 35, width: 35,
+                                            PulseAnimation(
+                                              animateType: AnimateType.loop,
+                                              durationMilliseconds: 2100,
+                                              child: CircleAvatar(
+                                                backgroundColor: ShibaCardColor,
+                                                radius: 35,
+                                                child: IconButton(
+                                                  tooltip: 'SHIBA',
+                                                  splashColor:turuncu,
+                                                  isSelected: selected,
+                                                  icon:  Image.asset(
+                                                    'assets/shiba.png', height: 35, width: 35,
+                                                  ),
+                                                  iconSize: 50,
+                                                  onPressed: () async {
+                                                    setState(() {
+                                                      selected_ShibaIcon = true;
+                                                      ShibaCardColor = turuncu;
+                                                      BttcCardColor = Colors.transparent;
+                                                      FlokiCardColor = Colors.transparent;
+                                                      CateCardColor = Colors.transparent;
+                                                      SatoshiCardColor = Colors.transparent;
+                                                      FLightClupCardColor = Colors.transparent;
+
+                                                      page_controller.animateToPage(
+                                                          0, duration: const Duration(microseconds: 300), curve: Curves.easeIn
+                                                      );
+                                                    });
+                                                  },
                                                 ),
-                                                iconSize: 50,
-                                                onPressed: () {
-                                                  setState(() {
-                                                    selected_ShibaIcon = true;
-                                                    ShibaCardColor = turuncu;
-                                                    BttcCardColor = Colors.transparent;
-                                                    FlokiCardColor = Colors.transparent;
-                                                    CateCardColor = Colors.transparent;
-                                                    SatoshiCardColor = Colors.transparent;
-                                                    FLightClupCardColor = Colors.transparent;
-
-                                                    page_controller.animateToPage(
-                                                        0, duration: const Duration(microseconds: 300), curve: Curves.easeIn
-                                                    );
-                                                  });
-                                                },
                                               ),
                                             ),
 
@@ -810,31 +861,107 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                               height: 5,
                                             ),
 
-                                            CircleAvatar(
-                                              backgroundColor: BttcCardColor,
-                                              radius: 35,
-                                              child: IconButton(
-                                                tooltip: 'BTTC',
-                                                splashColor: Colors.orange.shade200,
-                                                icon:  Image.asset(
-                                                  'assets/bttc.png', height: 35, width: 35,
-                                                ),
-                                                iconSize: 50,
-                                                onPressed: () {
-                                                  setState(() {
-                                                    selected_BttcIcon = true;
-                                                    BttcCardColor = siyah;
-                                                    ShibaCardColor = Colors.transparent;
-                                                    FlokiCardColor = Colors.transparent;
-                                                    CateCardColor = Colors.transparent;
-                                                    SatoshiCardColor = Colors.transparent;
-                                                    FLightClupCardColor = Colors.transparent;
+                                            PulseAnimation(
+                                              animateType: AnimateType.loop,
+                                              durationMilliseconds: 2100,
+                                              child: CircleAvatar(
+                                                backgroundColor: BttcCardColor,
+                                                radius: 35,
+                                                child: IconButton(
+                                                  tooltip: 'BTTC',
+                                                  splashColor: Colors.orange.shade200,
+                                                  icon:  Image.asset(
+                                                    'assets/bttc.png', height: 35, width: 35,
+                                                  ),
+                                                  iconSize: 50,
+                                                  onPressed: () async{
+                                                    setState(() {
+                                                      selected_BttcIcon = true;
+                                                      BttcCardColor = siyah;
+                                                      ShibaCardColor = Colors.transparent;
+                                                      FlokiCardColor = Colors.transparent;
+                                                      CateCardColor = Colors.transparent;
+                                                      SatoshiCardColor = Colors.transparent;
+                                                      FLightClupCardColor = Colors.transparent;
 
-                                                    page_controller.animateToPage(
-                                                        1, duration: const Duration(microseconds: 300), curve: Curves.easeIn
-                                                    );
-                                                  });
-                                                },
+                                                      page_controller.animateToPage(
+                                                          1, duration: const Duration(microseconds: 300), curve: Curves.easeIn
+                                                      );
+                                                    });
+                                                  },
+                                                ),
+                                              ),
+                                           ),
+
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+
+                                            PulseAnimation(
+                                              animateType: AnimateType.loop,
+                                              durationMilliseconds: 2100,
+                                              child: CircleAvatar(
+                                                backgroundColor: FlokiCardColor,
+                                                radius: 35,
+                                                child: IconButton(
+                                                  tooltip: 'FLOKI',
+                                                  splashColor: Colors.orange.shade200,
+                                                  icon:  Image.asset(
+                                                    'assets/floki.png', height: 35, width: 35,
+                                                  ),
+                                                  iconSize: 50,
+                                                  onPressed: () async{
+                                                    setState(() {
+                                                      selected_FlokiIcon = true;
+                                                      FlokiCardColor = gri;
+                                                      BttcCardColor = Colors.transparent;
+                                                      ShibaCardColor = Colors.transparent;
+                                                      CateCardColor = Colors.transparent;
+                                                      SatoshiCardColor = Colors.transparent;
+                                                      FLightClupCardColor = Colors.transparent;
+
+                                                      page_controller.animateToPage(
+                                                          2, duration: const Duration(microseconds: 300), curve: Curves.easeIn
+                                                      );
+                                                    });
+                                                  },
+                                                ),
+                                              ),
+                                           ),
+
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+
+                                            PulseAnimation(
+                                              animateType: AnimateType.loop,
+                                              durationMilliseconds: 2100,
+                                              child: CircleAvatar(
+                                                backgroundColor: CateCardColor,
+                                                radius: 35,
+                                                child: IconButton(
+                                                  tooltip: 'CATE',
+                                                  splashColor: Colors.orange.shade200,
+                                                  icon:  Image.asset(
+                                                    'assets/cate.png', height: 40, width: 40,
+                                                  ),
+                                                  iconSize: 50,
+                                                  onPressed: () async{
+                                                    setState(() {
+                                                      selected_CateIcon = true;
+                                                      CateCardColor = pembe;
+                                                      FlokiCardColor = Colors.transparent;
+                                                      BttcCardColor = Colors.transparent;
+                                                      ShibaCardColor = Colors.transparent;
+                                                      SatoshiCardColor = Colors.transparent;
+                                                      FLightClupCardColor = Colors.transparent;
+
+                                                      page_controller. animateToPage(
+                                                          3, duration: const Duration(microseconds: 300), curve: Curves.easeIn
+                                                      );
+                                                    });
+                                                  },
+                                                ),
                                               ),
                                             ),
 
@@ -842,128 +969,73 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                               height: 5,
                                             ),
 
-                                            CircleAvatar(
-                                              backgroundColor: FlokiCardColor,
-                                              radius: 35,
-                                              child: IconButton(
-                                                tooltip: 'FLOKI',
-                                                splashColor: Colors.orange.shade200,
-                                                icon:  Image.asset(
-                                                  'assets/floki.png', height: 35, width: 35,
+                                            PulseAnimation(
+                                              animateType: AnimateType.loop,
+                                              durationMilliseconds: 2100,
+                                              child: CircleAvatar(
+                                                backgroundColor: SatoshiCardColor,
+                                                radius: 35,
+                                                child: IconButton(
+                                                  tooltip: 'SATOSHI',
+                                                  splashColor: Colors.orange.shade200,
+                                                  icon:  Image.asset(
+                                                    'assets/satoshi.png', height: 35, width: 35,
+                                                  ),
+                                                  disabledColor: Colors.grey,
+                                                  iconSize: 50,
+                                                  onPressed: () async{
+                                                    setState(() {
+                                                      selected_SatoshiIcon = true;
+                                                      SatoshiCardColor = acik_turuncu;
+                                                      CateCardColor = Colors.transparent;
+                                                      FlokiCardColor = Colors.transparent;
+                                                      BttcCardColor = Colors.transparent;
+                                                      ShibaCardColor = Colors.transparent;
+                                                      FLightClupCardColor = Colors.transparent;
+                                                      page_controller.animateToPage(
+                                                          4, duration: const Duration(microseconds: 300), curve: Curves.easeIn
+                                                      );
+                                                    });
+                                                  },
                                                 ),
-                                                iconSize: 50,
-                                                onPressed: () {
-                                                  setState(() {
-                                                    selected_FlokiIcon = true;
-                                                    FlokiCardColor = gri;
-                                                    BttcCardColor = Colors.transparent;
-                                                    ShibaCardColor = Colors.transparent;
-                                                    CateCardColor = Colors.transparent;
-                                                    SatoshiCardColor = Colors.transparent;
-                                                    FLightClupCardColor = Colors.transparent;
-
-                                                    page_controller.animateToPage(
-                                                        2, duration: const Duration(microseconds: 300), curve: Curves.easeIn
-                                                    );
-                                                  });
-                                                },
                                               ),
-                                            ),
+                                           ),
 
                                             SizedBox(
                                               height: 5,
                                             ),
 
-                                            CircleAvatar(
-                                              backgroundColor: CateCardColor,
-                                              radius: 35,
-                                              child: IconButton(
-                                                tooltip: 'CATE',
-                                                splashColor: Colors.orange.shade200,
-                                                icon:  Image.asset(
-                                                  'assets/cate.png', height: 40, width: 40,
+                                            PulseAnimation(
+                                              animateType: AnimateType.loop,
+                                              durationMilliseconds: 2100,
+                                              child: CircleAvatar(
+                                                backgroundColor: FLightClupCardColor,
+                                                radius: 35,
+                                                child: IconButton(
+                                                  tooltip: 'FLIGHT CLUP',
+                                                  splashColor: mavi,
+                                                  icon:  Image.asset(
+                                                    "assets/flightclup.jpeg", height: 35, width: 35,
+                                                  ),
+                                                  iconSize: 50,
+                                                  onPressed: () async{
+                                                    setState(() {
+                                                      selected_FightclubIcon = true;
+                                                      FLightClupCardColor = mavi;
+                                                      SatoshiCardColor = Colors.transparent;
+                                                      CateCardColor = Colors.transparent;;
+                                                      FlokiCardColor = Colors.transparent;
+                                                      BttcCardColor = Colors.transparent;
+                                                      ShibaCardColor = Colors.transparent;
+                                                      page_controller.animateToPage(
+                                                          5, duration: const Duration(microseconds: 300), curve: Curves.easeIn
+                                                      );
+                                                    });
+                                                  },
                                                 ),
-                                                iconSize: 50,
-                                                onPressed: () {
-                                                  setState(() {
-                                                    selected_CateIcon = true;
-                                                    CateCardColor = pembe;
-                                                    FlokiCardColor = Colors.transparent;
-                                                    BttcCardColor = Colors.transparent;
-                                                    ShibaCardColor = Colors.transparent;
-                                                    SatoshiCardColor = Colors.transparent;
-                                                    FLightClupCardColor = Colors.transparent;
-
-                                                    page_controller. animateToPage(
-                                                        3, duration: const Duration(microseconds: 300), curve: Curves.easeIn
-                                                    );
-                                                  });
-                                                },
                                               ),
-                                            ),
+                                           ),
 
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-
-                                            CircleAvatar(
-                                              backgroundColor: SatoshiCardColor,
-                                              radius: 35,
-                                              child: IconButton(
-                                                tooltip: 'SATOSHI',
-                                                splashColor: Colors.orange.shade200,
-                                                icon:  Image.asset(
-                                                  'assets/satoshi.png', height: 35, width: 35,
-                                                ),
-                                                disabledColor: Colors.grey,
-                                                iconSize: 50,
-                                                onPressed: () {
-                                                  setState(() {
-                                                    selected_SatoshiIcon = true;
-                                                    SatoshiCardColor = acik_turuncu;
-                                                    CateCardColor = Colors.transparent;
-                                                    FlokiCardColor = Colors.transparent;
-                                                    BttcCardColor = Colors.transparent;
-                                                    ShibaCardColor = Colors.transparent;
-                                                    FLightClupCardColor = Colors.transparent;
-                                                    page_controller.animateToPage(
-                                                        4, duration: const Duration(microseconds: 300), curve: Curves.easeIn
-                                                    );
-                                                  });
-                                                },
-                                              ),
-                                            ),
-
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-
-                                            CircleAvatar(
-                                              backgroundColor: FLightClupCardColor,
-                                              radius: 35,
-                                              child: IconButton(
-                                                tooltip: 'FLIGHT CLUP',
-                                                splashColor: kirmizi,
-                                                icon:  Image.asset(
-                                                  "assets/flightclup.jpeg", height: 35, width: 35,
-                                                ),
-                                                iconSize: 50,
-                                                onPressed: () {
-                                                  setState(() {
-                                                    selected_FightclubIcon = true;
-                                                    FLightClupCardColor = mavi;
-                                                    SatoshiCardColor = Colors.transparent;
-                                                    CateCardColor = Colors.transparent;;
-                                                    FlokiCardColor = Colors.transparent;
-                                                    BttcCardColor = Colors.transparent;
-                                                    ShibaCardColor = Colors.transparent;
-                                                    page_controller.animateToPage(
-                                                        5, duration: const Duration(microseconds: 300), curve: Curves.easeIn
-                                                    );
-                                                  });
-                                                },
-                                              ),
-                                            ),
                                           ],
                                         ),
                                       ),
@@ -1002,8 +1074,6 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                   ],
               ),
 
-
-
             ],
           ),
         ),
@@ -1019,11 +1089,19 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
     //Animasyon-DuyuruText
     initTranslateAnimation();
     getShibaData();
-    getBttcData();
-    getFlokiData();
-    getCateData();
-    getSatoshiData();
-    getFightClub();
+    //getBttcData();
+    //getFlokiData();
+    //getCateData();
+    //getSatoshiData();
+    //getFightClub();
+    //Gif
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      controller1.repeat(
+        min: 0,
+        max: 53,
+        period: const Duration(milliseconds: 2500),
+      );
+    });
 
     //Ekran dönmesini engelleme
     SystemChrome.setPreferredOrientations([
@@ -1042,10 +1120,10 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
     initTranslateAnimation();
     translateAnimationController.dispose();
     getShibaData();
-    getBttcData();
-    getFlokiData();
-    getCateData();
-    getSatoshiData();
-    getFightClub();
+    //getBttcData();
+    //getFlokiData();
+    //getCateData();
+    //getSatoshiData();
+    //getFightClub();
   }
 }

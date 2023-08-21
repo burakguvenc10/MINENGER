@@ -27,22 +27,19 @@ class _Signup extends State<Signup> {
       body:Padding(
         padding: const EdgeInsets.all(20.0),
         child: Center(
-          child:Card(
+          child: SingleChildScrollView(
+            child: Card(
             color: Colors.grey.shade200,
             elevation: 5,
             shadowColor: Colors.grey,
             child: Container(
-              height: 630,
+              height: 658,
               padding: const EdgeInsets.all(20.0),
               child:SingleChildScrollView(
                 child:Column(
                   children: [
 
-                    CircleAvatar(
-                      backgroundImage: AssetImage('assets/msplash.png',),
-                      backgroundColor: Colors.white,
-                      radius: 40,
-                    ),
+                    Image.asset('assets/logo_yazi.png', color: Colors.orangeAccent.shade200, fit: BoxFit.cover, width: 180),
 
                     SizedBox(
                       height: 10,
@@ -347,6 +344,7 @@ class _Signup extends State<Signup> {
               ),
             ),
           ),
+         ),
         ),
       ),
     );

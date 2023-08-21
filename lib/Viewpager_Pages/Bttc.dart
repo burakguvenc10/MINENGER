@@ -135,10 +135,16 @@ class _Bttc extends State<Bttc> {
           duration: 25,
           shadowDegree: ShadowDegree.dark,
           width: 190,
-          onPressed: () {
+          onPressed: () async {
             checkstatu = false;
             setState(() => checkstatu);
-            seconds = 29;
+            seconds = 1;
+            await NotificationService.showNotification(
+                title: "BTTC COIN",
+                body: "Kazıma işlemi Başladı!!",
+                scheduled: true,
+                interval: 10
+            );
             startTimer();
           },
         ),
@@ -177,10 +183,18 @@ class _Bttc extends State<Bttc> {
     }
   }
 
-  void startTimer() {
-    timer = Timer.periodic(Duration(milliseconds: 60000), (_) {
+  void startTimer() async {
+    timer = Timer.periodic(Duration(milliseconds: 60000), (_) async {
       if (seconds > 0) {
         setState(() => seconds--);
+        if(seconds == 0){
+          await NotificationService.showNotification(
+              title: "BTTC COIN",
+              body: "Yeniden Kazımak için Hazır! Tıklayınız...",
+              scheduled: true,
+              interval: 10
+          );
+        }
       } else {
         setState(() {
           timer?.cancel();
@@ -197,14 +211,14 @@ class _Bttc extends State<Bttc> {
   @override
   void initState(){
     super.initState();
-    notificationService.initializeNotification();
+    //notificationService.initializeNotification();
   }
 
   void showNotification() async{
-    notificationService.sendNotification(
+    /*notificationService.sendNotification(
         'Deneme',
         'Mesajj'
-    );
+    );*/
 
   }
 

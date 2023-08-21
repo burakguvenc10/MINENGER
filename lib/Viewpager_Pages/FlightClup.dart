@@ -7,7 +7,7 @@ final coin_controller = TextEditingController();
 late final AnimatedButton animButton;
 const acikmavi = Color.fromRGBO(61,142,185,1);
 const mavi = Color.fromRGBO(44,130,201 ,1);
-const button_color = Color.fromRGBO(235, 189, 94 ,1);
+const button_color = Color.fromRGBO(252, 185, 65 ,1);
 
 class FightClub extends StatefulWidget {
   @override

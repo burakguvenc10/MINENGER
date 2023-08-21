@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'Anim/Animated_Splash.dart';
+import 'Component/NotificationService.dart';
 import 'Pages/Anasayfa.dart';
 import 'Pages/AccountInfo.dart';
 import 'Pages/WithdrawMoney.dart';
@@ -8,6 +9,8 @@ import 'Pages/Referances.dart';
 import 'Pages/Notifications.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  NotificationService.initializeNotification();
   runApp(const MyApp());
 }
 const appbarColor = Color.fromRGBO(235, 189, 94 ,1);
