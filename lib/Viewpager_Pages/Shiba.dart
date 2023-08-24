@@ -3,14 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:animated_button/animated_button.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
 import '../Component/NotificationService.dart';
 
 final coin_controller = TextEditingController(text: '0');
 late final AnimatedButton animButton;
 const button_color = Color.fromRGBO(252, 185, 65 ,1);
 const turuncu = Color.fromRGBO(255, 116, 5 ,1);
-
 
 class Shiba extends StatefulWidget {
   @override
@@ -24,7 +22,7 @@ class _Shiba extends State<Shiba> {
   int seconds = 30;
   bool checkstatu = true;
   late RewardedAd rewardedAd;
-  double sonuc = 0;
+  late double sonuc;
 
   loadRewardedAd(){
     RewardedAd.load(
@@ -44,8 +42,7 @@ class _Shiba extends State<Shiba> {
     if(rewardedAd != null){
       rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
           onAdShowedFullScreenContent: (RewardedAd ad){
-            loadRewardedAd();
-            ad.dispose();
+          
           },
           onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error){
             ad.dispose();
@@ -58,16 +55,22 @@ class _Shiba extends State<Shiba> {
       );
       rewardedAd.setImmersiveMode(true);
       rewardedAd.show(
-          onUserEarnedReward: (ad,rewardedAd){
-              setState(() {
-                sonuc = double.parse(coin_controller.value.text) + 10;
-                coin_controller.text = sonuc.toString();
-                //Timer
-                checkstatu = false;
-                setState(() => checkstatu);
-                seconds = 29;
-                startTimer();
-              });
+          onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem){
+            NotificationService.showNotification(
+                title: "SHIBA COIN",
+                body: "Kazıma işlemi Başladı!!",
+                scheduled: true,
+                interval: 10
+            );
+            setState(() {
+              sonuc = double.parse(coin_controller.value.text) + 10;
+              coin_controller.text = sonuc.toString();
+              //Timer
+              checkstatu = false;
+              setState(() => checkstatu);
+              seconds = 1;
+              startTimer();
+            });
           }
       );
     }
@@ -191,9 +194,8 @@ class _Shiba extends State<Shiba> {
           duration: 25,
           shadowDegree: ShadowDegree.dark,
           width: 190,
-          onPressed: () {
+          onPressed: () async{
             //RewardedAd
-            loadRewardedAd();
             showRewardedAdd();
           },
         ),
@@ -230,10 +232,18 @@ class _Shiba extends State<Shiba> {
     }
   }
 
-  void startTimer() {
-    timer = Timer.periodic(Duration(milliseconds: 1800000), (_) {
+  void startTimer() async {
+    timer = Timer.periodic(Duration(seconds: 1800), (_) async {
       if (seconds > 0) {
         setState(() => seconds--);
+        if(seconds == 0){
+          await NotificationService.showNotification(
+              title: "SHIBA COIN",
+              body: "Yeniden Kazımak için Hazır! Tıklayınız...",
+              scheduled: true,
+              interval: 10
+          );
+        }
       } else {
         setState(() {
           timer?.cancel();
@@ -255,7 +265,7 @@ class _Shiba extends State<Shiba> {
 
   @override
   void dispose() {
-    loadRewardedAd();
+    rewardedAd.dispose();
   }
 
 

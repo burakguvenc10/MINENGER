@@ -1,13 +1,14 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:animated_button/animated_button.dart';
-import 'package:minenger/Component/NotificationService.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import '../Component/NotificationService.dart';
 
-final coin_controller = TextEditingController();
+final coin_controller = TextEditingController(text: '0');
 late final AnimatedButton animButton;
 const button_color = Color.fromRGBO(252, 185, 65 ,1);
 const siyah = Color.fromRGBO(40, 40, 48 ,1);
-//late FlutterLocalNotificationsPlugin localNotification;
 
 class Bttc extends StatefulWidget {
   @override
@@ -20,7 +21,60 @@ class _Bttc extends State<Bttc> {
   Timer? timer;
   int seconds = 30;
   bool checkstatu = true;
-  NotificationService notificationService = NotificationService();
+  late RewardedAd rewardedAd;
+  late double sonuc;
+
+  loadRewardedAd(){
+    RewardedAd.load(
+        adUnitId: Platform.isIOS ? "ca-app-pub-3940256099942544/5224354917" : "ca-app-pub-3940256099942544/5224354917", //testID
+        request: AdRequest(),
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+            onAdLoaded: (RewardedAd ad){
+              rewardedAd = ad;
+            },
+            onAdFailedToLoad: (LoadAdError error){
+              rewardedAd = error as RewardedAd;
+            })
+    );
+  }
+
+  showRewardedAdd(){
+    if(rewardedAd != null){
+      rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
+          onAdShowedFullScreenContent: (RewardedAd ad){
+
+          },
+          onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error){
+            ad.dispose();
+            loadRewardedAd();
+          },
+          onAdDismissedFullScreenContent: (ad){
+            ad.dispose();
+            loadRewardedAd();
+          }
+      );
+      rewardedAd.setImmersiveMode(true);
+      rewardedAd.show(
+          onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem){
+            NotificationService.showNotification(
+                title: "BTTC COIN",
+                body: "Kazıma işlemi Başladı!!",
+                scheduled: true,
+                interval: 10
+            );
+            setState(() {
+              sonuc = double.parse(coin_controller.value.text) + 10;
+              coin_controller.text = sonuc.toString();
+              //Timer
+              checkstatu = false;
+              setState(() => checkstatu);
+              seconds = 1;
+              startTimer();
+            });
+          }
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,16 +190,8 @@ class _Bttc extends State<Bttc> {
           shadowDegree: ShadowDegree.dark,
           width: 190,
           onPressed: () async {
-            checkstatu = false;
-            setState(() => checkstatu);
-            seconds = 1;
-            await NotificationService.showNotification(
-                title: "BTTC COIN",
-                body: "Kazıma işlemi Başladı!!",
-                scheduled: true,
-                interval: 10
-            );
-            startTimer();
+            //RewardedAd
+            showRewardedAdd();
           },
         ),
 
@@ -162,9 +208,7 @@ class _Bttc extends State<Bttc> {
 
   Widget buildTime(){
     if(seconds  == 0){
-      showNotification();
       checkstatu = true;
-      showNotification();
       return Icon(
         Icons.done, color: Colors.green, size: 100,
       );
@@ -211,16 +255,14 @@ class _Bttc extends State<Bttc> {
   @override
   void initState(){
     super.initState();
-    //notificationService.initializeNotification();
+    loadRewardedAd();
   }
 
-  void showNotification() async{
-    /*notificationService.sendNotification(
-        'Deneme',
-        'Mesajj'
-    );*/
-
+  @override
+  void dispose() {
+    rewardedAd.dispose();
   }
+
 
 
 }

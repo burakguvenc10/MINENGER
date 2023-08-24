@@ -50,7 +50,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                   ),
 
                   Container(
-                      height: 560,
+                      height: 540,
                     decoration: BoxDecoration(
                       color: Colors.grey.shade200,
                       borderRadius: BorderRadius.circular(15),
@@ -71,31 +71,46 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              IconButton(
-                                  onPressed: (){
-                                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Login()), (_) => false);
-                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                      content: Text("Başarıyla Çıkış Yapıldı"),
-                                      backgroundColor: Colors.white38,
-                                    ));
-                                  },
-                                  icon: Icon(Icons.logout,color: Colors.red,size: 30,)
+
+                              CircleAvatar(
+                                backgroundImage: AssetImage('assets/msplash.png'),
+                                backgroundColor: Colors.white,
+                                child: Padding(padding: EdgeInsets.all(5.0)),
+                                radius: 40,
                               ),
 
-                              Text("Çıkış",style: TextStyle(fontSize: 13,color: Colors.grey,),)
+                              SizedBox(
+                                width: 60,
+                              ),
+
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  IconButton(
+                                      alignment: Alignment.centerRight,
+                                      onPressed: (){
+                                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Login()), (_) => false);
+                                        /*ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                          content: Text("Başarıyla Çıkış Yapıldı"),
+                                          backgroundColor: Colors.white38,
+                                        ));*/
+                                      },
+                                      icon: Icon(Icons.logout,color: Colors.red,size: 30,)
+                                  ),
+
+                                  TextButton(
+                                    child: Text('ÇIKIŞ',style: TextStyle(color: Colors.grey,fontSize: 14,height: -1)),
+                                    onPressed: () {
+                                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Login()), (_) => false);
+                                    },
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
 
-                          CircleAvatar(
-                            backgroundImage: AssetImage('assets/msplash.png'),
-                            backgroundColor: Colors.white,
-                            child: Padding(padding: EdgeInsets.all(5.0)),
-                            radius: 40,
-                          ),
-
-
                           SizedBox(
-                            height: 15,
+                            height: 25,
                           ),
 
                           TextFormField(
@@ -187,7 +202,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                               labelStyle: TextStyle(color: Colors.black),
                               prefixIcon: IconButton(
                                 onPressed: (){},
-                                icon: Icon(Icons.key),
+                                icon: Icon(Icons.lock),
                                 color: Colors.black54,
                               ),
                               focusedBorder: OutlineInputBorder(
@@ -223,7 +238,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                               labelStyle: TextStyle(color: Colors.black),
                               prefixIcon: IconButton(
                                 onPressed: (){},
-                                icon: Icon(Icons.key),
+                                icon: Icon(Icons.lock),
                                 color: Colors.black54,
                               ),
                               focusedBorder: OutlineInputBorder(
@@ -267,6 +282,10 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                             duration: 25,
                             shadowDegree: ShadowDegree.dark,
                             onPressed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text("Şifreniz Güncellenmiştir"),
+                                backgroundColor: Colors.green,
+                              ));
                             },
                           ),
 

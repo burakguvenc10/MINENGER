@@ -139,7 +139,7 @@ class _Dialog_Detail extends State<Dialog_Detail> {
                     keyboardType: TextInputType.emailAddress,
                     autofocus: false,
                     decoration: InputDecoration(
-                      hintText: "Binance E-mail Adresi",
+                      hintText: "Binance Mail Adresi",
                       labelText: 'E-mail',
                       suffixIcon: IconButton(
                         onPressed: Mail_controller.clear,
@@ -148,7 +148,9 @@ class _Dialog_Detail extends State<Dialog_Detail> {
                       ),
                       labelStyle: TextStyle(color: Colors.black),
                       prefixIcon: IconButton(
-                        onPressed: (){},
+                        onPressed: (){
+
+                        },
                         icon: Icon(Icons.mail_outline),
                         color: Colors.black54,
                       ),
@@ -189,13 +191,13 @@ class _Dialog_Detail extends State<Dialog_Detail> {
                           beb20_value = paste_value;
                         });
                       },
-                      icon: Icon(Icons.content_paste_go_outlined),
+                      icon: Icon(Icons.bookmarks_outlined),
                       color: Colors.black54,
                     ),
                     labelStyle: TextStyle(color: Colors.black),
                     prefixIcon: IconButton(
                       onPressed: (){},
-                      icon: Icon(Icons.numbers),
+                      icon: Icon(Icons.currency_bitcoin_outlined),
                       color: Colors.black54,
                     ),
                     focusedBorder: OutlineInputBorder(

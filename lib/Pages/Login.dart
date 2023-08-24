@@ -1,6 +1,6 @@
+import 'dart:async';
 import 'package:animated_button/animated_button.dart';
 import 'package:easy_animate/animation/fade_in_animation.dart';
-import 'package:easy_animate/animation/shake_animation.dart';
 import 'package:easy_animate/enum/animate_direction.dart';
 import 'package:easy_animate/enum/animate_type.dart';
 import 'package:flutter/material.dart';
@@ -8,15 +8,21 @@ import 'package:flutter/services.dart';
 import 'package:minenger/Pages/PasswordRefresh.dart';
 import 'package:minenger/Pages/Signup.dart';
 import 'package:minenger/main.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:hive/hive.dart';
 
+final mail_controller = TextEditingController();
+final password_controller = TextEditingController();
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
-bool isChecked = false;
 const turuncu = Color.fromRGBO(255, 116, 5 ,1);
 const siyah = Color.fromRGBO(40, 40, 48 ,1);
 const gri = Color.fromRGBO(122, 159, 191 ,1);
 const pembe = Color.fromRGBO(240, 194, 194 ,1);
 const acik_turuncu = Color.fromRGBO(239, 159, 56 ,1);
 const mavi = Color.fromRGBO(44,130,201 ,1);
+bool isChecked = false;
+bool statu = false;
+String _errorMessage = '';
 
 class Login extends StatefulWidget {
   @override
@@ -24,6 +30,9 @@ class Login extends StatefulWidget {
 }
 
 class _Login extends State<Login> {
+  late Box box1;
+  bool isHiddenPassword = true;
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -132,7 +141,7 @@ class _Login extends State<Login> {
                                 obscureText: false,
                                 keyboardType: TextInputType.emailAddress,
                                 autofocus: false,
-                                //controller: coin_controller,
+                                controller: mail_controller,
                                 decoration: InputDecoration(
                                   labelText: 'Email',
                                   labelStyle: TextStyle(color: Colors.black),
@@ -153,6 +162,7 @@ class _Login extends State<Login> {
                                 onSaved: (deger) {
                                 },
                                 onChanged: (deger) {
+                                  validateEmail(deger);
                                 },
                               ),
 
@@ -165,24 +175,26 @@ class _Login extends State<Login> {
                                 showCursor: true,
                                 cursorColor: Colors.black26,
                                 enableInteractiveSelection: false,
-                                obscureText: true,
+                                obscureText: isHiddenPassword,
                                 keyboardType: TextInputType.visiblePassword,
                                 autofocus: false,
-                                //controller: coin_controller,
+                                controller: password_controller,
                                 decoration: InputDecoration(
                                   labelText: 'Şifre',
                                   labelStyle: TextStyle(color: Colors.black),
                                   prefixIcon: IconButton(
                                     onPressed: (){},
-                                    icon: Icon(Icons.key),
+                                    icon: Icon(Icons.lock),
                                     color: Colors.black54,
                                   ),
-                                  suffixIcon: TextButton(
-                                    child: Container(
-                                      child: Text('Şifremi Unuttum?',textAlign: TextAlign.right,style: TextStyle(color: button_color)),
-                                    ),
-                                    onPressed: () {
-                                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> PasswordRefresh()));
+                                  suffixIcon: IconButton(
+                                    icon: Icon(isHiddenPassword? Icons.remove_red_eye_outlined: Icons.remove_red_eye),
+                                    color: Colors.black54,
+                                    onPressed: (){
+                                      isHiddenPassword = !isHiddenPassword;
+                                      setState(() {
+
+                                      });
                                     },
                                   ),
                                   focusedBorder: OutlineInputBorder(
@@ -198,23 +210,40 @@ class _Login extends State<Login> {
                                 },
                                 onChanged: (deger) {
                                 },
+
                               ),
 
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Checkbox(
-                                      value: isChecked,
-                                      onChanged: (value){
-                                        isChecked = !isChecked;
-                                        setState(() {
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                          value: isChecked,
+                                          onChanged: (value){
+                                            isChecked = !isChecked;
+                                            setState(() {
+                                              login();
+                                            });
+                                          }
+                                      ),
 
-                                        });
-                                      }
+                                      Text(
+                                        "Beni Hatırla",
+                                        style: TextStyle(color: Colors.black26,fontSize: 15,),
+                                      ),
+                                    ],
                                   ),
 
-                                  Text(
-                                    "Beni Hatırla",
-                                    style: TextStyle(color: Colors.black26,fontSize: 15,),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+
+                                  TextButton(
+                                      child: Text('Şifremi Unuttum',style: TextStyle(color: button_color,fontSize: 14)),
+                                      onPressed: () {
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> PasswordRefresh()),);
+                                      },
                                   ),
 
                                 ],
@@ -246,11 +275,16 @@ class _Login extends State<Login> {
                                 duration: 25,
                                 shadowDegree: ShadowDegree.dark,
                                 onPressed: () {
-                                  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> MyHomePage()), (_) => false);
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                    content: Text("Hoşgeldin Minengerli "),
-                                    backgroundColor: button_color,
-                                  ));
+                                  var mail = mail_controller.value.text;
+                                  var password = password_controller.value.text;
+                                  var validateMail = validateEmail(mail);
+                                  if(mail.isNotEmpty && password.isNotEmpty && validateMail == true){
+                                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> MyHomePage()), (_) => false);
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                      content: Text("Hoşgeldin Minengerli "),
+                                      backgroundColor: button_color,
+                                    ));
+                                  }
                                 },
                               ),
 
@@ -353,6 +387,28 @@ class _Login extends State<Login> {
     );
   }
 
+   bool validateEmail(String val) {
+    if(val.isEmpty){
+      setState(() {
+        _errorMessage = "Email Adresi Boş Olamaz!";
+        statu = false;
+      });
+      return statu;
+    }else if(!EmailValidator.validate(val, true)){
+      setState(() {
+        _errorMessage = "Geçersiz Email Adresi";
+        statu = false;
+      });
+      return statu;
+    }else{
+      setState(() {
+        _errorMessage = "";
+        statu = true;
+      });
+      return statu;
+    }
+  }
+
   @override
   void initState(){
     super.initState();
@@ -362,5 +418,29 @@ class _Login extends State<Login> {
       DeviceOrientation.portraitDown,
 
     ]);
+    createBox();
   }
+
+  void getData() async {
+    if(box1.get('email')!= null){
+      mail_controller.text = box1.get('email');
+    }
+    if(box1.get('pass')!= null){
+      password_controller.text = box1.get('pass');
+    }
+  }
+
+  void createBox() async{
+    box1 = await Hive.openBox('logindata');
+    getData();
+  }
+
+  void login(){
+    if(isChecked){
+      box1.put('email',mail_controller.value.text);
+      box1.put('pass', password_controller.value.text);
+    }
+  }
+
+
 }

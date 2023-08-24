@@ -3,7 +3,6 @@ import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
 import '../Component/Shiba_ParaCekme_Popup.dart';
 
 final Shiba_controller = TextEditingController();
@@ -25,6 +24,8 @@ class _ParaCekme extends State<ParaCekme> {
   bool isinterstitialLoaded = false;
   late BannerAd bannerAd;
   late InterstitialAd interstitialAd;
+  late RewardedAd rewardedAd;
+  late double sonuc;
 
   loadBannerAd(){
     bannerAd = BannerAd(
@@ -45,7 +46,64 @@ class _ParaCekme extends State<ParaCekme> {
     bannerAd.load();
   }
 
-  loadInterstitialAd(){
+  loadRewardedAd(){
+    RewardedAd.load(
+        adUnitId: Platform.isIOS ? "ca-app-pub-3940256099942544/5224354917" : "ca-app-pub-3940256099942544/5224354917", //testID
+        request: AdRequest(),
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+            onAdLoaded: (RewardedAd ad){
+              rewardedAd = ad;
+            },
+            onAdFailedToLoad: (LoadAdError error){
+              rewardedAd = error as RewardedAd;
+            })
+    );
+  }
+
+  showRewardedAdd(){
+    if(rewardedAd != null){
+      rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
+          onAdShowedFullScreenContent: (RewardedAd ad){
+
+          },
+          onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error){
+            ad.dispose();
+            loadRewardedAd();
+          },
+          onAdDismissedFullScreenContent: (ad){
+            ad.dispose();
+            loadRewardedAd();
+          }
+      );
+      rewardedAd.setImmersiveMode(true);
+      rewardedAd.show(
+          onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem){
+            showAnimatedDialog(
+              alignment: Alignment.center,
+              context: context,
+              barrierDismissible: true,
+              builder: (BuildContext context) {
+                return ClassicGeneralDialogWidget(
+                  actions: [
+                    Dialog_Detail(),
+                  ],
+                  onPositiveClick: () {
+                  },
+                  onNegativeClick: () {
+                    Navigator.of(context).pop();
+                  },
+                );
+              },
+              animationType: DialogTransitionType.size,
+              curve: Curves.easeInBack,
+              duration: Duration(seconds: 1),
+            );
+          }
+      );
+    }
+  }
+
+  /*loadInterstitialAd(){
     InterstitialAd.load(
         adUnitId: Platform.isIOS ? "ca-app-pub-3940256099942544/1033173712" : "ca-app-pub-3940256099942544/1033173712", //testId
         request: const AdRequest(),
@@ -63,7 +121,7 @@ class _ParaCekme extends State<ParaCekme> {
             },
         ),
     );
-  }
+  }*/
 
 
   @override
@@ -161,26 +219,8 @@ class _ParaCekme extends State<ParaCekme> {
                                   height: 50,
                                   onPressed: () {
                                     //loadInterstitialAd();
-                                    showAnimatedDialog(
-                                      alignment: Alignment.center,
-                                      context: context,
-                                      barrierDismissible: true,
-                                        builder: (BuildContext context) {
-                                          return ClassicGeneralDialogWidget(
-                                            actions: [
-                                              Dialog_Detail(),
-                                            ],
-                                            onPositiveClick: () {
-                                            },
-                                            onNegativeClick: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          );
-                                        },
-                                        animationType: DialogTransitionType.size,
-                                        curve: Curves.easeInBack,
-                                        duration: Duration(seconds: 1),
-                                    );
+                                    //RewardedAd
+                                    showRewardedAdd();
                                   },
                                 ),
                               ],
@@ -255,7 +295,6 @@ class _ParaCekme extends State<ParaCekme> {
                                   width: 90,
                                   height: 50,
                                   onPressed: () {
-
                                   },
                                 ),
                               ],
@@ -586,13 +625,14 @@ class _ParaCekme extends State<ParaCekme> {
     super.initState();
     //Admob-Banner
     loadBannerAd();
+    loadRewardedAd();
   }
 
   @override
   void dispose() {
     bannerAd.dispose();
-    loadBannerAd();
-    loadInterstitialAd();
+    rewardedAd.dispose();
+    //loadInterstitialAd();
   }
 }
 

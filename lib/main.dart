@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'Anim/Animated_Splash.dart';
 import 'Component/NotificationService.dart';
 import 'Pages/Anasayfa.dart';
@@ -8,9 +10,10 @@ import 'Pages/WithdrawMoney.dart';
 import 'Pages/Referances.dart';
 import 'Pages/Notifications.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   NotificationService.initializeNotification();
+  await Hive.initFlutter();
   runApp(const MyApp());
 }
 const appbarColor = Color.fromRGBO(235, 189, 94 ,1);

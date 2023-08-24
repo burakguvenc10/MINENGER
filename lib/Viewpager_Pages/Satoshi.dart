@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:animated_button/animated_button.dart';
-import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import '../Component/NotificationService.dart';
 
-final coin_controller = TextEditingController();
+final coin_controller = TextEditingController(text: '0');
 late final AnimatedButton animButton;
 const button_color = Color.fromRGBO(252, 185, 65 ,1);
 const turuncu = Color.fromRGBO(255, 167, 94 ,1);
@@ -19,6 +21,60 @@ class _Satoshi extends State<Satoshi> {
   Timer? timer;
   int seconds = 30;
   bool checkstatu = true;
+  late RewardedAd rewardedAd;
+  late double sonuc;
+
+  loadRewardedAd(){
+    RewardedAd.load(
+        adUnitId: Platform.isIOS ? "ca-app-pub-3940256099942544/5224354917" : "ca-app-pub-3940256099942544/5224354917", //testID
+        request: AdRequest(),
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+            onAdLoaded: (RewardedAd ad){
+              rewardedAd = ad;
+            },
+            onAdFailedToLoad: (LoadAdError error){
+              rewardedAd = error as RewardedAd;
+            })
+    );
+  }
+
+  showRewardedAdd(){
+    if(rewardedAd != null){
+      rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
+          onAdShowedFullScreenContent: (RewardedAd ad){
+
+          },
+          onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error){
+            ad.dispose();
+            loadRewardedAd();
+          },
+          onAdDismissedFullScreenContent: (ad){
+            ad.dispose();
+            loadRewardedAd();
+          }
+      );
+      rewardedAd.setImmersiveMode(true);
+      rewardedAd.show(
+          onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem){
+            NotificationService.showNotification(
+                title: "SATOSHI COIN",
+                body: "Kazıma işlemi Başladı!!",
+                scheduled: true,
+                interval: 10
+            );
+            setState(() {
+              sonuc = double.parse(coin_controller.value.text) + 10;
+              coin_controller.text = sonuc.toString();
+              //Timer
+              checkstatu = false;
+              setState(() => checkstatu);
+              seconds = 1;
+              startTimer();
+            });
+          }
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -133,11 +189,9 @@ class _Satoshi extends State<Satoshi> {
           duration: 25,
           shadowDegree: ShadowDegree.dark,
           width: 190,
-          onPressed: () {
-            checkstatu = false;
-            setState(() => checkstatu);
-            seconds = 29;
-            startTimer();
+          onPressed: () async {
+            //RewardedAd
+            showRewardedAdd();
           },
         ),
 
@@ -173,10 +227,18 @@ class _Satoshi extends State<Satoshi> {
     }
   }
 
-  void startTimer() {
-    timer = Timer.periodic(Duration(milliseconds: 60000), (_) {
+  void startTimer() async {
+    timer = Timer.periodic(Duration(milliseconds: 60000), (_) async {
       if (seconds > 0) {
         setState(() => seconds--);
+        if(seconds == 0){
+          await NotificationService.showNotification(
+              title: "SATOSHI COIN",
+              body: "Yeniden Kazımak için Hazır! Tıklayınız...",
+              scheduled: true,
+              interval: 10
+          );
+        }
       } else {
         setState(() {
           timer?.cancel();
@@ -188,6 +250,17 @@ class _Satoshi extends State<Satoshi> {
   void changeEnabled(){
     checkstatu = true;
     setState(() => checkstatu);
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    loadRewardedAd();
+  }
+
+  @override
+  void dispose() {
+    rewardedAd.dispose();
   }
 
 
