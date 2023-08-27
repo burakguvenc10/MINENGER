@@ -72,6 +72,7 @@ class _Referanslar extends State<Referanslar> {
                             showCursor: false,
                             enableInteractiveSelection: false,
                             obscureText: false,
+                            style: TextStyle(fontSize: 18),
                             keyboardType: TextInputType.none,
                             autofocus: false,
                             controller: referanskodu_controller,

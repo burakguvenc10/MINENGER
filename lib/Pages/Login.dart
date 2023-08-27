@@ -3,8 +3,10 @@ import 'package:animated_button/animated_button.dart';
 import 'package:easy_animate/animation/fade_in_animation.dart';
 import 'package:easy_animate/enum/animate_direction.dart';
 import 'package:easy_animate/enum/animate_type.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:minenger/Pages/PasswordRefresh.dart';
 import 'package:minenger/Pages/Signup.dart';
 import 'package:minenger/main.dart';
@@ -123,7 +125,7 @@ class _Login extends State<Login> {
                       elevation: 5,
                       shadowColor: Colors.grey,
                       child: Container(
-                        height: 400,
+                        height: 405,
                         padding: const EdgeInsets.all(20.0),
                           child:Column(
                             children: [
@@ -139,15 +141,21 @@ class _Login extends State<Login> {
                                 cursorColor: Colors.black26,
                                 enableInteractiveSelection: false,
                                 obscureText: false,
+                                style: TextStyle(fontSize: 17),
                                 keyboardType: TextInputType.emailAddress,
                                 autofocus: false,
                                 controller: mail_controller,
                                 decoration: InputDecoration(
                                   labelText: 'Email',
                                   labelStyle: TextStyle(color: Colors.black),
+                                  suffixIcon: IconButton(
+                                    onPressed: mail_controller.clear,
+                                    icon: Icon(Icons.clear_sharp),
+                                    color: Colors.orange,
+                                  ),
                                   prefixIcon: IconButton(
                                     onPressed: (){},
-                                    icon: Icon(Icons.mail_outline),
+                                    icon: Icon(CupertinoIcons.mail),
                                     color: Colors.black54,
                                   ),
                                   focusedBorder: OutlineInputBorder(
@@ -176,6 +184,7 @@ class _Login extends State<Login> {
                                 cursorColor: Colors.black26,
                                 enableInteractiveSelection: false,
                                 obscureText: isHiddenPassword,
+                                style: TextStyle(fontSize: 17),
                                 keyboardType: TextInputType.visiblePassword,
                                 autofocus: false,
                                 controller: password_controller,
@@ -184,11 +193,11 @@ class _Login extends State<Login> {
                                   labelStyle: TextStyle(color: Colors.black),
                                   prefixIcon: IconButton(
                                     onPressed: (){},
-                                    icon: Icon(Icons.lock),
+                                    icon: Icon(Bootstrap.lock),
                                     color: Colors.black54,
                                   ),
                                   suffixIcon: IconButton(
-                                    icon: Icon(isHiddenPassword? Icons.remove_red_eye_outlined: Icons.remove_red_eye),
+                                    icon: Icon(isHiddenPassword? Bootstrap.eye: CupertinoIcons.eye),
                                     color: Colors.black54,
                                     onPressed: (){
                                       isHiddenPassword = !isHiddenPassword;
@@ -238,6 +247,8 @@ class _Login extends State<Login> {
                                   SizedBox(
                                     width: 20,
                                   ),
+
+                                  Spacer(flex: 2),
 
                                   TextButton(
                                       child: Text('Şifremi Unuttum',style: TextStyle(color: button_color,fontSize: 14)),
@@ -298,7 +309,7 @@ class _Login extends State<Login> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     TextButton(
-                                      child: Text('hesabınız yok mu?',textAlign: TextAlign.left,style: TextStyle(color: Colors.black26,fontSize: 14)),
+                                      child: Text('hesabınız yok mu?',textAlign: TextAlign.left,style: TextStyle(color: Colors.black26,fontSize: 15)),
                                       onPressed: () {
                                         Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Signup()));
                                       },

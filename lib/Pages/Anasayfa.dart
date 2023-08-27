@@ -1126,4 +1126,5 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
     //getSatoshiData();
     //getFightClub();
   }
+
 }

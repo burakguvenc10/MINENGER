@@ -1,9 +1,10 @@
 import 'package:animated_button/animated_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:minenger/Pages/Login.dart';
-
+import 'package:icons_plus/icons_plus.dart';
 import '../Component/Webview_Signup.dart';
 
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
@@ -13,6 +14,8 @@ final Sifre_controller = TextEditingController();
 final SifreKontrol_controller = TextEditingController();
 final ReferansKodu_controller = TextEditingController();
 final CepTelefon_controller = TextEditingController();
+bool isHiddenPassword = true;
+bool isHiddenPassword2 = true;
 
 class Signup extends StatefulWidget {
   @override
@@ -33,7 +36,7 @@ class _Signup extends State<Signup> {
             elevation: 5,
             shadowColor: Colors.grey,
             child: Container(
-              height: 658,
+              height: 680,
               padding: const EdgeInsets.all(20.0),
               child:SingleChildScrollView(
                 child:Column(
@@ -52,6 +55,7 @@ class _Signup extends State<Signup> {
                       cursorColor: Colors.black26,
                       enableInteractiveSelection: false,
                       obscureText: false,
+                      style: TextStyle(fontSize: 18),
                       keyboardType: TextInputType.text,
                       autofocus: false,
                       decoration: InputDecoration(
@@ -64,7 +68,7 @@ class _Signup extends State<Signup> {
                         ),
                         prefixIcon: IconButton(
                           onPressed: (){},
-                          icon: Icon(Icons.person_outline_outlined),
+                          icon: Icon(LineAwesome.user),
                           color: Colors.black54,
                         ),
                         focusedBorder: OutlineInputBorder(
@@ -93,6 +97,7 @@ class _Signup extends State<Signup> {
                       cursorColor: Colors.black26,
                       enableInteractiveSelection: false,
                       obscureText: false,
+                      style: TextStyle(fontSize: 18),
                       keyboardType: TextInputType.emailAddress,
                       autofocus: false,
                       decoration: InputDecoration(
@@ -105,7 +110,7 @@ class _Signup extends State<Signup> {
                         ),
                         prefixIcon: IconButton(
                           onPressed: (){},
-                          icon: Icon(Icons.mail_outline),
+                          icon: Icon(CupertinoIcons.mail),
                           color: Colors.black54,
                         ),
                         focusedBorder: OutlineInputBorder(
@@ -133,20 +138,25 @@ class _Signup extends State<Signup> {
                       showCursor: true,
                       cursorColor: Colors.black26,
                       enableInteractiveSelection: false,
-                      obscureText: true,
+                      obscureText: isHiddenPassword,
+                      style: TextStyle(fontSize: 18),
                       keyboardType: TextInputType.visiblePassword,
                       autofocus: false,
                       decoration: InputDecoration(
                         labelText: 'Şifre',
                         labelStyle: TextStyle(color: Colors.black),
                         suffixIcon: IconButton(
-                          onPressed: Sifre_controller.clear,
-                          icon: Icon(Icons.clear_sharp),
-                          color: Colors.orange,
+                          icon: Icon(isHiddenPassword? Bootstrap.eye: CupertinoIcons.eye),
+                          color: Colors.black54,
+                          onPressed: (){
+                            isHiddenPassword = !isHiddenPassword;
+                            setState(() {
+                            });
+                          },
                         ),
                         prefixIcon: IconButton(
                           onPressed: (){},
-                          icon: Icon(Icons.key),
+                          icon: Icon(Bootstrap.lock),
                           color: Colors.black54,
                         ),
                         focusedBorder: OutlineInputBorder(
@@ -174,20 +184,25 @@ class _Signup extends State<Signup> {
                       showCursor: true,
                       cursorColor: Colors.black26,
                       enableInteractiveSelection: false,
-                      obscureText: true,
+                      obscureText: isHiddenPassword2,
+                      style: TextStyle(fontSize: 18),
                       keyboardType: TextInputType.visiblePassword,
                       autofocus: false,
                       decoration: InputDecoration(
                         labelText: '* Şifre Tekrar',
                         labelStyle: TextStyle(color: Colors.black),
                         suffixIcon: IconButton(
-                          onPressed: SifreKontrol_controller.clear,
-                          icon: Icon(Icons.clear_sharp),
-                          color: Colors.orange,
+                          icon: Icon(isHiddenPassword2? Bootstrap.eye: CupertinoIcons.eye),
+                          color: Colors.black54,
+                          onPressed: (){
+                            isHiddenPassword2 = !isHiddenPassword2;
+                            setState(() {
+                            });
+                          },
                         ),
                         prefixIcon: IconButton(
                           onPressed: (){},
-                          icon: Icon(Icons.key),
+                          icon: Icon(Bootstrap.lock),
                           color: Colors.black54,
                         ),
                         focusedBorder: OutlineInputBorder(
@@ -216,6 +231,7 @@ class _Signup extends State<Signup> {
                       cursorColor: Colors.black26,
                       enableInteractiveSelection: false,
                       obscureText: false,
+                      style: TextStyle(fontSize: 18),
                       keyboardType: TextInputType.text,
                       autofocus: false,
                       decoration: InputDecoration(
@@ -223,12 +239,12 @@ class _Signup extends State<Signup> {
                         labelStyle: TextStyle(color: Colors.black),
                         suffixIcon: IconButton(
                           onPressed: ReferansKodu_controller.clear,
-                          icon: Icon(Icons.clear_sharp),
-                          color: Colors.orange,
+                          icon: Icon(FontAwesome.paste),
+                          color: Colors.black45,
                         ),
                         prefixIcon: IconButton(
                           onPressed: (){},
-                          icon: Icon(Icons.account_box_outlined),
+                          icon: Icon(OctIcons.cross_reference_24),
                           color: Colors.black54,
                         ),
                         focusedBorder: OutlineInputBorder(
@@ -253,6 +269,7 @@ class _Signup extends State<Signup> {
                     IntlPhoneField(
                       controller: CepTelefon_controller,
                       cursorColor: Colors.black,
+                      style: TextStyle(fontSize: 18),
                       decoration: InputDecoration(
                         labelText: 'Cep Telefonu',
                         suffixIcon: IconButton(

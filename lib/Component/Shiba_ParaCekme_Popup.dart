@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/services.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:material_dialogs/dialogs.dart';
 import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 import 'package:material_dialogs/widgets/buttons/icon_outline_button.dart';
@@ -46,11 +48,11 @@ class _Dialog_Detail extends State<Dialog_Detail> {
 
               SizedBox(width: 5,),
 
-              Text("Shiba Coin : ",style: TextStyle(fontSize: 16,color: Colors.black,fontWeight: FontWeight.normal),textAlign: TextAlign.start,),
+              Text("Shiba Coin : ",style: TextStyle(fontSize: 18,color: Colors.black,fontWeight: FontWeight.normal),textAlign: TextAlign.start,),
 
               SizedBox(width: 5,),
 
-              Text("${coinsayisi}",style: TextStyle(fontSize: 16,color: Colors.black,fontWeight: FontWeight.normal),textAlign: TextAlign.start,),
+              Text("${coinsayisi}",style: TextStyle(fontSize: 18,color: Colors.black,fontWeight: FontWeight.normal),textAlign: TextAlign.start,),
             ],
           ),
 
@@ -116,7 +118,7 @@ class _Dialog_Detail extends State<Dialog_Detail> {
                 width: 5,
               ),
 
-              Text("Binance",style:TextStyle(fontSize: 17,),),
+              Text("BINANCE",style:TextStyle(fontSize: 17,),),
 
             ],
           ),
@@ -136,6 +138,7 @@ class _Dialog_Detail extends State<Dialog_Detail> {
                     cursorColor: Colors.black26,
                     enableInteractiveSelection: false,
                     obscureText: false,
+                    style: TextStyle(fontSize: 18),
                     keyboardType: TextInputType.emailAddress,
                     autofocus: false,
                     decoration: InputDecoration(
@@ -151,7 +154,7 @@ class _Dialog_Detail extends State<Dialog_Detail> {
                         onPressed: (){
 
                         },
-                        icon: Icon(Icons.mail_outline),
+                        icon: Icon(CupertinoIcons.mail),
                         color: Colors.black54,
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -178,7 +181,8 @@ class _Dialog_Detail extends State<Dialog_Detail> {
                   showCursor: true,
                   cursorColor: Colors.black26,
                   enableInteractiveSelection: false,
-                  obscureText: true,
+                  obscureText: false,
+                  style: TextStyle(fontSize: 18),
                   keyboardType: TextInputType.text,
                   autofocus: false,
                   decoration: InputDecoration(
@@ -191,13 +195,13 @@ class _Dialog_Detail extends State<Dialog_Detail> {
                           beb20_value = paste_value;
                         });
                       },
-                      icon: Icon(Icons.bookmarks_outlined),
+                      icon: Icon(FontAwesome.paste),
                       color: Colors.black54,
                     ),
                     labelStyle: TextStyle(color: Colors.black),
                     prefixIcon: IconButton(
                       onPressed: (){},
-                      icon: Icon(Icons.currency_bitcoin_outlined),
+                      icon: Icon(IonIcons.wallet),
                       color: Colors.black54,
                     ),
                     focusedBorder: OutlineInputBorder(

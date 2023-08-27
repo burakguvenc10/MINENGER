@@ -268,7 +268,6 @@ class _Shiba extends State<Shiba> {
     rewardedAd.dispose();
   }
 
-
 }
 
 

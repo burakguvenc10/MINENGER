@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:animated_button/animated_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'Login.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -12,7 +14,8 @@ class HesapBilgileri extends StatefulWidget {
 class _HesapBilgileri extends State<HesapBilgileri> {
   bool isLoaded = false;
   late BannerAd bannerAd;
-
+  bool isHiddenPassword = true;
+  bool isHiddenPassword2 = true;
 
   loadBannerAd(){
     bannerAd = BannerAd(
@@ -50,7 +53,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                   ),
 
                   Container(
-                      height: 540,
+                      height: 545,
                     decoration: BoxDecoration(
                       color: Colors.grey.shade200,
                       borderRadius: BorderRadius.circular(15),
@@ -95,11 +98,11 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                                           backgroundColor: Colors.white38,
                                         ));*/
                                       },
-                                      icon: Icon(Icons.logout,color: Colors.red,size: 30,)
+                                      icon: Icon(BoxIcons.bx_exit ,color: Colors.red,size: 33,)
                                   ),
 
                                   TextButton(
-                                    child: Text('ÇIKIŞ',style: TextStyle(color: Colors.grey,fontSize: 14,height: -1)),
+                                    child: Text('ÇIKIŞ YAP',style: TextStyle(color: Colors.grey,fontSize: 12,height: -2)),
                                     onPressed: () {
                                       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Login()), (_) => false);
                                     },
@@ -118,6 +121,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                             showCursor: false,
                             enableInteractiveSelection: false,
                             obscureText: false,
+                            style: TextStyle(fontSize: 18),
                             enabled: false,
                             keyboardType: TextInputType.none,
                             autofocus: false,
@@ -127,7 +131,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                               labelStyle: TextStyle(color: Colors.black),
                               prefixIcon: IconButton(
                                 onPressed: (){},
-                                icon: Icon(Icons.person),
+                                icon: Icon(LineAwesome.user),
                                 color: Colors.black54,
                               ),
 
@@ -156,6 +160,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                             showCursor: false,
                             enableInteractiveSelection: false,
                             obscureText: false,
+                            style: TextStyle(fontSize: 18),
                             enabled: false,
                             keyboardType: TextInputType.none,
                             autofocus: false,
@@ -165,7 +170,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                               labelStyle: TextStyle(color: Colors.black),
                               prefixIcon: IconButton(
                                 onPressed: (){},
-                                icon: Icon(Icons.mail_outline),
+                                icon: Icon(CupertinoIcons.mail),
                                 color: Colors.black54,
                               ),
                               focusedBorder: OutlineInputBorder(
@@ -193,16 +198,27 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                             showCursor: true,
                             cursorColor: Colors.black26,
                             enableInteractiveSelection: false,
-                            obscureText: true,
+                            obscureText: isHiddenPassword,
+                            style: TextStyle(fontSize: 18),
                             keyboardType: TextInputType.visiblePassword,
                             autofocus: false,
                             //controller: coin_controller,
                             decoration: InputDecoration(
                               labelText: 'Yeni Şifre',
                               labelStyle: TextStyle(color: Colors.black),
+                              suffixIcon: IconButton(
+                                icon: Icon(isHiddenPassword? Bootstrap.eye: CupertinoIcons.eye),
+                                color: Colors.black54,
+                                onPressed: (){
+                                  isHiddenPassword = !isHiddenPassword;
+                                  setState(() {
+
+                                  });
+                                },
+                              ),
                               prefixIcon: IconButton(
                                 onPressed: (){},
-                                icon: Icon(Icons.lock),
+                                icon: Icon(Bootstrap.lock),
                                 color: Colors.black54,
                               ),
                               focusedBorder: OutlineInputBorder(
@@ -229,16 +245,27 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                             showCursor: true,
                             cursorColor: Colors.black26,
                             enableInteractiveSelection: false,
-                            obscureText: true,
+                            style: TextStyle(fontSize: 18),
+                            obscureText: isHiddenPassword2,
                             keyboardType: TextInputType.visiblePassword,
                             autofocus: false,
                             //controller: coin_controller,
                             decoration: InputDecoration(
                               labelText: '* Yeni Şifre Tekrar',
                               labelStyle: TextStyle(color: Colors.black),
+                              suffixIcon: IconButton(
+                                icon: Icon(isHiddenPassword2? Bootstrap.eye: CupertinoIcons.eye),
+                                color: Colors.black54,
+                                onPressed: (){
+                                  isHiddenPassword2 = !isHiddenPassword2;
+                                  setState(() {
+
+                                  });
+                                },
+                              ),
                               prefixIcon: IconButton(
                                 onPressed: (){},
-                                icon: Icon(Icons.lock),
+                                icon: Icon(Bootstrap.lock),
                                 color: Colors.black54,
                               ),
                               focusedBorder: OutlineInputBorder(
