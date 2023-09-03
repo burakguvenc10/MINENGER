@@ -5,7 +5,7 @@ import 'package:animated_button/animated_button.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../Component/NotificationService.dart';
 
-final coin_controller = TextEditingController(text: '0');
+TextEditingController coin_controller = TextEditingController(text: '0');
 late final AnimatedButton animButton;
 const button_color = Color.fromRGBO(252, 185, 65 ,1);
 const turuncu = Color.fromRGBO(255, 116, 5 ,1);
@@ -15,7 +15,9 @@ class Shiba extends StatefulWidget {
    _Shiba createState() => _Shiba();
 }
 
-class _Shiba extends State<Shiba> {
+class _Shiba extends State<Shiba> with WidgetsBindingObserver{
+
+  late AppLifecycleState appLifecycleState;
 
   static const maxSeconds = 30;
   Timer? timer;
@@ -23,6 +25,7 @@ class _Shiba extends State<Shiba> {
   bool checkstatu = true;
   late RewardedAd rewardedAd;
   late double sonuc;
+
 
   loadRewardedAd(){
     RewardedAd.load(
@@ -233,7 +236,7 @@ class _Shiba extends State<Shiba> {
   }
 
   void startTimer() async {
-    timer = Timer.periodic(Duration(seconds: 1800), (_) async {
+    timer = Timer.periodic(Duration(seconds: 60000), (_) async {
       if (seconds > 0) {
         setState(() => seconds--);
         if(seconds == 0){
@@ -252,6 +255,7 @@ class _Shiba extends State<Shiba> {
     });
   }
 
+
   void changeEnabled(){
     checkstatu = true;
     setState(() => checkstatu);
@@ -261,12 +265,39 @@ class _Shiba extends State<Shiba> {
   void initState(){
     super.initState();
     loadRewardedAd();
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
   }
 
   @override
   void dispose() {
     rewardedAd.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    setState(() {
+      if(state == AppLifecycleState.resumed){
+        print('Resumed = $state');
+        //coin_controller.text = "300";
+      }
+      if(state == AppLifecycleState.paused){
+        print('Paused = $state');
+        //coin_controller.text = "200";
+      }
+      if(state == AppLifecycleState.inactive){
+        print('InactiveState = $state');
+        //coin_controller.text = "100";
+      }
+      /*if(state == AppLifecycleState.detached){
+        print('Detached = $state');
+      }*/
+
+    });
+  }
+
 
 }
 

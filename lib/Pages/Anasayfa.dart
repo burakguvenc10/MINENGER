@@ -2,20 +2,15 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:easy_animate/animation/fade_in_animation.dart';
 import 'package:easy_animate/animation/pulse_animation.dart';
-import 'package:easy_animate/animation/scale_in_animation.dart';
 import 'package:easy_animate/enum/animate_direction.dart';
 import 'package:easy_animate/enum/animate_type.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gif/flutter_gif.dart';
-import 'package:http/http.dart' as http;
-import 'package:html/dom.dart' as dom;
-import 'package:csslib/parser.dart' as parser;
-import 'package:minenger/Viewpager_Pages/FlightClup.dart';
-import '../Component/NotificationService.dart';
 import '../Component/Pageview.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'dart:convert';
 
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
 const acik_turuncu = Color.fromRGBO(239, 159, 56 ,1);
@@ -27,13 +22,21 @@ const acikmavi = Color.fromRGBO(61,142,185,1);
 const mavi = Color.fromRGBO(44,130,201 ,1);
 num _curr = 0;
 bool selected = true;
-int pageIndex = 0;
+int toplamIndex = 0 ;
+int shibaIndex = 0;
+int bttcIndex = 1;
+int flokiIndex = 2;
+int cateIndex = 3;
+int satoshiIndex = 4;
+int flightClubIndex = 5;
+
 var shiba_data = "Yükleniyor..";
 var bttc_data = "Yükleniyor..";
 var floki_data = "Yükleniyor..";
 var cate_data = "Yükleniyor..";
 var satoshi_data = "Yükleniyor..";
 var fightclub_data = "Yükleniyor..";
+
 
 class Anasayfa extends StatefulWidget {
   @override
@@ -58,130 +61,186 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
   Color CateCardColor = Colors.grey.shade300;
   Color SatoshiCardColor = Colors.grey.shade300;
   Color FLightClupCardColor = Colors.grey.shade300;
-  var jsonList;
-  var response;
+  var jsonList = [];
+  var price = "";
+  late Response response;
+  String baseUrl = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest";
+  String headers_key = 'X-CMC_PRO_API_KEY';
+  String headers_value = 'e6d3b04a-1e8f-4cbd-a2c4-a8aa84c0035f';
+  String headers_aut = 'Authorization';
+  String shiba_id = "5994";
+  String bttc_id = "3718";
+  String floki_id = "10804";
+  String cate_id = "9656";
+  String satoshi_id = "9022";
+  String flightClup_id = "22550";
   Dio dio = Dio();
 
 
-  /*Future getShibaData() async {
-    //Parse-CoinsValue
-    var Shiba_Url = Uri.parse(
-        "https://www.binance.com/en/price/shiba-inu");
+  Future getShibaData() async {
+    try {
+      dio.options.headers[headers_key] = headers_value;
+      dio.options.headers[headers_aut] = headers_value;
+      response = await dio.get(baseUrl,
+          queryParameters: {
+              'id': shiba_id
+          },
+      );
+      if (response.statusCode == 200) {
+        price = response.data.toString();
+        print("Response_Data : ${price}");
 
-    var resShiba = await http.get(Shiba_Url);
-    dom.Document htmlShiba = dom.Document.html(resShiba.body);
-    final Shiba_titles = htmlShiba
-        .querySelectorAll(
-        '#__APP > div > main > section > div > div.css-871wnf > div.css-1wh66rn > div.css-1267ixm > div.css-1bwgsh3')
-        .map((element) => element.innerHtml.substring(1).trim()).toString();
+        setState(() {
+          shiba_data = price.substring(744,754);
+        });
 
-    setState(() {
-      shiba_data = Shiba_titles;
-    });
+      }else{
+        print("Response Hata Kodu! : ${response.statusCode}");
+      }
+
+    } on DioError catch(e){
+      print("Response Hata Aldi! : ${e}");
+      return Future.error(e.message as Object);
+    }
 
   }
 
   Future getBttcData() async {
-    //Parse-CoinsValue
-    var Bttc_Url = Uri.parse(
-        "https://www.binance.com/en/price/bittorrent-new");
+    try {
+      dio.options.headers[headers_key] = headers_value;
+      dio.options.headers[headers_aut] = headers_value;
+      response = await dio.get(baseUrl,
+        queryParameters: {
+          'id': bttc_id
+        },
+      );
+      if (response.statusCode == 200) {
+        price = response.data.toString();
+        print("Response_Data : ${price}");
 
-    var resBttc = await http.get(Bttc_Url);
-    dom.Document htmlBttc = dom.Document.html(resBttc.body);
-    final Bttc_titles = htmlBttc
-        .querySelectorAll(
-        '#__APP > div > main > section > div > div.css-871wnf > div.css-1wh66rn > div.css-1267ixm > div.css-1bwgsh3')
-        .map((element) => element.innerHtml.substring(1).trim()).toString();
+        setState(() {
+          bttc_data = price.substring(696,706);
+        });
 
-    setState(() {
-      bttc_data = Bttc_titles;
-    });
+      }else{
+        print("Response Hata Kodu! : ${response.statusCode}");
+      }
+
+    } on DioError catch(e){
+      print("Response Hata Aldi! : ${e}");
+      return Future.error(e.message as Object);
+    }
 
   }
 
   Future getFlokiData() async {
-    //Parse-CoinsValue
-    var Floki_Url = Uri.parse(
-        "https://www.binance.com/en/price/floki-inu");
+    try {
+      dio.options.headers[headers_key] = headers_value;
+      dio.options.headers[headers_aut] = headers_value;
+      response = await dio.get(baseUrl,
+        queryParameters: {
+          'id': floki_id
+        },
+      );
+      if (response.statusCode == 200) {
+        price = response.data.toString();
+        print("Response_Data : ${price}");
 
-    var resFloki = await http.get(Floki_Url);
-    dom.Document htmlFloki = dom.Document.html(resFloki.body);
-    final Floki_titles = htmlFloki
-        .querySelectorAll(
-        '#__APP > div > main > section > div > div.css-871wnf > div.css-1wh66rn > div.css-1267ixm > div.css-1bwgsh3')
-        .map((element) => element.innerHtml.substring(1).trim()).toString();
+        setState(() {
+          floki_data = price.substring(812,822);
+        });
 
-    setState(() {
-      floki_data = Floki_titles;
-    });
+      }else{
+        print("Response Hata Kodu! : ${response.statusCode}");
+      }
+
+    } on DioError catch(e){
+      print("Response Hata Aldi! : ${e}");
+      return Future.error(e.message as Object);
+    }
 
   }
 
   Future getCateData() async {
-    //Parse-CoinsValue
-    var Cate_Url = Uri.parse(
-        "https://www.binance.com/en/price/catecoin");
+    try {
+      dio.options.headers[headers_key] = headers_value;
+      dio.options.headers[headers_aut] = headers_value;
+      response = await dio.get(baseUrl,
+        queryParameters: {
+          'id': cate_id
+        },
+      );
+      if (response.statusCode == 200) {
+        price = response.data.toString();
+        print("Response_Data : ${price}");
 
-    var resCate = await http.get(Cate_Url);
-    dom.Document htmlCate = dom.Document.html(resCate.body);
-    final Cate_titles = htmlCate
-        .querySelectorAll(
-        '#__APP > div > main > section > div > div.css-871wnf > div.css-1wh66rn > div.css-1267ixm > div.css-1bwgsh3')
-        .map((element) => element.innerHtml.substring(1).trim()).toString();
+        setState(() {
+          cate_data = "0.00..." + price.substring(840,846);
+        });
 
-    setState(() {
-      cate_data = Cate_titles;
-    });
+      }else{
+        print("Response Hata Kodu! : ${response.statusCode}");
+      }
+
+    } on DioError catch(e){
+      print("Response Hata Aldi! : ${e}");
+      return Future.error(e.message as Object);
+    }
 
   }
 
   Future getSatoshiData() async {
-    //Parse-CoinsValue
-    var Satoshi_Url = Uri.parse(
-        "https://www.binance.com/en/price/satoshi");
+    try {
+      dio.options.headers[headers_key] = headers_value;
+      dio.options.headers[headers_aut] = headers_value;
+      response = await dio.get(baseUrl,
+        queryParameters: {
+          'id': satoshi_id
+        },
+      );
+      if (response.statusCode == 200) {
+        price = response.data.toString();
+        print("Response_Data : ${price}");
 
-    var resSatoshi = await http.get(Satoshi_Url);
-    dom.Document htmlSatoshi= dom.Document.html(resSatoshi.body);
-    final Satoshi_titles = htmlSatoshi
-        .querySelectorAll(
-        '#__APP > div > main > section > div > div.css-871wnf > div.css-1wh66rn > div.css-1267ixm > div.css-1bwgsh3')
-        .map((element) => element.innerHtml.substring(1).trim()).toString();
+        setState(() {
+          satoshi_data = price.substring(555,565);
+        });
 
-    setState(() {
-      satoshi_data = Satoshi_titles;
-    });
+      }else{
+        print("Response Hata Kodu! : ${response.statusCode}");
+      }
+
+    } on DioError catch(e){
+      print("Response Hata Aldi! : ${e}");
+      return Future.error(e.message as Object);
+    }
 
   }
 
-  Future getFightClub() async {
-    //Parse-CoinsValue
-    var BabyDoge_Url = Uri.parse(
-        "https://www.binance.com/en/price/baby-doge-coin");
-
-    var resBabydoge = await http.get(BabyDoge_Url);
-    dom.Document htmlBaby= dom.Document.html(resBabydoge.body);
-    final Babydoge_titles = htmlBaby
-        .querySelectorAll(
-        '#__APP > div > main > section > div > div.css-871wnf > div.css-1wh66rn > div.css-1267ixm > div.css-1bwgsh3')
-        .map((element) => element.innerHtml.substring(1).trim()).toString();
-
-    setState(() {
-      fightclub_data = Babydoge_titles;
-    });
-
-  }*/
-
-  Future getShibaData() async {
+  Future getFlightClub() async {
     try {
-      response = await Dio().get('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest');
+      dio.options.headers[headers_key] = headers_value;
+      dio.options.headers[headers_aut] = headers_value;
+      response = await dio.get(baseUrl,
+        queryParameters: {
+          'id': flightClup_id
+        },
+      );
       if (response.statusCode == 200) {
+        price = response.data.toString();
+        print("Response_Data : ${price}");
+
         setState(() {
-          jsonList = response.data["quote"] as List;
-          shiba_data = jsonList.toString().substring(0,8);
+          fightclub_data = price.substring(718,728);
         });
+
+      }else{
+        print("Response Hata Kodu! : ${response.statusCode}");
       }
-    }catch(e){
-      print(e);
+
+    } on DioError catch(e){
+      print("Response Hata Aldi! : ${e}");
+      return Future.error(e.message as Object);
     }
 
   }
@@ -302,7 +361,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                 crossAxisAlignment: CrossAxisAlignment.center,
                                                 children: [
                                                   Image.asset(
-                                                    "assets/tl.png",
+                                                    "assets/dolar.png",
                                                     height: 30,
                                                     width: 28,
                                                   ),
@@ -371,7 +430,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         side: CardSide.BACK,
                                         speed: 1000,
                                         onFlipDone: (status) {
-                                          //getBttcData();
+                                          getBttcData();
                                         },
                                         front: Container(
                                           child: Column(
@@ -387,7 +446,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                 crossAxisAlignment: CrossAxisAlignment.center,
                                                 children: [
                                                   Image.asset(
-                                                    "assets/tl.png",
+                                                    "assets/dolar.png",
                                                     height: 30,
                                                     width: 28,
                                                   ),
@@ -456,7 +515,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         side: CardSide.BACK,
                                         speed: 1000,
                                         onFlipDone: (status) {
-                                          //getFlokiData();
+                                          getFlokiData();
                                         },
                                         front: Container(
                                           child: Column(
@@ -472,7 +531,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                 crossAxisAlignment: CrossAxisAlignment.center,
                                                 children: [
                                                   Image.asset(
-                                                    "assets/tl.png",
+                                                    "assets/dolar.png",
                                                     height: 30,
                                                     width: 28,
                                                   ),
@@ -541,7 +600,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         side: CardSide.BACK,
                                         speed: 1000,
                                         onFlipDone: (status) {
-                                          //getCateData();
+                                          getCateData();
                                         },
                                         front: Container(
                                           child: Column(
@@ -557,7 +616,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                 crossAxisAlignment: CrossAxisAlignment.center,
                                                 children: [
                                                   Image.asset(
-                                                    "assets/tl.png",
+                                                    "assets/dolar.png",
                                                     height: 30,
                                                     width: 28,
                                                   ),
@@ -626,7 +685,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         side: CardSide.BACK,
                                         speed: 1000,
                                         onFlipDone: (status) {
-                                          //getSatoshiData();
+                                          getSatoshiData();
                                         },
                                         front: Container(
                                           child: Column(
@@ -642,7 +701,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                 crossAxisAlignment: CrossAxisAlignment.center,
                                                 children: [
                                                   Image.asset(
-                                                    "assets/tl.png",
+                                                    "assets/dolar.png",
                                                     height: 30,
                                                     width: 28,
                                                   ),
@@ -711,7 +770,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                         side: CardSide.BACK,
                                         speed: 1000,
                                         onFlipDone: (status) {
-                                          //getFightClub();
+                                          getFlightClub();
                                         },
                                         front: Container(
                                           child: Column(
@@ -727,7 +786,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                 crossAxisAlignment: CrossAxisAlignment.center,
                                                 children: [
                                                   Image.asset(
-                                                    "assets/tl.png",
+                                                    "assets/dolar.png",
                                                     height: 30,
                                                     width: 28,
                                                   ),
@@ -846,9 +905,9 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                       CateCardColor = Colors.transparent;
                                                       SatoshiCardColor = Colors.transparent;
                                                       FLightClupCardColor = Colors.transparent;
-
+                                                      toplamIndex = shibaIndex;
                                                       page_controller.animateToPage(
-                                                          0, duration: const Duration(microseconds: 300), curve: Curves.easeIn
+                                                          toplamIndex, duration: const Duration(seconds: 1), curve: Curves.easeIn
                                                       );
                                                     });
                                                   },
@@ -883,9 +942,9 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                       CateCardColor = Colors.transparent;
                                                       SatoshiCardColor = Colors.transparent;
                                                       FLightClupCardColor = Colors.transparent;
-
+                                                      toplamIndex = bttcIndex;
                                                       page_controller.animateToPage(
-                                                          1, duration: const Duration(microseconds: 300), curve: Curves.easeIn
+                                                          toplamIndex, duration: const Duration(seconds: 1), curve: Curves.easeIn
                                                       );
                                                     });
                                                   },
@@ -919,9 +978,9 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                       CateCardColor = Colors.transparent;
                                                       SatoshiCardColor = Colors.transparent;
                                                       FLightClupCardColor = Colors.transparent;
-
+                                                      toplamIndex = flokiIndex;
                                                       page_controller.animateToPage(
-                                                          2, duration: const Duration(microseconds: 300), curve: Curves.easeIn
+                                                          toplamIndex, duration: const Duration(seconds: 1), curve: Curves.easeIn
                                                       );
                                                     });
                                                   },
@@ -955,9 +1014,9 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                       ShibaCardColor = Colors.transparent;
                                                       SatoshiCardColor = Colors.transparent;
                                                       FLightClupCardColor = Colors.transparent;
-
+                                                      toplamIndex = cateIndex;
                                                       page_controller. animateToPage(
-                                                          3, duration: const Duration(microseconds: 300), curve: Curves.easeIn
+                                                          toplamIndex, duration: const Duration(seconds: 1), curve: Curves.easeIn
                                                       );
                                                     });
                                                   },
@@ -992,8 +1051,9 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                       BttcCardColor = Colors.transparent;
                                                       ShibaCardColor = Colors.transparent;
                                                       FLightClupCardColor = Colors.transparent;
+                                                      toplamIndex = satoshiIndex;
                                                       page_controller.animateToPage(
-                                                          4, duration: const Duration(microseconds: 300), curve: Curves.easeIn
+                                                          toplamIndex, duration: const Duration(seconds: 1), curve: Curves.easeIn
                                                       );
                                                     });
                                                   },
@@ -1027,8 +1087,9 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                                       FlokiCardColor = Colors.transparent;
                                                       BttcCardColor = Colors.transparent;
                                                       ShibaCardColor = Colors.transparent;
+                                                      toplamIndex = flightClubIndex;
                                                       page_controller.animateToPage(
-                                                          5, duration: const Duration(microseconds: 300), curve: Curves.easeIn
+                                                          toplamIndex, duration: const Duration(seconds: 1), curve: Curves.easeIn
                                                       );
                                                     });
                                                   },
@@ -1049,7 +1110,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
                                   alignment: Alignment.center,
                                   child: Column(
                                     children: [
-                                      Pageview(pageIndex),
+                                      Pageview(toplamIndex),
                                     ],
                                   ),
                                 ),
@@ -1081,19 +1142,30 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
     );
   }
 
+
   @override
   void initState(){
     super.initState();
+    setState(() {
+      selected_ShibaIcon = true;
+      ShibaCardColor = turuncu;
+      BttcCardColor = Colors.transparent;
+      FlokiCardColor = Colors.transparent;
+      CateCardColor = Colors.transparent;
+      SatoshiCardColor = Colors.transparent;
+      FLightClupCardColor = Colors.transparent;
+    });
     //Admob-Banner
     loadBannerAd();
     //Animasyon-DuyuruText
     initTranslateAnimation();
+    //Exchange-Coins
     getShibaData();
-    //getBttcData();
-    //getFlokiData();
-    //getCateData();
-    //getSatoshiData();
-    //getFightClub();
+    getBttcData();
+    getFlokiData();
+    getCateData();
+    getSatoshiData();
+    getFlightClub();
     //Gif
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       controller1.repeat(
@@ -1109,6 +1181,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
       DeviceOrientation.portraitDown,
 
     ]);
+
   }
 
   @override
@@ -1119,12 +1192,15 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
     //Animasyon
     initTranslateAnimation();
     translateAnimationController.dispose();
+    //Exchange-Coin
     getShibaData();
-    //getBttcData();
-    //getFlokiData();
-    //getCateData();
-    //getSatoshiData();
-    //getFightClub();
+    getBttcData();
+    getFlokiData();
+    getCateData();
+    getSatoshiData();
+    getFlightClub();
+
   }
+
 
 }

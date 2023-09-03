@@ -1,10 +1,14 @@
 import 'package:animated_button/animated_button.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:minenger/Pages/Login.dart';
 
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
+final passwordRefresh_controller = TextEditingController();
+String _errorMessage = '';
 
 class PasswordRefresh extends StatefulWidget {
   @override
@@ -24,20 +28,19 @@ class _PasswordRefresh extends State<PasswordRefresh> {
             elevation: 5,
             shadowColor: Colors.grey,
             child: Container(
-              height: 350,
+              height: 300,
               padding: const EdgeInsets.all(20.0),
               child:SingleChildScrollView(
                 child:Column(
                   children: [
-
-                    CircleAvatar(
-                      backgroundImage: AssetImage('assets/msplash.png',),
-                      backgroundColor: Colors.white,
-                      radius: 40,
+                    SizedBox(
+                      height: 5,
                     ),
 
+                    Image.asset('assets/logo_yazi.png', color: Colors.orangeAccent.shade200, fit: BoxFit.cover, width: 180),
+
                     SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
 
                     TextFormField(
@@ -46,15 +49,22 @@ class _PasswordRefresh extends State<PasswordRefresh> {
                       cursorColor: Colors.black26,
                       enableInteractiveSelection: false,
                       obscureText: false,
-                      keyboardType: TextInputType.text,
+                      style: TextStyle(fontSize: 17),
+                      keyboardType: TextInputType.emailAddress,
                       autofocus: false,
-                      //controller: coin_controller,
+                      controller: passwordRefresh_controller,
                       decoration: InputDecoration(
-                        labelText: 'Kullanıcı Adı veya Cep Telefonu',
+                        labelText: 'Email',
+                        hintText: 'Mail Adresinizi Yazınız',
                         labelStyle: TextStyle(color: Colors.black),
+                        suffixIcon: IconButton(
+                          onPressed: passwordRefresh_controller.clear,
+                          icon: Icon(Icons.clear_sharp),
+                          color: Colors.orange,
+                        ),
                         prefixIcon: IconButton(
                           onPressed: (){},
-                          icon: Icon(Icons.person_outline_outlined),
+                          icon: Icon(CupertinoIcons.mail),
                           color: Colors.black54,
                         ),
                         focusedBorder: OutlineInputBorder(
@@ -69,6 +79,7 @@ class _PasswordRefresh extends State<PasswordRefresh> {
                       onSaved: (deger) {
                       },
                       onChanged: (deger) {
+                        validateEmail(deger);
                       },
                     ),
 
@@ -85,7 +96,7 @@ class _PasswordRefresh extends State<PasswordRefresh> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                              'Gönder',
+                              'Yeni Şifre Gönder',
                               style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.white,
@@ -100,8 +111,16 @@ class _PasswordRefresh extends State<PasswordRefresh> {
                       duration: 25,
                       shadowDegree: ShadowDegree.dark,
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Login()));
-                      },
+                        var mail = passwordRefresh_controller.value.text;
+                        var validateMail = validateEmail(mail);
+                        if(mail.isNotEmpty && validateMail == true){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Login()));
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Mail Adresinize Gönderilmiştir."),
+                              backgroundColor: Colors.green,
+                            ));
+                          }
+                      }
                     ),
 
                   ],
@@ -117,6 +136,30 @@ class _PasswordRefresh extends State<PasswordRefresh> {
       ),
     );
   }
+
+  bool validateEmail(String val) {
+    if(val.isEmpty){
+      setState(() {
+        _errorMessage = "Email Adresi Boş Olamaz!";
+        statu = false;
+      });
+      return statu;
+    }else if(!EmailValidator.validate(val, true)){
+      setState(() {
+        _errorMessage = "Geçersiz Email Adresi";
+        statu = false;
+      });
+      return statu;
+    }else{
+      setState(() {
+        _errorMessage = "";
+        statu = true;
+      });
+      return statu;
+    }
+  }
+
+
   @override
   void initState(){
     super.initState();

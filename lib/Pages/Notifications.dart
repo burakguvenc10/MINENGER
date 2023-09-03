@@ -16,7 +16,7 @@ class _Duyurular extends State<Duyurular> {
 
   late NativeAd nativead;
   bool isloaded = false;
-  static final _kAdIndex = 4;
+  static final _kAdIndex = 3;
   var jsonList;
   var response;
   bool isLoading = false;
@@ -44,10 +44,6 @@ class _Duyurular extends State<Duyurular> {
 
   void getData() async {
     isLoading == true;
-    //dio.options.headers['content-type'] = 'application/json';
-    //dio.options.headers['authorization'] = 'apikey 6t5uNKw5HvNRrSjIemVprT:6cu8lF6bHMdNClEtMP4iop';
-    //dio.options.receiveTimeout= 1000 as Duration?;
-    //dio.options.connectTimeout = 1500 as Duration?;
     try {
       response = await Dio().get('https://protocoderspoint.com/jsondata/superheros.json');
       if (response.statusCode == 200) {
@@ -79,23 +75,6 @@ class _Duyurular extends State<Duyurular> {
       body: Container(
         child: Stack(
           children: [
-
-            Padding(
-              padding: EdgeInsets.fromLTRB(10, 5, 10, 10),
-              child: FAProgressBar(
-              currentValue: _currentValue,
-              animatedDuration: const Duration(milliseconds: 800),
-              size: 18,
-              displayText: '%',
-              progressGradient: LinearGradient(
-                colors: [
-                  Colors.orangeAccent.withOpacity(0.75),
-                  Colors.green.withOpacity(0.75),
-                ],
-              ),
-             ),
-            ),
-
             !isLoading ? ListView.builder(
                 padding: EdgeInsets.only(top: 25,left: 10,right: 10, bottom: 10),
                 itemCount: jsonList == null ? 0 :jsonList.length + (isloaded ? 1 : 0),
@@ -107,7 +86,7 @@ class _Duyurular extends State<Duyurular> {
                         ),
                         height: 70,
                         alignment: Alignment.center,
-                        padding: EdgeInsets.all(5)
+                        padding: EdgeInsets.all(15)
                     );
                   }
 
@@ -164,12 +143,24 @@ class _Duyurular extends State<Duyurular> {
                               ),
                             ],
                           ),
-                        )
+                        ),
                     );
                   }
                 }
-            ): Center(
-              child: CircularProgressIndicator(color: button_color,),
+            ):Padding(
+              padding: EdgeInsets.fromLTRB(10, 5, 10, 10),
+              child: FAProgressBar(
+                currentValue: _currentValue,
+                animatedDuration: const Duration(milliseconds: 800),
+                size: 18,
+                displayText: '%',
+                progressGradient: LinearGradient(
+                  colors: [
+                    Colors.orangeAccent.withOpacity(0.75),
+                    Colors.green.withOpacity(0.75),
+                  ],
+                ),
+              ),
             ),
 
           ],

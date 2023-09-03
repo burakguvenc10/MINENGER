@@ -189,14 +189,14 @@ class _Dialog_Detail extends State<Dialog_Detail> {
                     hintText: "BEP-20 Cüzdan Kodu",
                     labelText: 'BEP-20',
                     suffixIcon: IconButton(
+                      icon: Icon(FontAwesome.paste),
+                      color: Colors.black54,
                       onPressed: (){
                         final paste_value = FlutterClipboard.paste().toString();
                         setState(() {
                           beb20_value = paste_value;
                         });
                       },
-                      icon: Icon(FontAwesome.paste),
-                      color: Colors.black54,
                     ),
                     labelStyle: TextStyle(color: Colors.black),
                     prefixIcon: IconButton(
