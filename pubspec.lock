@@ -225,6 +225,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.17"
+  exprollable_page_view:
+    dependency: "direct main"
+    description:
+      name: exprollable_page_view
+      sha256: a5c889e88d26ec77cf3c97d505b08d61122a4d895f5cd846456b8fa4e1b46d80
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0-rc.2"
   fake_async:
     dependency: transitive
     description:
@@ -725,6 +733,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  sms_otp_auto_verify:
+    dependency: "direct main"
+    description:
+      name: sms_otp_auto_verify
+      sha256: "7c7fa9c7f08f60b34e9ba683796899b13c889a68d074b5ed91db9ab72f9b1355"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   source_gen:
     dependency: transitive
     description:

@@ -1,11 +1,15 @@
+import 'dart:convert';
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:minenger/Pages/Login.dart';
 import 'package:icons_plus/icons_plus.dart';
+import '../Component/Mail_Validation_Popup.dart';
 import '../Component/Webview_Signup.dart';
+import 'package:http/http.dart' as http;
 
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
 final KullaniciAdi_controller = TextEditingController();
@@ -350,7 +354,27 @@ class _Signup extends State<Signup> {
                       duration: 25,
                       shadowDegree: ShadowDegree.dark,
                       onPressed: () {
-                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Login()), (_) => false);
+                        SendMail();
+                        showAnimatedDialog(
+                          alignment: Alignment.center,
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) {
+                            return ClassicGeneralDialogWidget(
+                              actions: [
+                                Mail_Validation_Popup(),
+                              ],
+                              onPositiveClick: () {
+                              },
+                              onNegativeClick: () {
+                                Navigator.of(context).pop();
+                              },
+                            );
+                          },
+                          animationType: DialogTransitionType.size,
+                          curve: Curves.easeInBack,
+                          duration: Duration(seconds: 1),
+                        );
                       },
                     ),
 
@@ -366,6 +390,37 @@ class _Signup extends State<Signup> {
       ),
     );
   }
+
+  Future SendMail({code}) async{
+    final service_id = "service_w9gzuxn";
+    final template_id = "template_q2n61jw";
+    final user_id = "ciFDAEMgWlyVWOzPn";
+    final private_key = "XyeoSFBSRds6hFzbehhey";
+    final code = "5460";
+    var url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    try{
+      var response = await http.post(url,
+        headers: {
+          'origin':'http://localhost',
+          'content-Type': 'application/json'
+        },
+        body: json.encode({
+          'service_id':service_id,
+          'template_id':template_id,
+          'user_id':user_id,
+          'template_params': {
+          'code': code,
+          'g-recaptcha-response': private_key
+          }
+        }));
+      print('[MAIL RESPONSE OK:] ${response.body}');
+    }catch(error){
+      print('MAIL ERROR');
+    }
+
+  }
+
+
   @override
   void initState(){
     super.initState();

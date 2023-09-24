@@ -8,6 +8,7 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gif/flutter_gif.dart';
+import 'package:hive_flutter/adapters.dart';
 import '../Component/Pageview.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'dart:convert';
@@ -20,6 +21,7 @@ const gri = Color.fromRGBO(122, 159, 191 ,1);
 const pembe = Color.fromRGBO(240, 194, 194 ,1);
 const acikmavi = Color.fromRGBO(61,142,185,1);
 const mavi = Color.fromRGBO(44,130,201 ,1);
+int stateCont = 0;
 num _curr = 0;
 bool selected = true;
 int toplamIndex = 0 ;
@@ -43,7 +45,7 @@ class Anasayfa extends StatefulWidget {
   _Anasayfa createState() => _Anasayfa();
 }
 
-class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
+class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
   late FlutterGifController controller1 = FlutterGifController(vsync: this);
   late AnimationController translateAnimationController;
   late Animation<double> translateAnimation;
@@ -64,7 +66,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
   var jsonList = [];
   var price = "";
   late Response response;
-  String baseUrl = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest";
+  String baseUrl = "";//https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest
   String headers_key = 'X-CMC_PRO_API_KEY';
   String headers_value = 'e6d3b04a-1e8f-4cbd-a2c4-a8aa84c0035f';
   String headers_aut = 'Authorization';
@@ -1182,6 +1184,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
 
     ]);
 
+
   }
 
   @override
@@ -1199,7 +1202,6 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin  {
     getCateData();
     getSatoshiData();
     getFlightClub();
-
   }
 
 

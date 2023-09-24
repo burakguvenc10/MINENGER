@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:minenger/Pages/Anasayfa.dart';
 
 const appbarColor = Color.fromRGBO(235, 189, 94 ,1);
 

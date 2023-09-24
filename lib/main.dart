@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           actions: <Widget>[
           IconButton(
-          icon: const Icon(Icons.notifications),
+          icon: const Icon(Icons.notifications_sharp,color: Colors.white,),
           tooltip: 'Duyurular',
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Duyurular()));

@@ -20,8 +20,7 @@ const mavi = Color.fromRGBO(44,130,201 ,1);
 
 
 class Pageview extends StatefulWidget {
-  final initialPage;
-  Pageview(this.initialPage);
+  Pageview(initialPage);
   @override
   _PageView createState() => _PageView();
 }
@@ -111,6 +110,10 @@ class _PageView extends State<Pageview> {
 
   ];
 
+
+  @override
+  void initState() {
+  }
 
   @override
   void dispose() {

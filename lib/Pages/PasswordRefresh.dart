@@ -3,8 +3,9 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:minenger/Component/Mail_Validation_Popup.dart';
 import 'package:minenger/Pages/Login.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
 final passwordRefresh_controller = TextEditingController();
@@ -114,15 +115,29 @@ class _PasswordRefresh extends State<PasswordRefresh> {
                         var mail = passwordRefresh_controller.value.text;
                         var validateMail = validateEmail(mail);
                         if(mail.isNotEmpty && validateMail == true){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Login()));
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text("Mail Adresinize Gönderilmiştir."),
-                              backgroundColor: Colors.green,
-                            ));
-                          }
+                          showAnimatedDialog(
+                            alignment: Alignment.center,
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (BuildContext context) {
+                              return ClassicGeneralDialogWidget(
+                                actions: [
+                                  Mail_Validation_Popup(),
+                                ],
+                                onPositiveClick: () {
+                                },
+                                onNegativeClick: () {
+                                  Navigator.of(context).pop();
+                                },
+                              );
+                            },
+                            animationType: DialogTransitionType.size,
+                            curve: Curves.easeInBack,
+                            duration: Duration(seconds: 1),
+                          );
+                        }
                       }
                     ),
-
                   ],
                 ),
 
