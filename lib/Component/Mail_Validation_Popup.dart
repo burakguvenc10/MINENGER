@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:minenger/Pages/Login.dart';
 import 'package:sms_otp_auto_verify/sms_otp_auto_verify.dart';
+import '../Pages/PasswordRefresh.dart';
+import '../Pages/Signup.dart';
 
 final Mail_controller = TextEditingController();
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
@@ -105,7 +107,15 @@ class _MailValidation extends State<Mail_Validation_Popup> {
                   shadowDegree: ShadowDegree.dark,
                   height: 50,
                   onPressed: () {
-                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Login()), (_) => false);
+                    if(signupBox.get('validation')!= null && signupBox.get('validation').toString() == Mail_controller.value.text){
+                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Login()), (_) => false);
+                    }
+                    else if(passwordRefreshBox.get('refresh')!= null && passwordRefreshBox.get('refresh').toString() == Mail_controller.value.text){
+                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Login()), (_) => false);
+                    }else{
+                      print("Doğrulama işlemi başarısız");
+                    }
+
                   },
                 ),
 

@@ -1,15 +1,20 @@
+import 'dart:convert';
+import 'dart:math';
 import 'package:animated_button/animated_button.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:minenger/Component/Mail_Validation_Popup.dart';
 import 'package:minenger/Pages/Login.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
+import 'package:http/http.dart' as http;
 
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
 final passwordRefresh_controller = TextEditingController();
 String _errorMessage = '';
+late Box passwordRefreshBox;
 
 class PasswordRefresh extends StatefulWidget {
   @override
@@ -112,6 +117,7 @@ class _PasswordRefresh extends State<PasswordRefresh> {
                       duration: 25,
                       shadowDegree: ShadowDegree.dark,
                       onPressed: () {
+                        SendMail();
                         var mail = passwordRefresh_controller.value.text;
                         var validateMail = validateEmail(mail);
                         if(mail.isNotEmpty && validateMail == true){
@@ -152,6 +158,52 @@ class _PasswordRefresh extends State<PasswordRefresh> {
     );
   }
 
+  Future SendMail({code}) async{
+    final service_id = "service_w9gzuxn";
+    final template_id = "template_q2n61jw";
+    final user_id = "ciFDAEMgWlyVWOzPn";
+    final private_key = "XyeoSFBSRds6hFzbehhey";
+    String code = "";
+    for(int i = 1; i<5; i++){
+      var rnd = new Random();
+      int sayi = rnd.nextInt(10);
+      code = code + sayi.toString();
+    }
+    var url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    try{
+      var response = await http.post(url,
+          headers: {
+            'origin':'http://localhost',
+            'content-Type': 'application/json'
+          },
+          body: json.encode({
+            'service_id':service_id,
+            'template_id':template_id,
+            'user_id':user_id,
+            'template_params': {
+              'code': code,
+              'g-recaptcha-response': private_key
+            }
+          }));
+      print('[MAIL RESPONSE OK:] ${response.body}');
+      passwordRefreshBox = await Hive.openBox('refresh');
+      passwordRefreshBox.put('refresh',code);
+    }catch(error){
+      print('MAIL ERROR');
+    }
+  }
+
+  Future RandomNumber() async{
+    String code = "";
+    for(int i = 1; i<5; i++){
+      var rnd = new Random();
+      int sayi = rnd.nextInt(10);
+      code = code + sayi.toString();
+    }
+    print('[Code :] $code');
+    return code;
+  }
+
   bool validateEmail(String val) {
     if(val.isEmpty){
       setState(() {
@@ -182,7 +234,6 @@ class _PasswordRefresh extends State<PasswordRefresh> {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
-
     ]);
   }
 }

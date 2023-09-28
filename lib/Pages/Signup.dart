@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:minenger/Pages/Login.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -20,6 +22,7 @@ final ReferansKodu_controller = TextEditingController();
 final CepTelefon_controller = TextEditingController();
 bool isHiddenPassword = true;
 bool isHiddenPassword2 = true;
+late Box signupBox;
 
 class Signup extends StatefulWidget {
   @override
@@ -396,7 +399,12 @@ class _Signup extends State<Signup> {
     final template_id = "template_q2n61jw";
     final user_id = "ciFDAEMgWlyVWOzPn";
     final private_key = "XyeoSFBSRds6hFzbehhey";
-    final code = "5460";
+    String code = "";
+    for(int i = 1; i<5; i++){
+      var rnd = new Random();
+      int sayi = rnd.nextInt(10);
+      code = code + sayi.toString();
+    }
     var url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
     try{
       var response = await http.post(url,
@@ -410,16 +418,28 @@ class _Signup extends State<Signup> {
           'user_id':user_id,
           'template_params': {
           'code': code,
+          'mail':Mail_controller.value.text,
           'g-recaptcha-response': private_key
           }
         }));
       print('[MAIL RESPONSE OK:] ${response.body}');
+      signupBox = await Hive.openBox('validation');
+      signupBox.put('validation',code);
     }catch(error){
       print('MAIL ERROR');
     }
-
   }
 
+  Future RandomNumber() async{
+    String code = "";
+    for(int i = 1; i<5; i++){
+      var rnd = new Random();
+      int sayi = rnd.nextInt(10);
+      code = code + sayi.toString();
+    }
+    print('[Code :] $code');
+    return code;
+  }
 
   @override
   void initState(){
