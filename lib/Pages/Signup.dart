@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:animated_button/animated_button.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +10,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:minenger/Pages/Login.dart';
 import 'package:icons_plus/icons_plus.dart';
-import '../Component/Mail_Validation_Popup.dart';
+import '../Component/Signup_Validation_Popup.dart';
 import '../Component/Webview_Signup.dart';
 import 'package:http/http.dart' as http;
 
@@ -22,6 +23,7 @@ final ReferansKodu_controller = TextEditingController();
 final CepTelefon_controller = TextEditingController();
 bool isHiddenPassword = true;
 bool isHiddenPassword2 = true;
+String _errorMessage = '';
 late Box signupBox;
 
 class Signup extends StatefulWidget {
@@ -357,6 +359,9 @@ class _Signup extends State<Signup> {
                       duration: 25,
                       shadowDegree: ShadowDegree.dark,
                       onPressed: () {
+                        var mail = Mail_controller.value.text;
+                        var validateMail = validateEmail(mail);
+                        if(mail.isNotEmpty && validateMail == true){
                         SendMail();
                         showAnimatedDialog(
                           alignment: Alignment.center,
@@ -365,7 +370,7 @@ class _Signup extends State<Signup> {
                           builder: (BuildContext context) {
                             return ClassicGeneralDialogWidget(
                               actions: [
-                                Mail_Validation_Popup(),
+                                Signup_Validation_Popup(),
                               ],
                               onPositiveClick: () {
                               },
@@ -377,7 +382,8 @@ class _Signup extends State<Signup> {
                           animationType: DialogTransitionType.size,
                           curve: Curves.easeInBack,
                           duration: Duration(seconds: 1),
-                        );
+                         );
+                        }
                       },
                     ),
 
@@ -392,6 +398,28 @@ class _Signup extends State<Signup> {
         ),
       ),
     );
+  }
+
+  bool validateEmail(String val) {
+    if(val.isEmpty){
+      setState(() {
+        _errorMessage = "Email Adresi Boş Olamaz!";
+        statu = false;
+      });
+      return statu;
+    }else if(!EmailValidator.validate(val, true)){
+      setState(() {
+        _errorMessage = "Geçersiz Email Adresi";
+        statu = false;
+      });
+      return statu;
+    }else{
+      setState(() {
+        _errorMessage = "";
+        statu = true;
+      });
+      return statu;
+    }
   }
 
   Future SendMail({code}) async{

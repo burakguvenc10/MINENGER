@@ -2,20 +2,20 @@ import 'package:animated_button/animated_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:minenger/Pages/Login.dart';
 import 'package:sms_otp_auto_verify/sms_otp_auto_verify.dart';
 import '../Pages/PasswordRefresh.dart';
-import '../Pages/Signup.dart';
 
-final Mail_controller = TextEditingController();
+final Refresh_controller = TextEditingController();
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
 
-class Mail_Validation_Popup extends StatefulWidget {
+class Refresh_Validation_Popup extends StatefulWidget {
   @override
-  _MailValidation createState() => _MailValidation();
+  _Refresh_Validation_Popup createState() => _Refresh_Validation_Popup();
 }
 
-class _MailValidation extends State<Mail_Validation_Popup> {
+class _Refresh_Validation_Popup extends State<Refresh_Validation_Popup> {
   int _otpCodeLength = 8;
   bool _isLoadingButton = false;
   bool _enableButton = false;
@@ -46,7 +46,7 @@ class _MailValidation extends State<Mail_Validation_Popup> {
             child: Column(
               children: [
                 TextFieldPin(
-                  textController: Mail_controller,
+                  textController: Refresh_controller,
                   autoFocus: true,
                   codeLength: 4,
                   alignment: MainAxisAlignment.center,
@@ -71,16 +71,27 @@ class _MailValidation extends State<Mail_Validation_Popup> {
                   },
                 ),
 
-                TextButton(
-                  child: Text('İşlem Süresi: 3 Dakika',style: TextStyle(color: Colors.grey.shade400,fontSize: 15)),
-                  onPressed: () {
-                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Login()), (_) => false);
-                  },
+                SizedBox(
+                  height: 15,
+                ),
+
+                FAProgressBar(
+                  size: 20,
+                  displayText: ' DAKIKA',
+                  currentValue: 3,
+                  maxValue: 3,
+                  changeColorValue: 1,
+                  direction: Axis.horizontal,
+                  displayTextStyle: TextStyle(fontSize: 12,color: Colors.black),
+                  changeProgressColor: button_color,
+                  animatedDuration: const Duration(seconds: 180),
+                  progressColor: button_color,
                 ),
 
                 SizedBox(
-                  height: 5,
+                  height: 15,
                 ),
+
 
                 AnimatedButton(
                   child: Padding(
@@ -107,15 +118,11 @@ class _MailValidation extends State<Mail_Validation_Popup> {
                   shadowDegree: ShadowDegree.dark,
                   height: 50,
                   onPressed: () {
-                    if(signupBox.get('validation')!= null && signupBox.get('validation').toString() == Mail_controller.value.text){
-                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Login()), (_) => false);
-                    }
-                    else if(passwordRefreshBox.get('refresh')!= null && passwordRefreshBox.get('refresh').toString() == Mail_controller.value.text){
+                    if(passwordRefreshBox.get('refresh')!= null && passwordRefreshBox.get('refresh').toString() == Refresh_controller.value.text){
                       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Login()), (_) => false);
                     }else{
                       print("Doğrulama işlemi başarısız");
                     }
-
                   },
                 ),
 

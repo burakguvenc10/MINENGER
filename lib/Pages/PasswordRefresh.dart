@@ -6,7 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:minenger/Component/Mail_Validation_Popup.dart';
+import 'package:minenger/Component/Refresh_Validation_Popup.dart';
+import 'package:minenger/Component/Signup_Validation_Popup.dart';
 import 'package:minenger/Pages/Login.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:http/http.dart' as http;
@@ -117,10 +118,10 @@ class _PasswordRefresh extends State<PasswordRefresh> {
                       duration: 25,
                       shadowDegree: ShadowDegree.dark,
                       onPressed: () {
-                        SendMail();
                         var mail = passwordRefresh_controller.value.text;
                         var validateMail = validateEmail(mail);
                         if(mail.isNotEmpty && validateMail == true){
+                          SendMail();
                           showAnimatedDialog(
                             alignment: Alignment.center,
                             context: context,
@@ -128,7 +129,7 @@ class _PasswordRefresh extends State<PasswordRefresh> {
                             builder: (BuildContext context) {
                               return ClassicGeneralDialogWidget(
                                 actions: [
-                                  Mail_Validation_Popup(),
+                                  Refresh_Validation_Popup(),
                                 ],
                                 onPositiveClick: () {
                                 },
@@ -158,6 +159,28 @@ class _PasswordRefresh extends State<PasswordRefresh> {
     );
   }
 
+  bool validateEmail(String val) {
+    if(val.isEmpty){
+      setState(() {
+        _errorMessage = "Email Adresi Boş Olamaz!";
+        statu = false;
+      });
+      return statu;
+    }else if(!EmailValidator.validate(val, true)){
+      setState(() {
+        _errorMessage = "Geçersiz Email Adresi";
+        statu = false;
+      });
+      return statu;
+    }else{
+      setState(() {
+        _errorMessage = "";
+        statu = true;
+      });
+      return statu;
+    }
+  }
+
   Future SendMail({code}) async{
     final service_id = "service_w9gzuxn";
     final template_id = "template_q2n61jw";
@@ -182,6 +205,7 @@ class _PasswordRefresh extends State<PasswordRefresh> {
             'user_id':user_id,
             'template_params': {
               'code': code,
+              'mail':passwordRefresh_controller.value.text,
               'g-recaptcha-response': private_key
             }
           }));
@@ -202,28 +226,6 @@ class _PasswordRefresh extends State<PasswordRefresh> {
     }
     print('[Code :] $code');
     return code;
-  }
-
-  bool validateEmail(String val) {
-    if(val.isEmpty){
-      setState(() {
-        _errorMessage = "Email Adresi Boş Olamaz!";
-        statu = false;
-      });
-      return statu;
-    }else if(!EmailValidator.validate(val, true)){
-      setState(() {
-        _errorMessage = "Geçersiz Email Adresi";
-        statu = false;
-      });
-      return statu;
-    }else{
-      setState(() {
-        _errorMessage = "";
-        statu = true;
-      });
-      return statu;
-    }
   }
 
 
