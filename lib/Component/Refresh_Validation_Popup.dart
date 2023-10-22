@@ -2,10 +2,9 @@ import 'package:animated_button/animated_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:material_dialogs/dialogs.dart';
 import 'package:material_dialogs/widgets/buttons/icon_button.dart';
+import 'package:minenger/Component/New_Password_Popup.dart';
 import 'package:minenger/Pages/Login.dart';
 import 'package:sms_otp_auto_verify/sms_otp_auto_verify.dart';
 import '../Pages/PasswordRefresh.dart';
@@ -122,22 +121,12 @@ class _Refresh_Validation_Popup extends State<Refresh_Validation_Popup> {
                   height: 50,
                   onPressed: () {
                     if(passwordRefreshBox.get('refresh')!= null && passwordRefreshBox.get('refresh').toString() == Refresh_controller.value.text){
-                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Login()), (_) => false);
+                      Navigator.of(context).pop();
                       Dialogs.materialDialog(
-                          color: Colors.white,
-                          msg: 'İşleminiz Başarılı',
                           context: context,
+                          barrierDismissible: false,
                           actions: [
-                            IconsButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              text: 'Kapat',
-                              iconData: Iconsax.chart_success,
-                              color: Colors.green,
-                              textStyle: TextStyle(color: Colors.white),
-                              iconColor: Colors.white,
-                            ),
+                            New_Password_Popup()
                           ]);
                     }else{
                       Dialogs.materialDialog(
@@ -156,7 +145,6 @@ class _Refresh_Validation_Popup extends State<Refresh_Validation_Popup> {
                               iconColor: Colors.white,
                             ),
                           ]);
-                      print("Doğrulama işlemi başarısız");
                     }
                   },
                 ),

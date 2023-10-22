@@ -158,7 +158,6 @@ class _Signup_Validation_Popup extends State<Signup_Validation_Popup> {
                               iconColor: Colors.white,
                             ),
                           ]);
-                      print("Doğrulama işlemi başarısız");
                     }
                   },
                 ),
