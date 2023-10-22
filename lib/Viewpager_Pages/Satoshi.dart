@@ -136,6 +136,9 @@ class _Satoshi extends State<Satoshi> {
             onSaved: (deger) {
             },
             onChanged: (deger) {
+              setState(() {
+                coin_controller.value.text;
+              });
             },
           ),
         ),

@@ -136,6 +136,9 @@ class _Bttc extends State<Bttc> {
             onSaved: (deger) {
             },
             onChanged: (deger) {
+              setState(() {
+                coin_controller.value.text;
+              });
             },
           ),
         ),

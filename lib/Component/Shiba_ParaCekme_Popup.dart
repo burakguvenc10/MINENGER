@@ -257,7 +257,7 @@ class _Dialog_Detail extends State<Dialog_Detail> {
                   title: 'Hesap Onayı',
                   context: context,
                   actions: [
-                    IconsOutlineButton(
+                     IconsOutlineButton(
                       onPressed: () {
                         Navigator.of(context).pop();
                       },

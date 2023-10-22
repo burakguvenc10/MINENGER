@@ -137,6 +137,9 @@ class _Cate extends State<Cate> {
             onSaved: (deger) {
             },
             onChanged: (deger) {
+              setState(() {
+                coin_controller.value.text;
+              });
             },
           ),
         ),

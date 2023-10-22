@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
+import 'package:icons_plus/icons_plus.dart';
+import 'package:material_dialogs/dialogs.dart';
+import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 import 'package:minenger/Pages/Login.dart';
 import 'package:sms_otp_auto_verify/sms_otp_auto_verify.dart';
 import '../Pages/PasswordRefresh.dart';
@@ -30,13 +33,13 @@ class _Refresh_Validation_Popup extends State<Refresh_Validation_Popup> {
       child: Column(
         children: [
 
-          Text("Doğrulama Kodu",style: TextStyle(fontSize: 30,color: Colors.orange.shade200,fontWeight: FontWeight.bold),textAlign: TextAlign.center),
+          Text("Doğrulama Kodu",style: TextStyle(fontSize: 30,color: Colors.orange.shade400,fontWeight: FontWeight.bold),textAlign: TextAlign.center),
 
           SizedBox(
             height: 10,
           ),
 
-          Text("*Lütfen Mail Adresinize Gelen Doğrulama Kodunu Yazınız* ",style: TextStyle(fontSize: 11,color: Colors.orange,fontWeight: FontWeight.normal),textAlign: TextAlign.center,),
+          Text("*Lütfen Mail Adresinize Gelen Doğrulama Kodunu Yazınız",style: TextStyle(fontSize: 11,color: Colors.orange.shade200,fontWeight: FontWeight.normal),textAlign: TextAlign.center,),
 
 
           SizedBox(height: 15),
@@ -64,6 +67,24 @@ class _Refresh_Validation_Popup extends State<Refresh_Validation_Popup> {
                     _onOtpCallBack(code,false);
                   }),
 
+                CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Colors.orangeAccent,
+                  child: Center(
+                    child: Column(
+                      children:[
+                        SizedBox(
+                          height: 8,
+                        ),
+
+                        Text('Kalan Süre',style: TextStyle(color: Colors.grey.shade200,fontSize: 10)),
+
+                        Text('180 sn',style: TextStyle(color: Colors.white,fontSize: 14)),
+                      ],
+                    ),
+                  ),
+                ),
+
                 TextButton(
                   child: Text('İşlemi İptal Et',style: TextStyle(color: Colors.red.shade400,fontSize: 14)),
                   onPressed: () {
@@ -72,26 +93,8 @@ class _Refresh_Validation_Popup extends State<Refresh_Validation_Popup> {
                 ),
 
                 SizedBox(
-                  height: 15,
+                  height: 5,
                 ),
-
-                FAProgressBar(
-                  size: 20,
-                  displayText: ' DAKIKA',
-                  currentValue: 3,
-                  maxValue: 3,
-                  changeColorValue: 1,
-                  direction: Axis.horizontal,
-                  displayTextStyle: TextStyle(fontSize: 12,color: Colors.black),
-                  changeProgressColor: button_color,
-                  animatedDuration: const Duration(seconds: 180),
-                  progressColor: button_color,
-                ),
-
-                SizedBox(
-                  height: 15,
-                ),
-
 
                 AnimatedButton(
                   child: Padding(
@@ -120,7 +123,39 @@ class _Refresh_Validation_Popup extends State<Refresh_Validation_Popup> {
                   onPressed: () {
                     if(passwordRefreshBox.get('refresh')!= null && passwordRefreshBox.get('refresh').toString() == Refresh_controller.value.text){
                       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Login()), (_) => false);
+                      Dialogs.materialDialog(
+                          color: Colors.white,
+                          msg: 'İşleminiz Başarılı',
+                          context: context,
+                          actions: [
+                            IconsButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              text: 'Kapat',
+                              iconData: Iconsax.chart_success,
+                              color: Colors.green,
+                              textStyle: TextStyle(color: Colors.white),
+                              iconColor: Colors.white,
+                            ),
+                          ]);
                     }else{
+                      Dialogs.materialDialog(
+                          color: Colors.white,
+                          msg: 'Şifre Hatalı',
+                          context: context,
+                          actions: [
+                            IconsButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              text: 'Kapat',
+                              iconData: CupertinoIcons.xmark_circle_fill,
+                              color: Colors.red,
+                              textStyle: TextStyle(color: Colors.white),
+                              iconColor: Colors.white,
+                            ),
+                          ]);
                       print("Doğrulama işlemi başarısız");
                     }
                   },

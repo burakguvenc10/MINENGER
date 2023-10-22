@@ -138,6 +138,9 @@ class _Floki extends State<Floki> {
             onSaved: (deger) {
             },
             onChanged: (deger) {
+              setState(() {
+                coin_controller.value.text;
+              });
             },
           ),
         ),

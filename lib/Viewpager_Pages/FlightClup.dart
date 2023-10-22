@@ -138,6 +138,9 @@ class _FightClub extends State<FightClub> {
             onSaved: (deger) {
             },
             onChanged: (deger) {
+              setState(() {
+                coin_controller.value.text;
+              });
             },
           ),
         ),

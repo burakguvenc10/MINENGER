@@ -909,7 +909,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
                                                       FLightClupCardColor = Colors.transparent;
                                                       toplamIndex = shibaIndex;
                                                       page_controller.animateToPage(
-                                                          toplamIndex, duration: const Duration(seconds: 1), curve: Curves.easeIn
+                                                          toplamIndex, duration: const Duration(seconds: 1), curve: Curves.fastLinearToSlowEaseIn
                                                       );
                                                     });
                                                   },
@@ -946,7 +946,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
                                                       FLightClupCardColor = Colors.transparent;
                                                       toplamIndex = bttcIndex;
                                                       page_controller.animateToPage(
-                                                          toplamIndex, duration: const Duration(seconds: 1), curve: Curves.easeIn
+                                                          toplamIndex, duration: const Duration(seconds: 1), curve: Curves.fastLinearToSlowEaseIn
                                                       );
                                                     });
                                                   },
@@ -982,7 +982,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
                                                       FLightClupCardColor = Colors.transparent;
                                                       toplamIndex = flokiIndex;
                                                       page_controller.animateToPage(
-                                                          toplamIndex, duration: const Duration(seconds: 1), curve: Curves.easeIn
+                                                          toplamIndex, duration: const Duration(seconds: 1), curve: Curves.fastLinearToSlowEaseIn
                                                       );
                                                     });
                                                   },
@@ -1018,7 +1018,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
                                                       FLightClupCardColor = Colors.transparent;
                                                       toplamIndex = cateIndex;
                                                       page_controller. animateToPage(
-                                                          toplamIndex, duration: const Duration(seconds: 1), curve: Curves.easeIn
+                                                          toplamIndex, duration: const Duration(seconds: 1), curve: Curves.fastLinearToSlowEaseIn
                                                       );
                                                     });
                                                   },
@@ -1055,7 +1055,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
                                                       FLightClupCardColor = Colors.transparent;
                                                       toplamIndex = satoshiIndex;
                                                       page_controller.animateToPage(
-                                                          toplamIndex, duration: const Duration(seconds: 1), curve: Curves.easeIn
+                                                          toplamIndex, duration: const Duration(seconds: 1), curve: Curves.fastLinearToSlowEaseIn
                                                       );
                                                     });
                                                   },
@@ -1091,7 +1091,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
                                                       ShibaCardColor = Colors.transparent;
                                                       toplamIndex = flightClubIndex;
                                                       page_controller.animateToPage(
-                                                          toplamIndex, duration: const Duration(seconds: 1), curve: Curves.easeIn
+                                                          toplamIndex, duration: const Duration(seconds: 1), curve: Curves.fastLinearToSlowEaseIn
                                                       );
                                                     });
                                                   },
