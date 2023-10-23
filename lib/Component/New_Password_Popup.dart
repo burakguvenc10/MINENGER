@@ -162,7 +162,11 @@ class _New_Password_Popup extends State<New_Password_Popup> {
                   shadowDegree: ShadowDegree.dark,
                   height: 50,
                   onPressed: () {
-                    if((newpassword_Controller.value.text.isNotEmpty && newpasswordAgain_Controller.value.text.isNotEmpty) && (newpassword_Controller.value.text == newpasswordAgain_Controller.value.text)){
+                    var newPassword = newpassword_Controller.value.text;
+                    var newPasswordAgain = newpasswordAgain_Controller.value.text;
+                    var characterNewPassword = newPassword.length;
+                    var characterNewPasswordAgain = newPasswordAgain.length;
+                    if((newPassword.isNotEmpty && newPasswordAgain.isNotEmpty) && (newPassword == newPasswordAgain)){
                       Navigator.of(context).pop();
                       Navigator.of(context).pop();
                       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Login()), (_) => false);
@@ -182,7 +186,25 @@ class _New_Password_Popup extends State<New_Password_Popup> {
                             ),
                           ]);
                     }
-                    else if(newpassword_Controller.value.text.length < 8 || newpasswordAgain_Controller.value.text.length < 8 ){
+                    else if(newPassword.isNotEmpty && newPasswordAgain.isNotEmpty && (newPassword != newPasswordAgain) ){
+                      Dialogs.materialDialog(
+                          color: Colors.white,
+                          msg: 'Şifre alanları birbiriyle aynı olmalıdır!',
+                          context: context,
+                          actions: [
+                            IconsButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              text: 'Kapat',
+                              iconData: Iconsax.warning_2,
+                              color: Colors.red,
+                              textStyle: TextStyle(color: Colors.white),
+                              iconColor: Colors.white,
+                            ),
+                          ]);
+                    }
+                    else if((newPassword.isNotEmpty && newPasswordAgain.isNotEmpty) && (characterNewPassword < 8 || characterNewPasswordAgain < 8 )){
                       Dialogs.materialDialog(
                           color: Colors.white,
                           msg: 'Şifre Uzunluğu 8 Karakterden Az Olamaz!',
@@ -193,7 +215,7 @@ class _New_Password_Popup extends State<New_Password_Popup> {
                                 Navigator.of(context).pop();
                               },
                               text: 'Kapat',
-                              iconData: CupertinoIcons.xmark_circle_fill,
+                              iconData: Iconsax.warning_2,
                               color: Colors.red,
                               textStyle: TextStyle(color: Colors.white),
                               iconColor: Colors.white,
@@ -203,7 +225,7 @@ class _New_Password_Popup extends State<New_Password_Popup> {
                     else{
                       Dialogs.materialDialog(
                           color: Colors.white,
-                          msg: 'Şifreler Aynı Değil!',
+                          msg: 'Şifre alanları boş bırakılamaz!',
                           context: context,
                           actions: [
                             IconsButton(
@@ -211,7 +233,7 @@ class _New_Password_Popup extends State<New_Password_Popup> {
                                 Navigator.of(context).pop();
                               },
                               text: 'Kapat',
-                              iconData: CupertinoIcons.xmark_circle_fill,
+                              iconData: Iconsax.warning_2,
                               color: Colors.red,
                               textStyle: TextStyle(color: Colors.white),
                               iconColor: Colors.white,

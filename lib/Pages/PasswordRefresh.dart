@@ -6,6 +6,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:icons_plus/icons_plus.dart';
+import 'package:material_dialogs/dialogs.dart';
+import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 import 'package:minenger/Component/Refresh_Validation_Popup.dart';
 import 'package:minenger/Component/Signup_Validation_Popup.dart';
 import 'package:minenger/Pages/Login.dart';
@@ -120,7 +123,7 @@ class _PasswordRefresh extends State<PasswordRefresh> {
                       onPressed: () {
                         var mail = passwordRefresh_controller.value.text;
                         var validateMail = validateEmail(mail);
-                        if(mail.isNotEmpty && validateMail == true){
+                         if(mail.isNotEmpty && validateMail == true){
                           SendMail();
                           showAnimatedDialog(
                             alignment: Alignment.center,
@@ -143,14 +146,43 @@ class _PasswordRefresh extends State<PasswordRefresh> {
                             duration: Duration(seconds: 1),
                           );
                         }
+                        else if(mail.isNotEmpty && validateMail == false){
+                           Dialogs.materialDialog(
+                               color: Colors.white,
+                               msg: 'UYARI MESAJI',
+                               context: context,
+                               actions: [
+                                 IconsButton(
+                                   onPressed: () {
+                                   },
+                                   text: 'Geçerli bir Email adresi yazınız!',
+                                   iconData: Iconsax.warning_2,
+                                   color: Colors.red,
+                                   textStyle: TextStyle(color: Colors.white),
+                                   iconColor: Colors.white,
+                                 ),
+                               ]);
+                        }else{
+                           Dialogs.materialDialog(
+                               color: Colors.white,
+                               msg: 'UYARI MESAJI',
+                               context: context,
+                               actions: [
+                                 IconsButton(
+                                   onPressed: () {
+                                   },
+                                   text: 'lütfen Email adresinizi yazınız!',
+                                   iconData: Iconsax.warning_2,
+                                   color: Colors.red,
+                                   textStyle: TextStyle(color: Colors.white),
+                                   iconColor: Colors.white,
+                                 ),
+                               ]);
+                        }
                       }
                     ),
                   ],
                 ),
-
-
-
-
               ),
             ),
           ),

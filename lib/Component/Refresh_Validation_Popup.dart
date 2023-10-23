@@ -2,6 +2,7 @@ import 'package:animated_button/animated_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:material_dialogs/dialogs.dart';
 import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 import 'package:minenger/Component/New_Password_Popup.dart';
@@ -131,7 +132,7 @@ class _Refresh_Validation_Popup extends State<Refresh_Validation_Popup> {
                     }else{
                       Dialogs.materialDialog(
                           color: Colors.white,
-                          msg: 'Şifre Hatalı',
+                          msg: 'Şifre Hatalı Girildi!',
                           context: context,
                           actions: [
                             IconsButton(
@@ -139,7 +140,7 @@ class _Refresh_Validation_Popup extends State<Refresh_Validation_Popup> {
                                 Navigator.of(context).pop();
                               },
                               text: 'Kapat',
-                              iconData: CupertinoIcons.xmark_circle_fill,
+                              iconData: Iconsax.warning_2,
                               color: Colors.red,
                               textStyle: TextStyle(color: Colors.white),
                               iconColor: Colors.white,

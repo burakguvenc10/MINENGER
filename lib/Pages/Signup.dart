@@ -8,6 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:material_dialogs/dialogs.dart';
+import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 import 'package:minenger/Pages/Login.dart';
 import 'package:icons_plus/icons_plus.dart';
 import '../Component/Signup_Validation_Popup.dart';
@@ -15,7 +17,7 @@ import '../Component/Webview_Signup.dart';
 import 'package:http/http.dart' as http;
 
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
-final KullaniciAdi_controller = TextEditingController();
+final KullaniciAdi_controller = TextEditingController(text: '');
 final Mail_controller = TextEditingController();
 final Sifre_controller = TextEditingController();
 final SifreKontrol_controller = TextEditingController();
@@ -68,7 +70,7 @@ class _Signup extends State<Signup> {
                       keyboardType: TextInputType.text,
                       autofocus: false,
                       decoration: InputDecoration(
-                        labelText: 'Kullanıcı Adı',
+                        labelText: '* Kullanıcı Adı',
                         labelStyle: TextStyle(color: Colors.black),
                         suffixIcon: IconButton(
                           onPressed: KullaniciAdi_controller.clear,
@@ -110,7 +112,7 @@ class _Signup extends State<Signup> {
                       keyboardType: TextInputType.emailAddress,
                       autofocus: false,
                       decoration: InputDecoration(
-                        labelText: 'Email',
+                        labelText: '* Email',
                         labelStyle: TextStyle(color: Colors.black),
                         suffixIcon: IconButton(
                           onPressed: Mail_controller.clear,
@@ -152,7 +154,7 @@ class _Signup extends State<Signup> {
                       keyboardType: TextInputType.visiblePassword,
                       autofocus: false,
                       decoration: InputDecoration(
-                        labelText: 'Şifre',
+                        labelText: '* Şifre',
                         labelStyle: TextStyle(color: Colors.black),
                         suffixIcon: IconButton(
                           icon: Icon(isHiddenPassword? Bootstrap.eye: CupertinoIcons.eye),
@@ -280,7 +282,7 @@ class _Signup extends State<Signup> {
                       cursorColor: Colors.black,
                       style: TextStyle(fontSize: 18),
                       decoration: InputDecoration(
-                        labelText: 'Cep Telefonu',
+                        labelText: '* Cep Telefonu',
                         suffixIcon: IconButton(
                           onPressed: CepTelefon_controller.clear,
                           icon: Icon(Icons.clear_sharp),
@@ -361,33 +363,88 @@ class _Signup extends State<Signup> {
                       onPressed: () {
                         var mail = Mail_controller.value.text;
                         var validateMail = validateEmail(mail);
-                        if(mail.isNotEmpty && validateMail == true){
-                        SendMail();
-                        showAnimatedDialog(
-                          alignment: Alignment.center,
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (BuildContext context) {
-                            return ClassicGeneralDialogWidget(
+                        var kullaniciAdi = KullaniciAdi_controller.value.text;
+                        var sifre = Sifre_controller.value.text;
+                        var sifreControl = SifreKontrol_controller.value.text;
+                        var cepTel = CepTelefon_controller.value.text;
+                        var referansKodu = ReferansKodu_controller.value.text;
+
+                        if((mail.isNotEmpty && validateMail == true) && kullaniciAdi.isNotEmpty && sifre.isNotEmpty && sifreControl.isNotEmpty && cepTel.isNotEmpty && (sifre == sifreControl)){
+                          SendMail();
+                          showAnimatedDialog(
+                            alignment: Alignment.center,
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (BuildContext context) {
+                              return ClassicGeneralDialogWidget(
+                                actions: [
+                                  Signup_Validation_Popup(),
+                                ],
+                                onPositiveClick: () {
+                                },
+                                onNegativeClick: () {
+                                  Navigator.of(context).pop();
+                                },
+                              );
+                            },
+                            animationType: DialogTransitionType.size,
+                            curve: Curves.easeInBack,
+                            duration: Duration(seconds: 1),
+                           );
+                        }
+                        else if((mail.isNotEmpty && validateMail == true) && (sifre != sifreControl) && kullaniciAdi.isNotEmpty && sifre.isNotEmpty && sifreControl.isNotEmpty && cepTel.isNotEmpty){
+                            Dialogs.materialDialog(
+                                color: Colors.white,
+                                msg: 'UYARI MESAJI',
+                                context: context,
+                                actions: [
+                                  IconsButton(
+                                    onPressed: () {
+                                    },
+                                    text: 'Şifre alanları birbiriyle aynı olmalıdır!',
+                                    iconData: Iconsax.warning_2,
+                                    color: Colors.red,
+                                    textStyle: TextStyle(color: Colors.white),
+                                    iconColor: Colors.white,
+                                  ),
+                                ]);
+                        }
+                        else if((mail.isNotEmpty && validateMail == false) && kullaniciAdi.isNotEmpty && sifre.isNotEmpty && sifreControl.isNotEmpty && cepTel.isNotEmpty){
+                              Dialogs.materialDialog(
+                                color: Colors.white,
+                                msg: 'UYARI MESAJI',
+                                context: context,
+                                actions: [
+                                  IconsButton(
+                                    onPressed: () {
+                                    },
+                                    text: 'Geçerli bir Email adresi yazınız!',
+                                    iconData: Iconsax.warning_2,
+                                    color: Colors.red,
+                                    textStyle: TextStyle(color: Colors.white),
+                                    iconColor: Colors.white,
+                                  ),
+                              ]);
+                        }
+                        else{
+                          Dialogs.materialDialog(
+                              color: Colors.white,
+                              msg: 'UYARI MESAJI',
+                              context: context,
                               actions: [
-                                Signup_Validation_Popup(),
-                              ],
-                              onPositiveClick: () {
-                              },
-                              onNegativeClick: () {
-                                Navigator.of(context).pop();
-                              },
-                            );
-                          },
-                          animationType: DialogTransitionType.size,
-                          curve: Curves.easeInBack,
-                          duration: Duration(seconds: 1),
-                         );
+                                IconsButton(
+                                  onPressed: () {
+                                  },
+                                  text: 'Lütfen zorunlu alanları doldurunuz!',
+                                  iconData: Iconsax.warning_2,
+                                  color: Colors.red,
+                                  textStyle: TextStyle(color: Colors.white),
+                                  iconColor: Colors.white,
+                                ),
+                          ]);
                         }
                       },
                     ),
-
-
 
                   ],
                 ),
@@ -476,6 +533,7 @@ class _Signup extends State<Signup> {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
+    //Controllers,
 
     ]);
   }

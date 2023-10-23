@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:material_dialogs/dialogs.dart';
+import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 import 'package:minenger/Pages/PasswordRefresh.dart';
 import 'package:minenger/Pages/Signup.dart';
 import 'package:minenger/main.dart';
@@ -295,6 +297,40 @@ class _Login extends State<Login> {
                                       content: Text("Hoşgeldin Minengerli "),
                                       backgroundColor: button_color,
                                     ));
+                                  }
+                                  else if(mail.isNotEmpty && password.isNotEmpty && validateMail == false){
+                                    Dialogs.materialDialog(
+                                        color: Colors.white,
+                                        msg: 'UYARI MESAJI',
+                                        context: context,
+                                        actions: [
+                                          IconsButton(
+                                            onPressed: () {
+                                            },
+                                            text: 'Geçerli bir Email adresi yazınız!',
+                                            iconData: Iconsax.warning_2,
+                                            color: Colors.red,
+                                            textStyle: TextStyle(color: Colors.white),
+                                            iconColor: Colors.white,
+                                          ),
+                                    ]);
+                                  }
+                                  else{
+                                    Dialogs.materialDialog(
+                                        color: Colors.white,
+                                        msg: 'UYARI MESAJI',
+                                        context: context,
+                                        actions: [
+                                          IconsButton(
+                                            onPressed: () {
+                                            },
+                                            text: 'Lütfen Email ve Şifre alanlarını doldurunuz!',
+                                            iconData: Iconsax.warning_2,
+                                            color: Colors.red,
+                                            textStyle: TextStyle(color: Colors.white),
+                                            iconColor: Colors.white,
+                                          ),
+                                    ]);
                                   }
                                 },
                               ),

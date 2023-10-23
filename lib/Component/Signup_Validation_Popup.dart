@@ -144,7 +144,7 @@ class _Signup_Validation_Popup extends State<Signup_Validation_Popup> {
                     }else{
                       Dialogs.materialDialog(
                           color: Colors.white,
-                          msg: 'Şifre Hatalı',
+                          msg: 'Şifre Hatalı Girildi!',
                           context: context,
                           actions: [
                             IconsButton(
@@ -152,7 +152,7 @@ class _Signup_Validation_Popup extends State<Signup_Validation_Popup> {
                                 Navigator.of(context).pop();
                               },
                               text: 'Kapat',
-                              iconData: CupertinoIcons.xmark_circle_fill,
+                              iconData: Iconsax.warning_2,
                               color: Colors.red,
                               textStyle: TextStyle(color: Colors.white),
                               iconColor: Colors.white,
