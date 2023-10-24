@@ -11,12 +11,12 @@ const acikmavi = Color.fromRGBO(61,142,185,1);
 const mavi = Color.fromRGBO(44,130,201 ,1);
 const button_color = Color.fromRGBO(252, 185, 65 ,1);
 
-class FightClub extends StatefulWidget {
+class FightClup extends StatefulWidget {
   @override
-  _FightClub createState() => _FightClub();
+  _FightClup createState() => _FightClup();
 }
 
-class _FightClub extends State<FightClub> {
+class _FightClup extends State<FightClup> {
 
   static const maxSeconds = 30;
   Timer? timer;

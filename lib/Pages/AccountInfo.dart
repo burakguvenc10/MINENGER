@@ -3,8 +3,15 @@ import 'package:animated_button/animated_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:material_dialogs/dialogs.dart';
+import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 import 'Login.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+final kullaniciAdiController = TextEditingController();
+final mail_Controller = TextEditingController();
+final newpassword_Controller = TextEditingController();
+final newpasswordAgain_Controller = TextEditingController();
 
 class HesapBilgileri extends StatefulWidget {
   @override
@@ -125,7 +132,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                             enabled: false,
                             keyboardType: TextInputType.none,
                             autofocus: false,
-                            //controller: coin_controller,
+                            controller: kullaniciAdiController,
                             decoration: InputDecoration(
                               labelText: 'Kullanıcı Adı',
                               labelStyle: TextStyle(color: Colors.black),
@@ -164,7 +171,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                             enabled: false,
                             keyboardType: TextInputType.none,
                             autofocus: false,
-                            //controller: coin_controller,
+                            controller: mail_Controller,
                             decoration: InputDecoration(
                               labelText: 'Mail',
                               labelStyle: TextStyle(color: Colors.black),
@@ -202,7 +209,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                             style: TextStyle(fontSize: 18),
                             keyboardType: TextInputType.visiblePassword,
                             autofocus: false,
-                            //controller: coin_controller,
+                            controller: newpassword_Controller,
                             decoration: InputDecoration(
                               labelText: 'Yeni Şifre',
                               labelStyle: TextStyle(color: Colors.black),
@@ -249,7 +256,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                             obscureText: isHiddenPassword2,
                             keyboardType: TextInputType.visiblePassword,
                             autofocus: false,
-                            //controller: coin_controller,
+                            controller: newpasswordAgain_Controller,
                             decoration: InputDecoration(
                               labelText: '* Yeni Şifre Tekrar',
                               labelStyle: TextStyle(color: Colors.black),
@@ -309,10 +316,78 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                             duration: 25,
                             shadowDegree: ShadowDegree.dark,
                             onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text("Şifreniz Güncellenmiştir"),
-                                backgroundColor: Colors.green,
-                              ));
+                              var newPassword = newpassword_Controller.value.text;
+                              var newPasswordAgain = newpasswordAgain_Controller.value.text;
+                              var characterNewPassword = newPassword.length;
+                              var characterNewPasswordAgain = newPasswordAgain.length;
+                              if((newPassword.isNotEmpty && newPasswordAgain.isNotEmpty) && (newPassword == newPasswordAgain)){
+                                Dialogs.materialDialog(
+                                    color: Colors.white,
+                                    msg: 'İşleminiz Başarılı',
+                                    context: context,
+                                    actions: [
+                                      IconsButton(
+                                        onPressed: () {
+                                        },
+                                        text: 'Şifreniz Değiştirildi',
+                                        iconData: Iconsax.chart_success,
+                                        color: Colors.green,
+                                        textStyle: TextStyle(color: Colors.white),
+                                        iconColor: Colors.white,
+                                      ),
+                                    ]);
+                              }
+                              else if(newPassword.isNotEmpty && newPasswordAgain.isNotEmpty && (newPassword != newPasswordAgain) ){
+                                Dialogs.materialDialog(
+                                    color: Colors.white,
+                                    msg: 'UYARI MESAJI',
+                                    context: context,
+                                    actions: [
+                                      IconsButton(
+                                        onPressed: () {
+                                        },
+                                        text: 'Şifre alanları birbiriyle aynı olmalıdır!',
+                                        iconData: Iconsax.warning_2,
+                                        color: Colors.red,
+                                        textStyle: TextStyle(color: Colors.white),
+                                        iconColor: Colors.white,
+                                      ),
+                                    ]);
+                              }
+                              else if((newPassword.isNotEmpty && newPasswordAgain.isNotEmpty) && (characterNewPassword < 8 || characterNewPasswordAgain < 8 )){
+                                Dialogs.materialDialog(
+                                    color: Colors.white,
+                                    msg: 'UYARI MESAJI',
+                                    context: context,
+                                    actions: [
+                                      IconsButton(
+                                        onPressed: () {
+                                        },
+                                        text: 'Şifre Uzunluğu 8 Karakterden Az Olamaz!',
+                                        iconData: Iconsax.warning_2,
+                                        color: Colors.red,
+                                        textStyle: TextStyle(color: Colors.white),
+                                        iconColor: Colors.white,
+                                      ),
+                                    ]);
+                              }
+                              else{
+                                Dialogs.materialDialog(
+                                    color: Colors.white,
+                                    msg: 'UYARI MESAJI',
+                                    context: context,
+                                    actions: [
+                                      IconsButton(
+                                        onPressed: () {
+                                        },
+                                        text: 'Şifre alanları boş bırakılamaz!',
+                                        iconData: Iconsax.warning_2,
+                                        color: Colors.red,
+                                        textStyle: TextStyle(color: Colors.white),
+                                        iconColor: Colors.white,
+                                      ),
+                                    ]);
+                              }
                             },
                           ),
 

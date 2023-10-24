@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../Viewpager_Pages/Shiba.dart';
 import '../Viewpager_Pages/Floki.dart';
 import '../Viewpager_Pages/Bttc.dart';
-import '../Viewpager_Pages/Cate.dart';
+import '../Viewpager_Pages/BabyDoge.dart';
 import '../Viewpager_Pages/Satoshi.dart';
 import '../Viewpager_Pages/FlightClup.dart';
 
@@ -14,7 +14,7 @@ const acik_turuncu = Color.fromRGBO(239, 159, 56 ,1);
 const turuncu = Color.fromRGBO(255, 116, 5 ,1);
 const siyah = Color.fromRGBO(40, 40, 48 ,1);
 const gri = Color.fromRGBO(122, 159, 191 ,1);
-const pembe = Color.fromRGBO(240, 194, 194 ,1);
+const button_color_light = Color.fromRGBO(220, 185, 65 ,1);
 const acikmavi = Color.fromRGBO(61,142,185,1);
 const mavi = Color.fromRGBO(44,130,201 ,1);
 
@@ -31,11 +31,11 @@ class _PageView extends State<Pageview> {
   bool selected_FlokiIcon = false;
   bool selected_CateIcon = false;
   bool selected_SatoshiIcon = false;
-  bool selected_FightclubIcon = false;
+  bool selected_FightclupIcon = false;
   Color ShibaCardColor = Colors.grey.shade300;
   Color BttcCardColor = Colors.grey.shade300;
   Color FlokiCardColor = Colors.grey.shade300;
-  Color CateCardColor = Colors.grey.shade300;
+  Color BabyDogeCardColor = Colors.grey.shade300;
   Color SatoshiCardColor = Colors.grey.shade300;
   Color FLightClupCardColor = Colors.grey.shade300;
 
@@ -58,7 +58,7 @@ class _PageView extends State<Pageview> {
                     ShibaCardColor = turuncu;
                     BttcCardColor = Colors.transparent;
                     FlokiCardColor = Colors.transparent;
-                    CateCardColor = Colors.transparent;
+                    BabyDogeCardColor = Colors.transparent;
                     SatoshiCardColor = Colors.transparent;
                     FLightClupCardColor = Colors.transparent;
                   });
@@ -69,7 +69,7 @@ class _PageView extends State<Pageview> {
                     BttcCardColor = siyah;
                     ShibaCardColor = Colors.transparent;
                     FlokiCardColor = Colors.transparent;
-                    CateCardColor = Colors.transparent;
+                    BabyDogeCardColor = Colors.transparent;
                     SatoshiCardColor = Colors.transparent;
                     FLightClupCardColor = Colors.transparent;
                   });
@@ -80,7 +80,7 @@ class _PageView extends State<Pageview> {
                     FlokiCardColor = gri;
                     BttcCardColor = Colors.transparent;
                     ShibaCardColor = Colors.transparent;
-                    CateCardColor = Colors.transparent;
+                    BabyDogeCardColor = Colors.transparent;
                     SatoshiCardColor = Colors.transparent;
                     FLightClupCardColor = Colors.transparent;
                   });
@@ -102,11 +102,11 @@ class _PageView extends State<Pageview> {
     Center(
         child: Floki()),
     Center(
-        child: Cate()),
+        child: BabyDoge()),
     Center(
         child: Satoshi()),
     Center(
-        child: FightClub()),
+        child: FightClup()),
 
   ];
 

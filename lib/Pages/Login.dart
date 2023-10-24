@@ -381,9 +381,9 @@ class _Login extends State<Login> {
                           backgroundColor: pembe,
                           radius: 35,
                           child: IconButton(
-                            tooltip: 'CATE',
+                            tooltip: 'BABY DOGE',
                             icon:  Image.asset(
-                              'assets/cate.png', height: 40, width: 40,
+                              'assets/babydoge.png', height: 40, width: 40,
                             ),
                             iconSize: 50,
                             onPressed: () {},

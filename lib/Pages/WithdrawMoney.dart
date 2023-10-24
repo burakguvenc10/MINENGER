@@ -8,9 +8,9 @@ import '../Component/Shiba_ParaCekme_Popup.dart';
 final Shiba_controller = TextEditingController();
 final Bttc_controller = TextEditingController();
 final Floki_controller = TextEditingController();
-final Cate_controller = TextEditingController();
-final Satoshi_controller = TextEditingController();
 final BabyDoge_controller = TextEditingController();
+final Satoshi_controller = TextEditingController();
+final FlightClub_controller = TextEditingController();
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
 
 
@@ -394,15 +394,15 @@ class _ParaCekme extends State<ParaCekme> {
                                     enabled: false,
                                     keyboardType: TextInputType.none,
                                     autofocus: false,
-                                    controller: Cate_controller,
+                                    controller: BabyDoge_controller,
                                     decoration: InputDecoration(
                                       labelStyle: TextStyle(color: Colors.black),
                                       suffixIcon: IconButton(
                                         onPressed: (){},
-                                        icon: Image.asset('assets/cate.png',width: 25,height: 25,),
+                                        icon: Image.asset('assets/babydoge.png',width: 48,height: 48,),
                                         color: Colors.black54,
                                       ),
-                                      labelText: 'CATE',
+                                      labelText: 'BABY DOGE',
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Colors.orange,
@@ -552,7 +552,7 @@ class _ParaCekme extends State<ParaCekme> {
                                         icon: Image.asset('assets/flightclup.jpeg',width: 25,height: 25,),
                                         color: Colors.black54,
                                       ),
-                                      labelText: 'FLIGHT CLUB',
+                                      labelText: 'FLIGHT CLUP',
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Colors.orange,

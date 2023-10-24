@@ -8,15 +8,15 @@ import '../Component/NotificationService.dart';
 final coin_controller = TextEditingController(text: '0');
 late final AnimatedButton animButton;
 const button_color = Color.fromRGBO(252, 185, 65 ,1);
-const pembe = Color.fromRGBO(240, 194, 194 ,1);
-const koyu_pembe = Color.fromRGBO(194, 83, 150 ,1);
+const button_color_light = Color.fromRGBO(210, 185, 65 ,1);
 
-class Cate extends StatefulWidget {
+
+class BabyDoge extends StatefulWidget {
   @override
-  _Cate createState() => _Cate();
+  _BabyDoge createState() => _BabyDoge();
 }
 
-class _Cate extends State<Cate> {
+class _BabyDoge extends State<BabyDoge> {
 
   static const maxSeconds = 30;
   Timer? timer;
@@ -58,7 +58,7 @@ class _Cate extends State<Cate> {
       rewardedAd.show(
           onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem){
             NotificationService.showNotification(
-                title: "CATE COIN",
+                title: "BABY DOGE COIN",
                 body: "Kazıma işlemi Başladı!!",
                 scheduled: true,
                 interval: 10
@@ -85,7 +85,7 @@ class _Cate extends State<Cate> {
         gradient: LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [koyu_pembe,pembe,Colors.white,Colors.white,Colors.white],
+        colors: [button_color,button_color_light,Colors.white,Colors.white,Colors.white],
       ),
     ),
     child: Column(
@@ -95,7 +95,7 @@ class _Cate extends State<Cate> {
           height: 20,
         ),
 
-        Text('CATE', textAlign: TextAlign.center, style: TextStyle(
+        Text('BABY DOGE', textAlign: TextAlign.center, style: TextStyle(
           fontSize: 35,
           foreground: Paint()
             ..style = PaintingStyle.stroke
@@ -130,7 +130,7 @@ class _Cate extends State<Cate> {
               hintText: 'Kazılan Coin',
               suffixIcon: IconButton(
                 onPressed: (){},
-                icon: Image.asset('assets/cate.png',width: 25,height: 25,),
+                icon: Image.asset('assets/babydoge.png',width: 48,height: 48,),
               ),
             ),
             maxLines: 1,
@@ -154,7 +154,7 @@ class _Cate extends State<Cate> {
                 height: 120,
                 child: CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation(Colors.blueGrey.shade200),
-                  backgroundColor: koyu_pembe,
+                  backgroundColor: button_color_light,
                   color: Colors.redAccent,
                   strokeWidth: 8,
                   value: 1- seconds / maxSeconds,
@@ -237,7 +237,7 @@ class _Cate extends State<Cate> {
         setState(() => seconds--);
         if(seconds == 0){
           await NotificationService.showNotification(
-              title: "CATE COIN",
+              title: "BABY DOGE COIN",
               body: "Yeniden Kazımak için Hazır! Tıklayınız...",
               scheduled: true,
               interval: 10

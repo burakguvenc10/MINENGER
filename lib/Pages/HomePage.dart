@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gif/flutter_gif.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:minenger/Viewpager_Pages/BabyDoge.dart';
 import '../Component/Pageview.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'dart:convert';
@@ -18,7 +19,7 @@ const acik_turuncu = Color.fromRGBO(239, 159, 56 ,1);
 const turuncu = Color.fromRGBO(255, 116, 5 ,1);
 const siyah = Color.fromRGBO(40, 40, 48 ,1);
 const gri = Color.fromRGBO(122, 159, 191 ,1);
-const pembe = Color.fromRGBO(240, 194, 194 ,1);
+const button_color_light = Color.fromRGBO(220, 185, 65 ,1);
 const acikmavi = Color.fromRGBO(61,142,185,1);
 const mavi = Color.fromRGBO(44,130,201 ,1);
 int stateCont = 0;
@@ -28,14 +29,14 @@ int toplamIndex = 0 ;
 int shibaIndex = 0;
 int bttcIndex = 1;
 int flokiIndex = 2;
-int cateIndex = 3;
+int babydogeIndex = 3;
 int satoshiIndex = 4;
 int flightClubIndex = 5;
 
 var shiba_data = "Yükleniyor..";
 var bttc_data = "Yükleniyor..";
 var floki_data = "Yükleniyor..";
-var cate_data = "Yükleniyor..";
+var babydoge_data = "Yükleniyor..";
 var satoshi_data = "Yükleniyor..";
 var fightclub_data = "Yükleniyor..";
 
@@ -53,14 +54,14 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
   bool selected_ShibaIcon = false;
   bool selected_BttcIcon = false;
   bool selected_FlokiIcon = false;
-  bool selected_CateIcon = false;
+  bool selected_BabydogeIcon = false;
   bool selected_SatoshiIcon = false;
   bool selected_FightclubIcon = false;
   late BannerAd bannerAd;
   Color ShibaCardColor = Colors.grey.shade300;
   Color BttcCardColor = Colors.grey.shade300;
   Color FlokiCardColor = Colors.grey.shade300;
-  Color CateCardColor = Colors.grey.shade300;
+  Color BabyDogeCardColor = Colors.grey.shade300;
   Color SatoshiCardColor = Colors.grey.shade300;
   Color FLightClupCardColor = Colors.grey.shade300;
   var jsonList = [];
@@ -73,7 +74,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
   String shiba_id = "5994";
   String bttc_id = "3718";
   String floki_id = "10804";
-  String cate_id = "9656";
+  String babydoge_id = "9656";
   String satoshi_id = "9022";
   String flightClup_id = "22550";
   Dio dio = Dio();
@@ -163,13 +164,13 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
 
   }
 
-  Future getCateData() async {
+  Future getBabyDogeData() async {
     try {
       dio.options.headers[headers_key] = headers_value;
       dio.options.headers[headers_aut] = headers_value;
       response = await dio.get(baseUrl,
         queryParameters: {
-          'id': cate_id
+          'id': babydoge_id
         },
       );
       if (response.statusCode == 200) {
@@ -177,7 +178,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
         print("Response_Data : ${price}");
 
         setState(() {
-          cate_data = "0.00..." + price.substring(840,846);
+          babydoge_data = "0.00..." + price.substring(840,846);
         });
 
       }else{
@@ -585,7 +586,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
                                   borderRadius: BorderRadius.circular(15),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: pembe.withOpacity(0.8),
+                                      color: button_color_light.withOpacity(0.8),
                                       spreadRadius: 3,
                                       blurRadius: 10,
                                       offset: Offset(0,3),
@@ -602,13 +603,13 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
                                         side: CardSide.BACK,
                                         speed: 1000,
                                         onFlipDone: (status) {
-                                          getCateData();
+                                          getBabyDogeData();
                                         },
                                         front: Container(
                                           child: Column(
                                             children:[
                                               Image.asset(
-                                                "assets/cate.png",
+                                                "assets/babydoge.png",
                                                 height: 39,
                                               ),
 
@@ -623,7 +624,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
                                                     width: 28,
                                                   ),
 
-                                                  Text(cate_data,style: TextStyle(fontSize: 16)),
+                                                  Text(babydoge_data,style: TextStyle(fontSize: 16)),
                                                 ],
                                               ),
                                             ],
@@ -633,7 +634,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
                                           child: Column(
                                             children:[
                                               Image.asset(
-                                                "assets/cate.png",
+                                                "assets/babydoge.png",
                                                 height: 39,
                                               ),
 
@@ -648,7 +649,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
                                                     width: 28,
                                                   ),
 
-                                                  Text(cate_data,style: TextStyle(fontSize: 16)),
+                                                  Text(babydoge_data,style: TextStyle(fontSize: 16)),
                                                 ],
                                               ),
                                             ],
@@ -904,7 +905,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
                                                       ShibaCardColor = turuncu;
                                                       BttcCardColor = Colors.transparent;
                                                       FlokiCardColor = Colors.transparent;
-                                                      CateCardColor = Colors.transparent;
+                                                      BabyDogeCardColor = Colors.transparent;
                                                       SatoshiCardColor = Colors.transparent;
                                                       FLightClupCardColor = Colors.transparent;
                                                       toplamIndex = shibaIndex;
@@ -941,7 +942,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
                                                       BttcCardColor = siyah;
                                                       ShibaCardColor = Colors.transparent;
                                                       FlokiCardColor = Colors.transparent;
-                                                      CateCardColor = Colors.transparent;
+                                                      BabyDogeCardColor = Colors.transparent;
                                                       SatoshiCardColor = Colors.transparent;
                                                       FLightClupCardColor = Colors.transparent;
                                                       toplamIndex = bttcIndex;
@@ -977,7 +978,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
                                                       FlokiCardColor = gri;
                                                       BttcCardColor = Colors.transparent;
                                                       ShibaCardColor = Colors.transparent;
-                                                      CateCardColor = Colors.transparent;
+                                                      BabyDogeCardColor = Colors.transparent;
                                                       SatoshiCardColor = Colors.transparent;
                                                       FLightClupCardColor = Colors.transparent;
                                                       toplamIndex = flokiIndex;
@@ -998,25 +999,25 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
                                               animateType: AnimateType.loop,
                                               durationMilliseconds: 2100,
                                               child: CircleAvatar(
-                                                backgroundColor: CateCardColor,
+                                                backgroundColor: BabyDogeCardColor,
                                                 radius: 35,
                                                 child: IconButton(
-                                                  tooltip: 'CATE',
+                                                  tooltip: 'BABY DOGE',
                                                   splashColor: Colors.orange.shade200,
                                                   icon:  Image.asset(
-                                                    'assets/cate.png', height: 40, width: 40,
+                                                    'assets/babydoge.png', height: 48, width: 48,
                                                   ),
                                                   iconSize: 50,
                                                   onPressed: () async{
                                                     setState(() {
-                                                      selected_CateIcon = true;
-                                                      CateCardColor = pembe;
+                                                      selected_BabydogeIcon = true;
+                                                      BabyDogeCardColor = button_color_light;
                                                       FlokiCardColor = Colors.transparent;
                                                       BttcCardColor = Colors.transparent;
                                                       ShibaCardColor = Colors.transparent;
                                                       SatoshiCardColor = Colors.transparent;
                                                       FLightClupCardColor = Colors.transparent;
-                                                      toplamIndex = cateIndex;
+                                                      toplamIndex = babydogeIndex;
                                                       page_controller. animateToPage(
                                                           toplamIndex, duration: const Duration(seconds: 1), curve: Curves.fastLinearToSlowEaseIn
                                                       );
@@ -1048,7 +1049,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
                                                     setState(() {
                                                       selected_SatoshiIcon = true;
                                                       SatoshiCardColor = acik_turuncu;
-                                                      CateCardColor = Colors.transparent;
+                                                      BabyDogeCardColor = Colors.transparent;
                                                       FlokiCardColor = Colors.transparent;
                                                       BttcCardColor = Colors.transparent;
                                                       ShibaCardColor = Colors.transparent;
@@ -1085,7 +1086,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
                                                       selected_FightclubIcon = true;
                                                       FLightClupCardColor = mavi;
                                                       SatoshiCardColor = Colors.transparent;
-                                                      CateCardColor = Colors.transparent;;
+                                                      BabyDogeCardColor = Colors.transparent;;
                                                       FlokiCardColor = Colors.transparent;
                                                       BttcCardColor = Colors.transparent;
                                                       ShibaCardColor = Colors.transparent;
@@ -1153,7 +1154,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
       ShibaCardColor = turuncu;
       BttcCardColor = Colors.transparent;
       FlokiCardColor = Colors.transparent;
-      CateCardColor = Colors.transparent;
+      BabyDogeCardColor = Colors.transparent;
       SatoshiCardColor = Colors.transparent;
       FLightClupCardColor = Colors.transparent;
     });
@@ -1165,7 +1166,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
     getShibaData();
     getBttcData();
     getFlokiData();
-    getCateData();
+    getBabyDogeData();
     getSatoshiData();
     getFlightClub();
     //Gif
@@ -1199,7 +1200,7 @@ class _Anasayfa extends State<Anasayfa> with TickerProviderStateMixin {
     getShibaData();
     getBttcData();
     getFlokiData();
-    getCateData();
+    getBabyDogeData();
     getSatoshiData();
     getFlightClub();
   }

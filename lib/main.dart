@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'Anim/Animated_Splash.dart';
 import 'Component/NotificationService.dart';
-import 'Pages/Anasayfa.dart';
+import 'Pages/HomePage.dart';
 import 'Pages/AccountInfo.dart';
 import 'Pages/WithdrawMoney.dart';
 import 'Pages/Referances.dart';
