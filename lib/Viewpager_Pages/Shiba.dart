@@ -121,7 +121,7 @@ class _Shiba extends State<Shiba> with WidgetsBindingObserver{
               showCursor: false,
               enableInteractiveSelection: false,
               obscureText: false,
-              keyboardType: TextInputType.none,
+              keyboardType: TextInputType.text,
               autofocus: false,
               controller: coin_controller,
               decoration: InputDecoration(

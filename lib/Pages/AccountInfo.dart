@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -320,24 +321,8 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                               var newPasswordAgain = newpasswordAgain_Controller.value.text;
                               var characterNewPassword = newPassword.length;
                               var characterNewPasswordAgain = newPasswordAgain.length;
-                              if((newPassword.isNotEmpty && newPasswordAgain.isNotEmpty) && (newPassword == newPasswordAgain)){
-                                Dialogs.materialDialog(
-                                    color: Colors.white,
-                                    msg: 'İşleminiz Başarılı',
-                                    context: context,
-                                    actions: [
-                                      IconsButton(
-                                        onPressed: () {
-                                        },
-                                        text: 'Şifreniz Değiştirildi',
-                                        iconData: Iconsax.chart_success,
-                                        color: Colors.green,
-                                        textStyle: TextStyle(color: Colors.white),
-                                        iconColor: Colors.white,
-                                      ),
-                                    ]);
-                              }
-                              else if(newPassword.isNotEmpty && newPasswordAgain.isNotEmpty && (newPassword != newPasswordAgain) ){
+
+                              if((newPassword.isEmpty || newPasswordAgain.isEmpty)){
                                 Dialogs.materialDialog(
                                     color: Colors.white,
                                     msg: 'UYARI MESAJI',
@@ -346,7 +331,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                                       IconsButton(
                                         onPressed: () {
                                         },
-                                        text: 'Şifre alanları birbiriyle aynı olmalıdır!',
+                                        text: 'Şifre alanları boş olamaz!',
                                         iconData: Iconsax.warning_2,
                                         color: Colors.red,
                                         textStyle: TextStyle(color: Colors.white),
@@ -354,7 +339,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                                       ),
                                     ]);
                               }
-                              else if((newPassword.isNotEmpty && newPasswordAgain.isNotEmpty) && (characterNewPassword < 8 || characterNewPasswordAgain < 8 )){
+                              else if(characterNewPassword < 8 || characterNewPasswordAgain < 8 ){
                                 Dialogs.materialDialog(
                                     color: Colors.white,
                                     msg: 'UYARI MESAJI',
@@ -371,7 +356,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                                       ),
                                     ]);
                               }
-                              else{
+                              else if(newPassword != newPasswordAgain){
                                 Dialogs.materialDialog(
                                     color: Colors.white,
                                     msg: 'UYARI MESAJI',
@@ -380,7 +365,7 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                                       IconsButton(
                                         onPressed: () {
                                         },
-                                        text: 'Şifre alanları boş bırakılamaz!',
+                                        text: 'Şifre alanları birbiriyle aynı olmalıdır!',
                                         iconData: Iconsax.warning_2,
                                         color: Colors.red,
                                         textStyle: TextStyle(color: Colors.white),
@@ -388,10 +373,25 @@ class _HesapBilgileri extends State<HesapBilgileri> {
                                       ),
                                     ]);
                               }
+                              else{
+                                Dialogs.materialDialog(
+                                    color: Colors.white,
+                                    msg: 'İşleminiz Başarılı',
+                                    context: context,
+                                    actions: [
+                                      IconsButton(
+                                        onPressed: () {
+                                        },
+                                        text: 'Şifreniz Değiştirildi',
+                                        iconData: Iconsax.chart_success,
+                                        color: Colors.green,
+                                        textStyle: TextStyle(color: Colors.white),
+                                        iconColor: Colors.white,
+                                      ),
+                                    ]);
+                              }
                             },
                           ),
-
-
 
                           ],
                         ),

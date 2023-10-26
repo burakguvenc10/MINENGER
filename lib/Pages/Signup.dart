@@ -369,7 +369,92 @@ class _Signup extends State<Signup> {
                         var cepTel = CepTelefon_controller.value.text;
                         var referansKodu = ReferansKodu_controller.value.text;
 
-                        if((mail.isNotEmpty && validateMail == true) && kullaniciAdi.isNotEmpty && sifre.isNotEmpty && sifreControl.isNotEmpty && cepTel.isNotEmpty && (sifre == sifreControl)){
+                        if(mail.isEmpty || kullaniciAdi.isEmpty || sifre.isEmpty || sifreControl.isEmpty || cepTel.isEmpty){
+                          Dialogs.materialDialog(
+                              color: Colors.white,
+                              msg: 'UYARI MESAJI',
+                              context: context,
+                              actions: [
+                                IconsButton(
+                                  onPressed: () {
+                                  },
+                                  text: 'Lütfen zorunlu alanları doldurunuz!',
+                                  iconData: Iconsax.warning_2,
+                                  color: Colors.red,
+                                  textStyle: TextStyle(color: Colors.white),
+                                  iconColor: Colors.white,
+                                ),
+                              ]);
+                        }
+                        else if(validateMail == false){
+                          Dialogs.materialDialog(
+                              color: Colors.white,
+                              msg: 'UYARI MESAJI',
+                              context: context,
+                              actions: [
+                                IconsButton(
+                                  onPressed: () {
+                                  },
+                                  text: 'Geçerli bir Email adresi yazınız!',
+                                  iconData: Iconsax.warning_2,
+                                  color: Colors.red,
+                                  textStyle: TextStyle(color: Colors.white),
+                                  iconColor: Colors.white,
+                                ),
+                              ]);
+                        }
+                        else if(sifre != sifreControl){
+                            Dialogs.materialDialog(
+                                color: Colors.white,
+                                msg: 'UYARI MESAJI',
+                                context: context,
+                                actions: [
+                                  IconsButton(
+                                    onPressed: () {
+                                    },
+                                    text: 'Şifre alanları birbiriyle aynı olmalıdır!',
+                                    iconData: Iconsax.warning_2,
+                                    color: Colors.red,
+                                    textStyle: TextStyle(color: Colors.white),
+                                    iconColor: Colors.white,
+                                  ),
+                                ]);
+                        }
+                        else if(sifre.length < 8 || sifreControl.length < 8){
+                          Dialogs.materialDialog(
+                              color: Colors.white,
+                              msg: 'UYARI MESAJI',
+                              context: context,
+                              actions: [
+                                IconsButton(
+                                  onPressed: () {
+                                  },
+                                  text: 'Şifre Uzunluğu 8 Karakterden Az Olamaz!',
+                                  iconData: Iconsax.warning_2,
+                                  color: Colors.red,
+                                  textStyle: TextStyle(color: Colors.white),
+                                  iconColor: Colors.white,
+                                ),
+                              ]);
+                        }
+                        else if(mail.isNotEmpty && validateMail == false){
+                              Dialogs.materialDialog(
+                                color: Colors.white,
+                                msg: 'UYARI MESAJI',
+                                context: context,
+                                actions: [
+                                  IconsButton(
+                                    onPressed: () {
+                                    },
+                                    text: 'Geçerli bir Email adresi yazınız!',
+                                    iconData: Iconsax.warning_2,
+                                    color: Colors.red,
+                                    textStyle: TextStyle(color: Colors.white),
+                                    iconColor: Colors.white,
+                                  ),
+                              ]);
+                        }
+                        else{
                           SendMail();
                           showAnimatedDialog(
                             alignment: Alignment.center,
@@ -390,62 +475,10 @@ class _Signup extends State<Signup> {
                             animationType: DialogTransitionType.size,
                             curve: Curves.easeInBack,
                             duration: Duration(seconds: 1),
-                           );
-                        }
-                        else if((mail.isNotEmpty && validateMail == true) && (sifre != sifreControl) && kullaniciAdi.isNotEmpty && sifre.isNotEmpty && sifreControl.isNotEmpty && cepTel.isNotEmpty){
-                            Dialogs.materialDialog(
-                                color: Colors.white,
-                                msg: 'UYARI MESAJI',
-                                context: context,
-                                actions: [
-                                  IconsButton(
-                                    onPressed: () {
-                                    },
-                                    text: 'Şifre alanları birbiriyle aynı olmalıdır!',
-                                    iconData: Iconsax.warning_2,
-                                    color: Colors.red,
-                                    textStyle: TextStyle(color: Colors.white),
-                                    iconColor: Colors.white,
-                                  ),
-                                ]);
-                        }
-                        else if((mail.isNotEmpty && validateMail == false) && kullaniciAdi.isNotEmpty && sifre.isNotEmpty && sifreControl.isNotEmpty && cepTel.isNotEmpty){
-                              Dialogs.materialDialog(
-                                color: Colors.white,
-                                msg: 'UYARI MESAJI',
-                                context: context,
-                                actions: [
-                                  IconsButton(
-                                    onPressed: () {
-                                    },
-                                    text: 'Geçerli bir Email adresi yazınız!',
-                                    iconData: Iconsax.warning_2,
-                                    color: Colors.red,
-                                    textStyle: TextStyle(color: Colors.white),
-                                    iconColor: Colors.white,
-                                  ),
-                              ]);
-                        }
-                        else{
-                          Dialogs.materialDialog(
-                              color: Colors.white,
-                              msg: 'UYARI MESAJI',
-                              context: context,
-                              actions: [
-                                IconsButton(
-                                  onPressed: () {
-                                  },
-                                  text: 'Lütfen zorunlu alanları doldurunuz!',
-                                  iconData: Iconsax.warning_2,
-                                  color: Colors.red,
-                                  textStyle: TextStyle(color: Colors.white),
-                                  iconColor: Colors.white,
-                                ),
-                          ]);
+                          );
                         }
                       },
                     ),
-
                   ],
                 ),
               ),

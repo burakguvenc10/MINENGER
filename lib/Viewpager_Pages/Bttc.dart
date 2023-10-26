@@ -115,7 +115,7 @@ class _Bttc extends State<Bttc> {
             showCursor: false,
             enableInteractiveSelection: false,
             obscureText: true,
-            keyboardType: TextInputType.none,
+            keyboardType: TextInputType.text,
             autofocus: false,
             controller: coin_controller,
             decoration: InputDecoration(

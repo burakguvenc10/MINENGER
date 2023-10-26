@@ -166,8 +166,59 @@ class _New_Password_Popup extends State<New_Password_Popup> {
                     var newPasswordAgain = newpasswordAgain_Controller.value.text;
                     var characterNewPassword = newPassword.length;
                     var characterNewPasswordAgain = newPasswordAgain.length;
-                    if((newPassword.isNotEmpty && newPasswordAgain.isNotEmpty) && (newPassword == newPasswordAgain)){
-                      Navigator.of(context).pop();
+
+                    if((newPassword.isEmpty || newPasswordAgain.isEmpty)){
+                      Dialogs.materialDialog(
+                          color: Colors.white,
+                          msg: 'UYARI MESAJI',
+                          context: context,
+                          actions: [
+                            IconsButton(
+                              onPressed: () {
+                              },
+                              text: 'Şifre alanları boş olamaz!',
+                              iconData: Iconsax.warning_2,
+                              color: Colors.red,
+                              textStyle: TextStyle(color: Colors.white),
+                              iconColor: Colors.white,
+                            ),
+                          ]);
+                    }
+                    else if(characterNewPassword < 8 || characterNewPasswordAgain < 8 ){
+                      Dialogs.materialDialog(
+                          color: Colors.white,
+                          msg: 'UYARI MESAJI',
+                          context: context,
+                          actions: [
+                            IconsButton(
+                              onPressed: () {
+                              },
+                              text: 'Şifre Uzunluğu 8 Karakterden Az Olamaz!',
+                              iconData: Iconsax.warning_2,
+                              color: Colors.red,
+                              textStyle: TextStyle(color: Colors.white),
+                              iconColor: Colors.white,
+                            ),
+                          ]);
+                    }
+                    else if(newPassword != newPasswordAgain){
+                      Dialogs.materialDialog(
+                          color: Colors.white,
+                          msg: 'UYARI MESAJI',
+                          context: context,
+                          actions: [
+                            IconsButton(
+                              onPressed: () {
+                              },
+                              text: 'Şifre alanları birbiriyle aynı olmalıdır!',
+                              iconData: Iconsax.warning_2,
+                              color: Colors.red,
+                              textStyle: TextStyle(color: Colors.white),
+                              iconColor: Colors.white,
+                            ),
+                          ]);
+                    }
+                    else{
                       Navigator.of(context).pop();
                       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Login()), (_) => false);
                       Dialogs.materialDialog(
@@ -181,60 +232,6 @@ class _New_Password_Popup extends State<New_Password_Popup> {
                               text: 'Şifreniz Değiştirildi',
                               iconData: Iconsax.chart_success,
                               color: Colors.green,
-                              textStyle: TextStyle(color: Colors.white),
-                              iconColor: Colors.white,
-                            ),
-                          ]);
-                    }
-                    else if(newPassword.isNotEmpty && newPasswordAgain.isNotEmpty && (newPassword != newPasswordAgain) ){
-                      Dialogs.materialDialog(
-                          color: Colors.white,
-                          msg: 'Şifre alanları birbiriyle aynı olmalıdır!',
-                          context: context,
-                          actions: [
-                            IconsButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              text: 'Kapat',
-                              iconData: Iconsax.warning_2,
-                              color: Colors.red,
-                              textStyle: TextStyle(color: Colors.white),
-                              iconColor: Colors.white,
-                            ),
-                          ]);
-                    }
-                    else if((newPassword.isNotEmpty && newPasswordAgain.isNotEmpty) && (characterNewPassword < 8 || characterNewPasswordAgain < 8 )){
-                      Dialogs.materialDialog(
-                          color: Colors.white,
-                          msg: 'Şifre Uzunluğu 8 Karakterden Az Olamaz!',
-                          context: context,
-                          actions: [
-                            IconsButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              text: 'Kapat',
-                              iconData: Iconsax.warning_2,
-                              color: Colors.red,
-                              textStyle: TextStyle(color: Colors.white),
-                              iconColor: Colors.white,
-                            ),
-                          ]);
-                    }
-                    else{
-                      Dialogs.materialDialog(
-                          color: Colors.white,
-                          msg: 'Şifre alanları boş bırakılamaz!',
-                          context: context,
-                          actions: [
-                            IconsButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              text: 'Kapat',
-                              iconData: Iconsax.warning_2,
-                              color: Colors.red,
                               textStyle: TextStyle(color: Colors.white),
                               iconColor: Colors.white,
                             ),

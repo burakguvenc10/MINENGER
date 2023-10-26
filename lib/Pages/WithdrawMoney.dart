@@ -3,14 +3,17 @@ import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:icons_plus/icons_plus.dart';
+import 'package:material_dialogs/dialogs.dart';
+import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 import '../Component/Shiba_ParaCekme_Popup.dart';
 
-final Shiba_controller = TextEditingController();
+final Shiba_controller = TextEditingController(text: '900');
 final Bttc_controller = TextEditingController();
 final Floki_controller = TextEditingController();
 final BabyDoge_controller = TextEditingController();
 final Satoshi_controller = TextEditingController();
-final FlightClub_controller = TextEditingController();
+final FlightClup_controller = TextEditingController();
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
 
 
@@ -164,7 +167,7 @@ class _ParaCekme extends State<ParaCekme> {
                                     enableInteractiveSelection: false,
                                     obscureText: true,
                                     style: TextStyle(fontSize: 18),
-                                    keyboardType: TextInputType.none,
+                                    keyboardType: TextInputType.text,
                                     autofocus: false,
                                     controller: Shiba_controller,
                                     decoration: InputDecoration(
@@ -196,14 +199,14 @@ class _ParaCekme extends State<ParaCekme> {
 
                                 AnimatedButton(
                                   child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
+                                    padding: const EdgeInsets.all(3.0),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
-                                          'Para Çek',
+                                          'PARA ÇEK',
                                           style: TextStyle(
-                                            fontSize: 17,
+                                            fontSize: 16,
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500,
                                             fontFamily: 'Akrobat-Regular',
@@ -212,16 +215,33 @@ class _ParaCekme extends State<ParaCekme> {
                                       ],
                                     ),
                                   ),
-
                                   color: button_color,
-                                  duration: 25,
+                                  enabled: true,
+                                  duration: 30,
                                   shadowDegree: ShadowDegree.dark,
                                   width: 90,
                                   height: 50,
                                   onPressed: () {
-                                    //loadInterstitialAd();
-                                    //RewardedAd
-                                    showRewardedAdd();
+                                    var Shiba = Shiba_controller.value.text;
+                                    int Shiba_value = int.parse(Shiba);
+                                    if(Shiba.isEmpty || Shiba_value < 1000){
+                                      Dialogs.materialDialog(
+                                          color: Colors.white,
+                                          msg: 'UYARI MESAJI!',
+                                          context: context,
+                                          actions: [
+                                            IconsButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              text: 'Shiba coini sayısı 1000 den büyük olmalıdır!',
+                                              iconData: Iconsax.warning_2,
+                                              color: Colors.red,
+                                              textStyle: TextStyle(color: Colors.white),
+                                              iconColor: Colors.white,
+                                            ),
+                                          ]);
+                                    }
                                   },
                                 ),
                               ],
@@ -242,7 +262,7 @@ class _ParaCekme extends State<ParaCekme> {
                                     enableInteractiveSelection: false,
                                     obscureText: true,
                                     style: TextStyle(fontSize: 18),
-                                    keyboardType: TextInputType.none,
+                                    keyboardType: TextInputType.text,
                                     autofocus: false,
                                     controller: Bttc_controller,
                                     decoration: InputDecoration(
@@ -317,7 +337,7 @@ class _ParaCekme extends State<ParaCekme> {
                                     obscureText: true,
                                     style: TextStyle(fontSize: 18),
                                     enabled: false,
-                                    keyboardType: TextInputType.none,
+                                    keyboardType: TextInputType.text,
                                     autofocus: false,
                                     controller: Floki_controller,
                                     decoration: InputDecoration(
@@ -392,7 +412,7 @@ class _ParaCekme extends State<ParaCekme> {
                                     obscureText: true,
                                     style: TextStyle(fontSize: 18),
                                     enabled: false,
-                                    keyboardType: TextInputType.none,
+                                    keyboardType: TextInputType.text,
                                     autofocus: false,
                                     controller: BabyDoge_controller,
                                     decoration: InputDecoration(
@@ -467,7 +487,7 @@ class _ParaCekme extends State<ParaCekme> {
                                     obscureText: true,
                                     style: TextStyle(fontSize: 18),
                                     enabled: false,
-                                    keyboardType: TextInputType.none,
+                                    keyboardType: TextInputType.text,
                                     autofocus: false,
                                     controller: Satoshi_controller,
                                     decoration: InputDecoration(
@@ -542,9 +562,9 @@ class _ParaCekme extends State<ParaCekme> {
                                     obscureText: true,
                                     style: TextStyle(fontSize: 18),
                                     enabled: false,
-                                    keyboardType: TextInputType.none,
+                                    keyboardType: TextInputType.text,
                                     autofocus: false,
-                                    controller: BabyDoge_controller,
+                                    controller: FlightClup_controller,
                                     decoration: InputDecoration(
                                       labelStyle: TextStyle(color: Colors.black),
                                       suffixIcon: IconButton(
@@ -601,8 +621,6 @@ class _ParaCekme extends State<ParaCekme> {
                                 ),
                               ],
                             ),
-
-
                           ],
                         ),
                       ),

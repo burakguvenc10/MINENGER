@@ -115,7 +115,7 @@ class _Satoshi extends State<Satoshi> {
             showCursor: false,
             enableInteractiveSelection: false,
             obscureText: true,
-            keyboardType: TextInputType.none,
+            keyboardType: TextInputType.text,
             autofocus: false,
             controller: coin_controller,
             decoration: InputDecoration(
