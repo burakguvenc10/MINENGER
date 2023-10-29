@@ -83,7 +83,7 @@ class _Referanslar extends State<Referanslar> {
                                 onPressed: (){
                                   Clipboard.setData(ClipboardData(text: '$copyCode')).then((_) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text('Panoya Kopyalandı'),backgroundColor: button_color,));
+                                    const SnackBar(content: Text('Referans Kodu Kopyalandı'),backgroundColor: button_color,));
                                   });
                                 },
                                 icon: Icon(Icons.copy),

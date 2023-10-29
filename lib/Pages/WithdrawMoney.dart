@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
@@ -8,12 +9,12 @@ import 'package:material_dialogs/dialogs.dart';
 import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 import '../Component/Shiba_ParaCekme_Popup.dart';
 
-final Shiba_controller = TextEditingController(text: '900');
-final Bttc_controller = TextEditingController();
-final Floki_controller = TextEditingController();
-final BabyDoge_controller = TextEditingController();
-final Satoshi_controller = TextEditingController();
-final FlightClup_controller = TextEditingController();
+final Shiba_controller = TextEditingController(text: '0');
+final Bttc_controller = TextEditingController(text: '0');
+final Floki_controller = TextEditingController(text: '0');
+final BabyDoge_controller = TextEditingController(text: '0');
+final Satoshi_controller = TextEditingController(text: '0');
+final FlightClup_controller = TextEditingController(text: '0');
 const button_color = Color.fromRGBO(235, 189, 94 ,1);
 
 
@@ -165,9 +166,9 @@ class _ParaCekme extends State<ParaCekme> {
                                     textAlign: TextAlign.center,
                                     showCursor: false,
                                     enableInteractiveSelection: false,
-                                    obscureText: true,
+                                    obscureText: false,
                                     style: TextStyle(fontSize: 18),
-                                    keyboardType: TextInputType.text,
+                                    keyboardType: TextInputType.none,
                                     autofocus: false,
                                     controller: Shiba_controller,
                                     decoration: InputDecoration(
@@ -224,7 +225,8 @@ class _ParaCekme extends State<ParaCekme> {
                                   onPressed: () {
                                     var Shiba = Shiba_controller.value.text;
                                     int Shiba_value = int.parse(Shiba);
-                                    if(Shiba.isEmpty || Shiba_value < 1000){
+                                    print("Shiba_value: " + '$Shiba_value');
+                                    if(Shiba_value < 1000){
                                       Dialogs.materialDialog(
                                           color: Colors.white,
                                           msg: 'UYARI MESAJI!',
@@ -232,15 +234,18 @@ class _ParaCekme extends State<ParaCekme> {
                                           actions: [
                                             IconsButton(
                                               onPressed: () {
-                                                Navigator.of(context).pop();
                                               },
-                                              text: 'Shiba coini sayısı 1000 den büyük olmalıdır!',
+                                              text: 'Shiba sayısı 1000 den büyük olmalıdır!',
                                               iconData: Iconsax.warning_2,
                                               color: Colors.red,
                                               textStyle: TextStyle(color: Colors.white),
                                               iconColor: Colors.white,
                                             ),
-                                          ]);
+                                      ]);
+                                    }
+                                    else{
+                                      //RewardedAd
+                                      showRewardedAdd();
                                     }
                                   },
                                 ),
@@ -260,9 +265,9 @@ class _ParaCekme extends State<ParaCekme> {
                                     textAlign: TextAlign.center,
                                     showCursor: false,
                                     enableInteractiveSelection: false,
-                                    obscureText: true,
+                                    obscureText: false,
                                     style: TextStyle(fontSize: 18),
-                                    keyboardType: TextInputType.text,
+                                    keyboardType: TextInputType.none,
                                     autofocus: false,
                                     controller: Bttc_controller,
                                     decoration: InputDecoration(
@@ -334,10 +339,10 @@ class _ParaCekme extends State<ParaCekme> {
                                     textAlign: TextAlign.center,
                                     showCursor: false,
                                     enableInteractiveSelection: false,
-                                    obscureText: true,
+                                    obscureText: false,
                                     style: TextStyle(fontSize: 18),
                                     enabled: false,
-                                    keyboardType: TextInputType.text,
+                                    keyboardType: TextInputType.none,
                                     autofocus: false,
                                     controller: Floki_controller,
                                     decoration: InputDecoration(
@@ -409,10 +414,10 @@ class _ParaCekme extends State<ParaCekme> {
                                     textAlign: TextAlign.center,
                                     showCursor: false,
                                     enableInteractiveSelection: false,
-                                    obscureText: true,
+                                    obscureText: false,
                                     style: TextStyle(fontSize: 18),
                                     enabled: false,
-                                    keyboardType: TextInputType.text,
+                                    keyboardType: TextInputType.none,
                                     autofocus: false,
                                     controller: BabyDoge_controller,
                                     decoration: InputDecoration(
@@ -484,10 +489,10 @@ class _ParaCekme extends State<ParaCekme> {
                                     textAlign: TextAlign.center,
                                     showCursor: false,
                                     enableInteractiveSelection: false,
-                                    obscureText: true,
+                                    obscureText: false,
                                     style: TextStyle(fontSize: 18),
                                     enabled: false,
-                                    keyboardType: TextInputType.text,
+                                    keyboardType: TextInputType.none,
                                     autofocus: false,
                                     controller: Satoshi_controller,
                                     decoration: InputDecoration(
@@ -559,10 +564,10 @@ class _ParaCekme extends State<ParaCekme> {
                                     textAlign: TextAlign.center,
                                     showCursor: false,
                                     enableInteractiveSelection: false,
-                                    obscureText: true,
+                                    obscureText: false,
                                     style: TextStyle(fontSize: 18),
                                     enabled: false,
-                                    keyboardType: TextInputType.text,
+                                    keyboardType: TextInputType.none,
                                     autofocus: false,
                                     controller: FlightClup_controller,
                                     decoration: InputDecoration(

@@ -236,7 +236,7 @@ class _New_Password_Popup extends State<New_Password_Popup> {
                               iconColor: Colors.white,
                             ),
                           ]);
-                    }
+                      }
                   },
                 ),
               ],
